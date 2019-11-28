@@ -1,0 +1,7 @@
+{
+    "CommonModule": true,
+    "AdminModule": true,
+    "UserModule": true,
+    "ProductModule": true,
+    "OrderModule": true
+}
