@@ -3,8 +3,10 @@
 namespace Modules\AdminModule\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Modules\AdminModule\Http\Requests\AdminRequest;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\AdminModule\Entities\Admin;
 
 class AdminModuleController extends Controller
 {
@@ -14,7 +16,9 @@ class AdminModuleController extends Controller
      */
     public function index()
     {
-        return view('adminmodule::index');
+        //return view('adminmodule::index');
+        $admins = Admin::with('phones','role')->get();
+        return $admins;
     }
 
     /**
@@ -23,7 +27,7 @@ class AdminModuleController extends Controller
      */
     public function create()
     {
-        return view('adminmodule::create');
+        //return view('adminmodule::create');
     }
 
     /**
@@ -31,9 +35,13 @@ class AdminModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(AdminRequest $request)
     {
         //
+        $admin=Admin::create($request['admin']);
+        $admin->phones->create($request['phones']);
+        return $admin;
+
     }
 
     /**
@@ -43,7 +51,9 @@ class AdminModuleController extends Controller
      */
     public function show($id)
     {
-        return view('adminmodule::show');
+        //return view('adminmodule::show');
+        $admin= Admin::where('id',$id)->with('phones','role')->first();
+        return $admin;
     }
 
     /**
@@ -53,7 +63,8 @@ class AdminModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('adminmodule::edit');
+        //return view('adminmodule::edit');
+        return Admin::find($id);
     }
 
     /**
@@ -64,7 +75,9 @@ class AdminModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $admin= Admin::find($id);
+        $admin->update($request->all());
+        return $admin;
     }
 
     /**
@@ -74,6 +87,7 @@ class AdminModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin= Admin::findOrFail($id)->delete();
+        return $admin;
     }
 }
