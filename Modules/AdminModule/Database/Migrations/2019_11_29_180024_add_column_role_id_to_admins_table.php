@@ -4,20 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolesTable extends Migration
+class AddColumnRoleIdToAdminsTable extends Migration
 {
     /**
      * Run the migrations.
      *
-
      * @return void
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('role');
-            $table->timestamps();
+        Schema::table('admins', function (Blueprint $table) {
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -28,6 +26,8 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropColumn('role_id');
+        });
     }
 }

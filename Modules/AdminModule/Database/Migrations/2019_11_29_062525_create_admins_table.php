@@ -19,13 +19,11 @@ class CreateAdminsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('address');
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
