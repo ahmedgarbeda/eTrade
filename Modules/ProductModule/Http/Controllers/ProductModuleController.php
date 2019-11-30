@@ -5,6 +5,9 @@ namespace Modules\ProductModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\ProductModule\Entities\Category;
+use Modules\ProductModule\Entities\Product;
+use Modules\ProductModule\Transformers\ProductResource;
 
 class ProductModuleController extends Controller
 {
@@ -14,7 +17,10 @@ class ProductModuleController extends Controller
      */
     public function index()
     {
-        return view('productmodule::index');
+        $product = Product::all();
+        //http://127.0.0.1:8000/productmodule/product
+        return ProductResource::collection($product);
+        //        return view('productmodule::index');
     }
 
     /**
@@ -33,7 +39,15 @@ class ProductModuleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->category_id = 1 ;
+
+        if($product->save()){
+            return new ProductResource($product);
+        }
     }
 
     /**
@@ -43,7 +57,10 @@ class ProductModuleController extends Controller
      */
     public function show($id)
     {
-        return view('productmodule::show');
+        //http://127.0.0.1:8000/productmodule/product/1
+        $product = Product::findOrFail($id);
+        return new ProductResource($product);
+
     }
 
     /**
@@ -64,7 +81,7 @@ class ProductModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -74,6 +91,9 @@ class ProductModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if ($product->delete()){
+            return new ProductResource($product);
+        }
     }
 }

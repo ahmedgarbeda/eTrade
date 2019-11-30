@@ -11,6 +11,14 @@
 |
 */
 
+//Route::prefix('productmodule')->group(function() {
+//    Route::get('/', 'ProductModuleController@index');
+//});
+
+
+
 Route::prefix('productmodule')->group(function() {
-    Route::get('/', 'ProductModuleController@index');
+    Route::resource('/product', 'ProductModuleController');
 });
+
+
