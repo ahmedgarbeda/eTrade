@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::prefix('adminmodule')->group(function() {
-    Route::resource('/admin','AdminModuleController');
-    //Route::get('/{id}', 'AdminModuleController@show');
+Auth::routes();
+Route::middleware('auth')->prefix('dashboard/admin')->group(function() {
+    //Route::resource('/new','AdminModuleController');
+    Route::get('/', 'AdminModuleController@index');
+    Route::post('/', 'AdminModuleController@store');
+    Route::get('/new', 'AdminModuleController@create');
 });
