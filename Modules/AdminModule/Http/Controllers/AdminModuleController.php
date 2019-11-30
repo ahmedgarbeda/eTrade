@@ -7,6 +7,7 @@ use Modules\AdminModule\Http\Requests\AdminRequest;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\AdminModule\Entities\Admin;
+use Modules\AdminModule\Entities\Role;
 
 class AdminModuleController extends Controller
 {
@@ -27,7 +28,8 @@ class AdminModuleController extends Controller
      */
     public function create()
     {
-        //return view('adminmodule::create');
+        return Role::all();
+
     }
 
     /**

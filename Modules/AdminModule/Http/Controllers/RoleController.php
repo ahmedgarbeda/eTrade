@@ -1,15 +1,13 @@
 <?php
 
-namespace Modules\ProductModule\Http\Controllers;
+namespace Modules\AdminModule\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\ProductModule\Entities\Category;
-use Modules\ProductModule\Entities\Product;
-use Modules\ProductModule\Transformers\ProductResource;
+use Modules\AdminModule\Entities\Role;
 
-class ProductModuleController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,8 @@ class ProductModuleController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        //http://127.0.0.1:8000/productmodule/product
-        return ProductResource::collection($product);
-        //        return view('productmodule::index');
+        //return view('adminmodule::index');
+        return Role::all();
     }
 
     /**
@@ -29,7 +25,7 @@ class ProductModuleController extends Controller
      */
     public function create()
     {
-        return view('productmodule::create');
+        //return view('adminmodule::create');
     }
 
     /**
@@ -39,15 +35,9 @@ class ProductModuleController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->category_id = 1 ;
+        //
+        return Role::create($request->all());
 
-        if($product->save()){
-            return new ProductResource($product);
-        }
     }
 
     /**
@@ -57,10 +47,8 @@ class ProductModuleController extends Controller
      */
     public function show($id)
     {
-        //http://127.0.0.1:8000/productmodule/product/1
-        $product = Product::findOrFail($id);
-        return new ProductResource($product);
-
+        //return view('adminmodule::show');
+        return  Role::find($id);
     }
 
     /**
@@ -70,7 +58,8 @@ class ProductModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('productmodule::edit');
+        //return view('adminmodule::edit');
+        return Role::find($id);
     }
 
     /**
@@ -81,7 +70,9 @@ class ProductModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
+        $role=Role::find($id);
+        return $role->update($request->all());
     }
 
     /**
@@ -91,9 +82,6 @@ class ProductModuleController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        if ($product->delete()){
-            return new ProductResource($product);
-        }
+        return Role::find($id)->delete();
     }
 }
