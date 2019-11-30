@@ -11,7 +11,9 @@
 |
 */
 
-Route::prefix('adminmodule')->group(function() {
-    Route::resource('/admin','AdminModuleController');
-    //Route::get('/{id}', 'AdminModuleController@show');
+Route::prefix('dashboard/admin')->group(function() {
+    //Route::resource('/admin','AdminModuleController');
+    Route::get('/', 'AdminModuleController@index');
+    Route::post('/','AdminModuleController@store');
+    Route::get('/new','AdminModuleController@create');
 });

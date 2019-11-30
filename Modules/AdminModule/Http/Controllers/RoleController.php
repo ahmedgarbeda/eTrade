@@ -3,13 +3,11 @@
 namespace Modules\AdminModule\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\AdminModule\Http\Requests\AdminRequest;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\AdminModule\Entities\Admin;
 use Modules\AdminModule\Entities\Role;
 
-class AdminModuleController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,7 @@ class AdminModuleController extends Controller
     public function index()
     {
         //return view('adminmodule::index');
-        $admins = Admin::with('phones','role')->get();
-        return $admins;
+        return Role::all();
     }
 
     /**
@@ -28,8 +25,7 @@ class AdminModuleController extends Controller
      */
     public function create()
     {
-        return Role::all();
-
+        //return view('adminmodule::create');
     }
 
     /**
@@ -37,12 +33,10 @@ class AdminModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(AdminRequest $request)
+    public function store(Request $request)
     {
         //
-        $admin=Admin::create($request['admin']);
-        $admin->phones->create($request['phones']);
-        return $admin;
+        return Role::create($request->all());
 
     }
 
@@ -54,8 +48,7 @@ class AdminModuleController extends Controller
     public function show($id)
     {
         //return view('adminmodule::show');
-        $admin= Admin::where('id',$id)->with('phones','role')->first();
-        return $admin;
+        return  Role::find($id);
     }
 
     /**
@@ -66,7 +59,7 @@ class AdminModuleController extends Controller
     public function edit($id)
     {
         //return view('adminmodule::edit');
-        return Admin::find($id);
+        return Role::find($id);
     }
 
     /**
@@ -77,9 +70,9 @@ class AdminModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin= Admin::find($id);
-        $admin->update($request->all());
-        return $admin;
+        //
+        $role=Role::find($id);
+        return $role->update($request->all());
     }
 
     /**
@@ -89,7 +82,6 @@ class AdminModuleController extends Controller
      */
     public function destroy($id)
     {
-        $admin= Admin::findOrFail($id)->delete();
-        return $admin;
+        return Role::find($id)->delete();
     }
 }
