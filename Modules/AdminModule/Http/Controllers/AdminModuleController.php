@@ -37,11 +37,11 @@ class AdminModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(AdminRequest $request)
+    public function store(Request $request)
     {
-        dd($request);
-        $admin=Admin::create($request['admin']);
-        $admin->phones->create($request['phones']);
+        //dd($request["admin"]);
+        $admin=Admin::create($request->all());
+        //$admin->phones->create($request['phones']);
         return $admin;
 
     }

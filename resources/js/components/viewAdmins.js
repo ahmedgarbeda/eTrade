@@ -13,7 +13,7 @@ class ViewAdmins extends Component {
                         </Link>
                     </div>
                     <div className="">
-                        <Link to="/addproduct">
+                        <Link to="/dashboard/product/new">
                             <button type="button" className="btn btn-success ml-2">New Product</button>
                         </Link>
                     </div>
@@ -23,7 +23,7 @@ class ViewAdmins extends Component {
                         <thead>
                             <tr>
                                 <th scope="col">id</th>
-                                <th scope="col">Eame</th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Address</th>
                             </tr>
