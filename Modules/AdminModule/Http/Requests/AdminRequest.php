@@ -15,10 +15,7 @@ class AdminRequest extends FormRequest
     {
         return [
             //
-            'name'=>['required', 'string', 'unique'],
-            'email'=>['required', 'unique','email'],
-            'password'=>['required','string'],
-            'address'=>['required','string']
+            
         ];
     }
 

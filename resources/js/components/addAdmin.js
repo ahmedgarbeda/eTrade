@@ -92,7 +92,7 @@ class AddAdmin extends Component {
                                 onChange={this.changehandel}
                                 />
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <label htmlFor="address">address</label>
                                 <input 
                                 type="text" 
@@ -102,7 +102,7 @@ class AddAdmin extends Component {
                                 value={this.state.address}
                                 onChange={this.changehandel}
                                 />
-                            </div>
+                            </div> */}
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Roles</label>
                                 <button aria-expanded="false" className="btn btn-lg dropdown-toggle text-black-50 w-100 m-0 border roles" data-toggle="dropdown" type="button">choose one</button>
