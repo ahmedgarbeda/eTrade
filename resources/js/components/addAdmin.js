@@ -113,18 +113,8 @@ class AddAdmin extends Component {
                                 onChange={this.changehandel}
                                 />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="address">role</label>
-                                <input 
-                                type="text" 
-                                className="form-control" 
-                                id="admin[role_id]" aria-describedby="" 
-                                name="role_id" 
-                                value={this.state.fieldValue}
-                                onChange={this.changehandel}
-                                />
-                            </div>
                            <div className="form-group">
+
                                 <label htmlFor="exampleInputPassword1">Roles</label>
                                 <select className="form-control">
                                     <optgroup label="This is a group">

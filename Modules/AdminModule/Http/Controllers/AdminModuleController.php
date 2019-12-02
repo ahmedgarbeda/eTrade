@@ -39,6 +39,18 @@ class AdminModuleController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $request->validate([
+        //     'name'=>'required|string|unique',
+        //     'email'=>'required | unique | email',
+        //     'password'=>'required | string',
+        //     'address'=>'required | string'
+        // ]);
+        // dd($request);
+        // $admin=Admin::create($request['admin']);
+        // //$admin->phones->create($request['phones']);
+        //return ;
+
         //dd($request["admin"]);
         $admin=Admin::create($request->all());
         //$admin->phones->create($request['phones']);
