@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 
 class AddAdmin extends Component {
@@ -7,10 +7,11 @@ class AddAdmin extends Component {
     constructor() {
         super();
         this.state = {
-            "admin[name]": '',
-            "admin[email]": '',
-            "admin[passwors]": '',
-            "admin[address]": '',
+            name: '',
+            email: '',
+            password: '',
+            address: '',
+            role_id: ''
         }
 
         this.changehandel = this.changehandel.bind(this);
@@ -18,31 +19,50 @@ class AddAdmin extends Component {
     }
 
     changehandel(event) {
-        const name = event.target.name;
+        const fieldValue = event.target.name;
         this.setState({
-            [name]: event.target.value
+            [fieldValue]: event.target.value
         })
     }
     
     adminhandle(event) {
         event.preventDefault();
+        const fetchData = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            address: this.state.address,
+            role_id: this.state.role_id
+        };
         
-        console.log(this.state);
-
         fetch(`/dashboard/admin`, {
             method: 'POST',
-            body: JSON.stringify(this.state),
+            body: JSON.stringify(fetchData),
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                 'Content-Type': 'application/json'
             }
-        }).then(res => res.json())
-            .then(data => console.log(data))
+        }).then(res => {
+                res.json();
+                if(res) {
+                    this.props.add_admin(fetchData);
+                    this.props.history.push('/dashboard/admin');
+                }
+            })
+            //.then(data => console.log(data))
             .catch(err => console.error("Error:", err));
     }
+    
 
     render() {
-        return( 
+
+        let roles = [
+            {id: 1, name: 'one'},
+            {id: 2, name: 'two'},
+            {id: 3, name: 'three'},
+        ];
+
+        return(
             <div className="card">
                 <div className="card-header h2">Create New admin</div>
                     <div className="card-body">
@@ -53,8 +73,8 @@ class AddAdmin extends Component {
                                 type="text" 
                                 className="form-control" 
                                 id="admin[name]" aria-describedby="" 
-                                name="admin[name]"
-                                value={this.state.name}
+                                name="name"
+                                value={this.state.fieldValue}
                                 onChange={this.changehandel}
                                 />
                             </div>
@@ -65,8 +85,8 @@ class AddAdmin extends Component {
                                 className="form-control" 
                                 id="admin[email]" 
                                 aria-describedby="emailHelp" 
-                                name="admin[email]"
-                                value={this.state.email}
+                                name="email"
+                                value={this.state.fieldValue}
                                 onChange={this.changehandel} 
                                 />
                             </div>
@@ -76,41 +96,31 @@ class AddAdmin extends Component {
                                 type="password" 
                                 className="form-control" 
                                 id="admin[password]" 
-                                name="admin[password]" 
-                                value={this.state.password}
+                                name="password" 
+                                value={this.state.fieldValue}
                                 onChange={this.changehandel}
                                 />
                             </div>
+                            
                             <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Password (repeat)</label>
-                                <input
-                                type="password" 
-                                className="form-control" 
-                                id="admin[repassword]" 
-                                name="admin[repassword]" 
-                                value={this.state.password}
-                                onChange={this.changehandel}
-                                />
-                            </div>
-                            {/* <div className="form-group">
                                 <label htmlFor="address">address</label>
                                 <input 
                                 type="text" 
                                 className="form-control" 
                                 id="admin[address]" aria-describedby="" 
-                                name="admin[address]" 
-                                value={this.state.address}
+                                name="address" 
+                                value={this.state.fieldValue}
                                 onChange={this.changehandel}
                                 />
-                            </div> */}
-                            <div className="form-group">
+                            </div>
+                           <div className="form-group">
+
                                 <label htmlFor="exampleInputPassword1">Roles</label>
-                                <button aria-expanded="false" className="btn btn-lg dropdown-toggle text-black-50 w-100 m-0 border roles" data-toggle="dropdown" type="button">choose one</button>
-                                <div className="dropdown-menu text-center bg-light" role="menu">
-                                    <span className="dropdown-item" href="#" role="presentation">First Product</span>
-                                    <span className="dropdown-item" href="#" role="presentation">Second Product</span>
-                                    <span className="dropdown-item" href="#" role="presentation">Third Product</span>
-                                </div>
+                                <select className="form-control">
+                                    <optgroup label="This is a group">
+                                        {roles.map(role => <option key={role.id}>{role.name}</option>)}
+                                    </optgroup>
+                                </select>
                             </div>
                             <div className="form-group">
                                 <button className="btn btn-primary btn-block" type="submit">Add Admin</button>
@@ -127,4 +137,4 @@ class AddAdmin extends Component {
 //         e.preventDefault();
 //     }
 
-export default AddAdmin;
+export default withRouter(AddAdmin);
