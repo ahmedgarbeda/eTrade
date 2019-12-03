@@ -78,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/slider')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Slider
@@ -94,7 +94,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/admin')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Admins
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/user')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 users
@@ -142,7 +142,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+          <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Offers
@@ -150,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/contact')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Contact Us
