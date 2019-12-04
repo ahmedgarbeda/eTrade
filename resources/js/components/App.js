@@ -9,6 +9,7 @@ import Navbar from './nav.js';
 import Header from './header.js';
 import Login from './login';
 import Signup from './signup';
+import Cart from './cart';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
 import Footer from './footer.js';
@@ -32,6 +33,9 @@ class App extends Component {
                             </Route>
                             <Route path="/product">
                                 <FullProductCard />
+                            </Route>
+                            <Route path="/cart">
+                                <Cart />
                             </Route>
                         </Switch>
                     </div>

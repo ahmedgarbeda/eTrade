@@ -37,9 +37,11 @@ class Navbar extends Component {
                                 <button type="button" className="btn btn-primary">SIGN UP</button>
                             </Link>
                         </li>
-                        <li className="nav-item ml-5">
-                            <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i></a>
-                        </li>
+                        <Link to="/cart">
+                            <li className="nav-item ml-5">
+                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i></a>
+                            </li>
+                        </Link>
                     </ul>
                 </div>
             </nav>
