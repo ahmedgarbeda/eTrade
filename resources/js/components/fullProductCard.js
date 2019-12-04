@@ -26,7 +26,7 @@ class FullProductCard extends Component {
                                         <p className="card-text mb-2 h4">color: <span>red</span></p>
                                         <div className="row">
                                             <div className="col-6 pt-2">
-                                                <small class="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                                <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                             </div>
                                             <div className="col-6">
                                                 <a href="#" className="btn btn-primary">
