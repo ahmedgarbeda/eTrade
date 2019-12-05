@@ -10,6 +10,7 @@ import Header from './header.js';
 import Login from './login';
 import Signup from './signup';
 import Cart from './cart';
+import Payments from './payments';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
 import Footer from './footer.js';
@@ -36,6 +37,9 @@ class App extends Component {
                             </Route>
                             <Route path="/cart">
                                 <Cart />
+                            </Route>
+                            <Route path="/payments">
+                                <Payments />
                             </Route>
                         </Switch>
                     </div>

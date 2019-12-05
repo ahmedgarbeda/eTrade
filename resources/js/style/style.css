@@ -11,3 +11,8 @@
 .pointer {
     cursor: pointer;
 }
+
+.active {
+    border: 1px solid #3490dc !important;
+    color:#3490dc !important;
+}

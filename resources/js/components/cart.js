@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import {Link} from "react-router-dom";
+
 
 const fetchedProducts = [
     {
@@ -122,6 +124,9 @@ class Cart extends Component {
                             ))}
                         </tbody>
                     </table>
+                    <Link to="/payments">
+                        <button className="btn btn-success mb-4 float-right display-1 font-weight-bolder">PROCEED TO CHECKOUT</button>
+                    </Link>
                 </div>
             </div>
          );

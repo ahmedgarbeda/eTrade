@@ -12,7 +12,7 @@ class Footer extends Component {
                             <form method="post">
                                 <div className="form-group">
                                     <label className="" htmlFor="name">Name</label>
-                                    <input id="name" className="form-control" type="text" name="name" placeholder="email" />
+                                    <input id="name" className="form-control" type="text" name="name" placeholder="name" />
                                 </div>
                                 <div className="form-group">
                                     <label className="" htmlFor="email">E-mail</label>
