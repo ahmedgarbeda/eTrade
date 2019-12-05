@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 class Footer extends Component {
     render() { 
         return ( 
-            <div className="bg-secondary py-3">
+            <div className="bg-dark py-3">
                 <div className="container pt-5">
                     <div className="row">
                         <div className="col-8">
@@ -25,7 +25,7 @@ class Footer extends Component {
                                     </textarea>
                                 </div>
                                 <div className="form-group">
-                                    <button className="btn btn-primary btn-block" type="submit">Send</button>
+                                    <button className="btn btn-info btn-block" type="submit">Send</button>
                                 </div>
                             </form>
                         </div>
@@ -37,9 +37,9 @@ class Footer extends Component {
                                 <i className="fas fa-phone-alt"></i><span className="px-3 h5">+25 418751</span>
                             </div>
                             <div className="pt-3">
-                                <i className="fab fa-facebook-f fa-2x pr-3"></i>
-                                <i className="fab fa-instagram fa-2x pr-3"></i>
-                                <i className="fab fa-twitter fa-2x pr-3"></i>
+                                <a href="#" className="social"><i className="fab fa-facebook-f fa-2x pr-3"></i></a>
+                                <a href="#" className="social"><i className="fab fa-instagram fa-2x pr-3"></i></a>
+                                <a href="#" className="social"><i className="fab fa-twitter fa-2x pr-3"></i></a>
                             </div>
                             <div className="pt-2">
                                 <img src="images/maps.png" alt="location" />
@@ -47,7 +47,7 @@ class Footer extends Component {
                         </div>
                     </div>
                 </div>
-                <hr className="mt-4 border-dark" />
+                <hr className="mt-4 border-light" />
                 <h5 className="text-center">&copy; All right reserved.</h5>
             </div>
          );

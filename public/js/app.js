@@ -6378,7 +6378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\r\n#quantity-input {\r\n    width: 30px;\r\n    height: 30px;\r\n}\r\n\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}", ""]);
+exports.push([module.i, "\r\n#quantity-input {\r\n    width: 30px;\r\n    height: 30px;\r\n}\r\n\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}", ""]);
 
 // exports
 
@@ -73806,7 +73806,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-secondary py-3"
+        className: "bg-dark py-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container pt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -73850,7 +73850,7 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary btn-block",
+        className: "btn btn-info btn-block",
         type: "submit"
       }, "Send")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-4"
@@ -73868,19 +73868,28 @@ function (_Component) {
         className: "px-3 h5"
       }, "+25 418751")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "social"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-facebook-f fa-2x pr-3"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "social"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-instagram fa-2x pr-3"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        className: "social"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fab fa-twitter fa-2x pr-3"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: "images/maps.png",
         alt: "location"
       }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
-        className: "mt-4 border-dark"
+        className: "mt-4 border-light"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "text-center"
       }, "\xA9 All right reserved."));
