@@ -73625,7 +73625,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var products = [{
+var fetchedProducts = [{
   id: 1,
   name: "product1",
   price: 100
@@ -73702,7 +73702,7 @@ function (_Component) {
       }, "Quantitiy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "text-right"
-      }, "Total"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, products.map(function (product) {
+      }, "Total"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, fetchedProducts.map(function (product) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: product.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -73726,7 +73726,7 @@ function (_Component) {
           className: "mx-3 text-center",
           type: "text",
           name: product.name,
-          value: product.id,
+          value: _this2.state.quantity,
           onChange: _this2.changeHandeler
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "text-primary h2 pointer",
@@ -73796,13 +73796,84 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-secondary",
-        style: {
-          minHeight: 15 + 'rem'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "bg-secondary py-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container pt-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "text-left  mb-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Contact Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        method: "post"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "",
+        htmlFor: "name"
+      }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "name",
+        className: "form-control",
+        type: "text",
+        name: "name",
+        placeholder: "email"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "",
+        htmlFor: "email"
+      }, "E-mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "email",
+        className: "form-control",
+        type: "email",
+        name: "email",
+        placeholder: "email"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "",
+        htmlFor: "password"
+      }, "Message"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-control",
+        col: "18"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary btn-block",
+        type: "submit"
+      }, "Send")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pb-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-map-marker-alt"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "px-3 h5"
+      }, "Nasr city, Cairo, Egypt")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pb-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-phone-alt"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "px-3 h5"
+      }, "+25 418751")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pt-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-facebook-f fa-2x pr-3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-instagram fa-2x pr-3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-twitter fa-2x pr-3"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "images/maps.png",
+        alt: "location"
+      }))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+        className: "mt-4 border-dark"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "text-center"
-      }, "Footer"));
+      }, "\xA9 All right reserved."));
     }
   }]);
 
@@ -74142,7 +74213,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-dark text-light"
+        className: "navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "navbar-brand m-0",
         href: "#"
@@ -74182,14 +74253,16 @@ function (_Component) {
         type: "submit"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-search"
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item ml-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
         href: "#"
       }, "HOME ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sr-only"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item ml-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",

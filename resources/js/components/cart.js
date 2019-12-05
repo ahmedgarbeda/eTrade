@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 
-const products = [
+const fetchedProducts = [
     {
         id: 1,
         name: "product1",
@@ -25,14 +25,14 @@ class Cart extends Component {
     constructor() {
         super();
         this.state= {
-            quantity: 0
+            quantity: 0,
         }
         this.changeHandeler = this.changeHandeler.bind(this);
         this.plusOne = this.plusOne.bind(this);
         this.minusOne = this.minusOne.bind(this);
     }
 
-    changeHandeler(event) {
+    changeHandeler(event) {        
         this.setState({
             quantity: event.target.value
         })
@@ -92,7 +92,7 @@ class Cart extends Component {
                                 </td>
                                 <td className="fix-table-cart h4 text-success text-right font-weight-bolder">$<span>{132 * this.state.quantity}</span></td>
                             </tr>*/}
-                            {products.map(product => (
+                            {fetchedProducts.map(product => (
                                     <tr key={product.id}>
                                     <th scope="row">
                                         <img src="images/product-red.png" width="80"/>
@@ -109,7 +109,7 @@ class Cart extends Component {
                                         className="mx-3 text-center" 
                                         type="text" 
                                         name={product.name}
-                                        value={product.id}
+                                        value={this.state.quantity}
                                         onChange={this.changeHandeler}
                                         />
                                         <span 
