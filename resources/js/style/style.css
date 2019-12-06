@@ -1,0 +1,22 @@
+
+#quantity-input {
+    width: 30px;
+    height: 30px;
+}
+
+.fix-table-cart {
+    line-height: 87px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.active {
+    border: 1px solid #3490dc !important;
+    color:#3490dc !important;
+}
+
+.social:hover {
+    color: #3490dc !important;
+}

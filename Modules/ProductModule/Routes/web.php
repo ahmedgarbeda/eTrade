@@ -22,3 +22,11 @@ Route::prefix('productmodule')->group(function() {
 });
 
 
+
+Route::prefix('productmodule')->group(function() {
+    Route::resource('/category' , 'CategoryModuleController');
+});
+
+Route::prefix('productmodule')->group(function() {
+    Route::resource('/offer' , 'OfferModuleController');
+});

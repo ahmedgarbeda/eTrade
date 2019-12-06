@@ -11,16 +11,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <title>eTrade</title>
 
- 
+
   <link rel="stylesheet" href="/css/app.css">
-  
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->   
+    <!-- Left navbar links -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -28,9 +28,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <li class="nav-item dropdown">
         <a href="/logout" class="btn btn-danger">Sign Out <i class="fas fa-sign-out-alt"></i></a>
 
-        
+
       </li>
-      
+
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -110,7 +110,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('category.index')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Categories
@@ -118,7 +118,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('product.index')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Products
@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -167,14 +167,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-  
-    
+
+
 
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
       @yield('content')
-        
+
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

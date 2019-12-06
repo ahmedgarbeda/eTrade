@@ -5,9 +5,15 @@ namespace Modules\ProductModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\AdminModule\Entities\Admin;
 use Modules\ProductModule\Entities\Category;
 use Modules\ProductModule\Entities\Product;
+use Modules\ProductModule\Entities\ProductPhotos;
 use Modules\ProductModule\Transformers\ProductResource;
+use Modules\ProductModule\Http\Requests\CreateProductRequest;
+use Modules\ProductModule\Http\Requests\UpdateProductRequest;
+
+use Symfony\Component\Process\Process;
 
 class ProductModuleController extends Controller
 {
@@ -17,10 +23,14 @@ class ProductModuleController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        //http://127.0.0.1:8000/productmodule/product
-        return ProductResource::collection($product);
-        //        return view('productmodule::index');
+
+        $products = Product::all();
+        return view('productmodule::product.index' , ['products' => $products] );
+
+//        $product = Product::all();
+//        //http://127.0.0.1:8000/productmodule/product
+//        return ProductResource::collection($product);
+//        //        return view('productmodule::index');
     }
 
     /**
@@ -29,7 +39,17 @@ class ProductModuleController extends Controller
      */
     public function create()
     {
-        return view('productmodule::create');
+        $categories = Category::all();
+        $categoryArr = array();
+        foreach ($categories as $category){
+            $categoryArr[$category->id] = $category->name ;
+        }
+        $admins = Admin::all();
+        $adminsArr = array();
+        foreach ($admins as $admin){
+            $adminsArr[$admin->id] = $admin->name ;
+        }
+        return view('productmodule::product.create' , ['categories' => $categoryArr , 'admins' => $adminsArr]);
     }
 
     /**
@@ -37,17 +57,32 @@ class ProductModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         $product = new Product();
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
-        $product->category_id = 1 ;
+        $product->admin_id = $request->input('admin_id');
+        $currentCategory = $request->input('category_id') ;
 
-        if($product->save()){
-            return new ProductResource($product);
+        $category = Category::find($currentCategory);
+        $category->products()->save($product);
+
+        if ($file = $request->file('photo')){
+            $name = time() . $file->getClientOriginalName() ;
+            $file->move('productImages' , $name);
+            $photo = new ProductPhotos();
+            $photo->path = $name;
         }
+        $product->photo()->save($photo);
+
+        return  redirect('productmodule/product');
+
+//
+//        if($product->save()){
+//            return new ProductResource($product);
+//        }
     }
 
     /**
@@ -57,6 +92,7 @@ class ProductModuleController extends Controller
      */
     public function show($id)
     {
+
         //http://127.0.0.1:8000/productmodule/product/1
         $product = Product::findOrFail($id);
         return new ProductResource($product);
@@ -70,7 +106,19 @@ class ProductModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('productmodule::edit');
+        $categories = Category::all();
+        $categoryArr = array();
+        foreach ($categories as $category){
+            $categoryArr[$category->id] = $category->name ;
+        }
+        $admins = Admin::all();
+        $adminsArr = array();
+        foreach ($admins as $admin){
+            $adminsArr[$admin->id] = $admin->name ;
+        }
+        $product = Product::find($id);
+        return view('productmodule::product.edit',
+        ['product' => $product , 'categories' => $categoryArr , 'admins' => $adminsArr]);
     }
 
     /**
@@ -79,9 +127,26 @@ class ProductModuleController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
+        $product = Product::find($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->price = $request->input('price');
+        $product->admin_id = $request->input('admin_id');
+        $currentCategory = $request->input('category_id') ;
+        $category = Category::find($currentCategory);
+        $category->products()->save($product);
 
+        if ($file = $request->file('photo')){
+            $name = time().  $file->getClientOriginalName() ;
+            $file->move('productImages' , $name);
+            $photo = ProductPhotos::where('product_id' , $product->id )->first();
+            unlink(  public_path() . $product->photo->path);
+            $photo->path = $name;
+            $product->photo()->save($photo);
+        }
+        return  redirect('productmodule/product');
     }
 
     /**
@@ -91,9 +156,16 @@ class ProductModuleController extends Controller
      */
     public function destroy($id)
     {
+
         $product = Product::findOrFail($id);
-        if ($product->delete()){
-            return new ProductResource($product);
+        if($product->photo){
+            unlink(  public_path() . $product->photo->path);
         }
+        $product->delete();
+        return  redirect('productmodule/product');
+
+//        if ($product->delete()){
+//            return new ProductResource($product);
+//        }
     }
 }
