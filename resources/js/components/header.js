@@ -17,7 +17,7 @@ class Header extends Component {
             console.log(this.state.counter);
             
             this.setState({ counter: this.state.counter + 1 });
-        }, 4500);
+        }, 3500);
     }
 
     render() {
