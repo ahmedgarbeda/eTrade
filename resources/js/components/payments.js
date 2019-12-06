@@ -8,14 +8,14 @@ class Payments extends Component {
     constructor() {
         super();
         this.state = {
-            active_payment: false
+            paymentMethod: false
         }
         this.toggle = this.toggle.bind(this);
     }
 
     toggle() {
         this.setState({ 
-           active_payment: !this.state.active_payment
+           paymentMethod: !this.state.paymentMethod
         });
     } 
 
@@ -80,15 +80,15 @@ class Payments extends Component {
                         <div className="py-3 px-1 my-5 text-center display-1">
                             <span id="box" className=
                             {"bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + 
-                            (this.state.active_payment ? "": "active")}
+                            (this.state.paymentMethod ? "": "active")}
                             onClick={this.toggle} ><i class="fas fa-credit-card"></i></span>
                             <span className=
                             {"bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + 
-                            (this.state.active_payment ? "active": "")}
+                            (this.state.paymentMethod ? "active": "")}
                             onClick={this.toggle} ><i class="fab fa-cc-paypal"></i></span>
                         </div>
                         <div>
-                            {(this.state.active_payment ? <PayPalForm /> : <CreditCardForm />)}
+                            {(this.state.paymentMethod ? <PayPalForm /> : <CreditCardForm />)}
                         </div>
                     </div>
                 </div>

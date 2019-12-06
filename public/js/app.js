@@ -74607,7 +74607,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Payments).call(this));
     _this.state = {
-      active_payment: false
+      paymentMethod: false
     };
     _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
     return _this;
@@ -74617,7 +74617,7 @@ function (_Component) {
     key: "toggle",
     value: function toggle() {
       this.setState({
-        active_payment: !this.state.active_payment
+        paymentMethod: !this.state.paymentMethod
       });
     }
   }, {
@@ -74735,16 +74735,16 @@ function (_Component) {
         className: "py-3 px-1 my-5 text-center display-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "box",
-        className: "bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + (this.state.active_payment ? "" : "active"),
+        className: "bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + (this.state.paymentMethod ? "" : "active"),
         onClick: this.toggle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-credit-card"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + (this.state.active_payment ? "active" : ""),
+        className: "bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + (this.state.paymentMethod ? "active" : ""),
         onClick: this.toggle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fab fa-cc-paypal"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.active_payment ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)))));
     }
   }]);
 
