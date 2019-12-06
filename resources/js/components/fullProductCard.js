@@ -9,7 +9,7 @@ class FullProductCard extends Component {
     render() { 
         return (
             <div>
-            <div className="container-fluid my-5 bg-white text-dark">
+            <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card border-0 rounded-0">

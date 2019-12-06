@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 class RelatedProduct extends Component {
     render() { 
         return ( 
-        <div className="container-fluid my-5 bg-white text-dark">
+        <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
             <h3 className="py-4">Similar items</h3>
             <div className="row">
                 <div className="col-4">
