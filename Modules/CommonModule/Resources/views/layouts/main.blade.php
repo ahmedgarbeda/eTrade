@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Phone List</title>
+  <title>eTrade</title>
 
  
   <link rel="stylesheet" href="/css/app.css">
@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="#" class="brand-link">
       <img src="/images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Phone List</span>
+      <span class="brand-text font-weight-light">eTrade</span>
     </a>
 
     <!-- Sidebar -->
@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list blue"></i>
+              <i class="nav-icon fas fa-cogs blue"></i>
               <p>
                 Settings
               </p>
@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users green"></i>
+              <i class="nav-icon fas fa-address-card green"></i>
               <p>
                 About Us
               </p>
@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/slider')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-slider-h cyan"></i>
               <p>
                 Slider
               </p>
@@ -95,7 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/admin')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-users-cogs cyan"></i>
               <p>
                 Admins
               </p>
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/user')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-users cyan"></i>
               <p>
                 users
               </p>

@@ -17,4 +17,5 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/slider', 'SliderController@index');
     Route::get('/admin', 'AdminController@index');
     Route::get('/user', 'UserController@index');
+    Route::get('/settings', 'CommonModuleController@settings');
 });

@@ -76,4 +76,8 @@ class CommonModuleController extends Controller
     {
         //
     }
+
+    public function settings(){
+        return view('commonmodule::settings');
+    }
 }
