@@ -12,9 +12,9 @@
 */
 
 Route::prefix('dashboard')->group(function () {
+
     Route::get('/', 'CommonModuleController@index');
+
     Route::get('/contact', 'ContactController@index');
-    Route::get('/slider', 'SliderController@index');
-    Route::get('/admin', 'AdminController@index');
-    Route::get('/user', 'UserController@index');
+    Route::resource('/slider', 'SliderController')->middleware('auth');
 });
