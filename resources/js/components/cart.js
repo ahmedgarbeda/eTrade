@@ -119,7 +119,7 @@ class Cart extends Component {
                                         onClick={() => this.plusOne(product)}
                                         >+</span>
                                     </td>
-                                    <td className="fix-table-cart h4 text-success text-right font-weight-bolder">$<span>{product.price * product.id}</span></td>
+                                    <td className="fix-table-cart h4 text-success text-right font-weight-bolder">$<span>{product.price * this.state.quantity}</span></td>
                                 </tr>
                             ))}
                         </tbody>

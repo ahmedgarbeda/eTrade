@@ -73570,12 +73570,12 @@ function (_Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_10__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_10__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signup__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/login"
@@ -73741,7 +73741,7 @@ function (_Component) {
           }
         }, "+")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
           className: "fix-table-cart h4 text-success text-right font-weight-bolder"
-        }, "$", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, product.price * product.id)));
+        }, "$", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, product.price * _this2.state.quantity)));
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/payments"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -74026,6 +74026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74047,28 +74048,60 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Header =
 /*#__PURE__*/
 function (_Component) {
   _inherits(Header, _Component);
 
   function Header() {
+    var _this;
+
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Header).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Header).call(this));
+    _this.state = {
+      counter: 1
+    };
+    return _this;
   }
 
   _createClass(Header, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.timer = setInterval(function () {
+        _this2.state.counter == 3 ? _this2.state.counter = 0 : '';
+        console.log(_this2.state.counter);
+
+        _this2.setState({
+          counter: _this2.state.counter + 1
+        });
+      }, 4500);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-secondary",
-        style: {
-          minHeight: 20 + 'rem'
-        }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "text-center"
-      }, "Black friday"));
+        className: "bg-secondary"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "position-absolute py-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "pt-5 display-4 font-weight-bolder"
+      }, "Say yes to adventure"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "h5 pb-4"
+      }, "Our store designed for your journey. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary"
+      }, "Shop Now")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "img-fluid",
+        src: "images/".concat(this.state.counter, ".jpg"),
+        alt: "show"
+      }));
     }
   }]);
 
@@ -74516,8 +74549,10 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid my-5 bg-white text-dark py-4 card-margin"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "pt-4 pb-5"
+      }, "Discover eTrade"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-4"
@@ -74534,7 +74569,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
+        className: "col-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "card-title"
       }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -74573,7 +74608,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
+        className: "col-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "card-title"
       }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
@@ -74612,7 +74647,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
+        className: "col-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "card-title"
       }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {

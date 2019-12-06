@@ -20,10 +20,10 @@ class App extends Component {
         return (
             <Router>
                 <Navbar />
+                <Header />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
-                                <Header />
                                 <ProductCard />
                             </Route>
                             <Route path="/sign-up">

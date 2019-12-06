@@ -7,7 +7,8 @@ import {Link} from "react-router-dom";
 class ProductCard extends Component {
     render() { 
         return (               
-                <div className="container-fluid my-5 bg-white text-dark py-4 card-margin">
+                <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
+                    <h2 className="pt-4 pb-5">Discover eTrade</h2>
                     <div className="row">
                         <div className="col-4">
                             <div className="card border-0 rounded-0">
@@ -16,7 +17,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
@@ -45,7 +46,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
@@ -74,7 +75,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
