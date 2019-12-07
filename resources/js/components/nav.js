@@ -24,16 +24,16 @@ class Navbar extends Component {
                             </form>
                         </li>
                         <Link to="/">
-                            <li className="nav-item ml-5">
+                            <li className="nav-item ml-5 font-weight-bold">
                                 <a className="nav-link" href="#">HOME<span className="sr-only"></span></a>
                             </li>
                         </Link>
                         <Link to="/about-us">
-                            <li className="nav-item ml-5">
+                            <li className="nav-item ml-5 font-weight-bold">
                                 <a className="nav-link" href="#">ABOUT<span className="sr-only"></span></a>
                             </li>
                         </Link>
-                        <li className="nav-item ml-5">
+                        <li className="nav-item ml-5 font-weight-bold">
                             <a className="nav-link" href="#">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
@@ -43,7 +43,8 @@ class Navbar extends Component {
                         </li>
                         <Link to="/cart">
                             <li className="nav-item ml-5">
-                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i></a>
+                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i>
+                                <span className="px-1 font-weight-bold">Cart</span></a>
                             </li>
                         </Link>
                     </ul>
