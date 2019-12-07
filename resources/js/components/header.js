@@ -14,10 +14,9 @@ class Header extends Component {
     componentDidMount() {
         this.timer = setInterval(() => {
             (this.state.counter == 3) ? this.state.counter = 0 : '';
-            console.log(this.state.counter);
             
             this.setState({ counter: this.state.counter + 1 });
-        }, 4500);
+        }, 3500);
     }
 
     render() {

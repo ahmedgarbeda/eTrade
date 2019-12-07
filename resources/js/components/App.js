@@ -9,15 +9,65 @@ import Navbar from './nav.js';
 import Header from './header.js';
 import Login from './login';
 import Signup from './signup';
-import Cart from './cart';
+import CartTable from './cartTable';
+import CartList from './cartList';
+import TotalPrice from './totalPrice';
 import Payments from './payments';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
 import Aboutus from './aboutus.js';
 import Footer from './footer.js';
 
+
+const fetchedProducts = [
+    {
+        id: 1,
+        name: 'product 1',
+        price: 100,
+        img: "images/product-joy.png"
+    },
+    {
+        id: 2,
+        name: 'product 2',
+        price: 55,
+        img: "images/product-blue.png"
+    }
+
+]
+
+
 class App extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            productList: [],
+            isProductListEmpty: false,
+            subTotal: 0
+        }
+        this.caluculateSubTotal = this.caluculateSubTotal.bind(this)
+    }
+
+    caluculateSubTotal(price) {
+        this.setState({ subTotal: this.state.subTotal + price });
+    }
+
     render() {
+
+        const products = fetchedProducts.map(product => {
+            return (
+                <CartList 
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                img={product.img}
+                handleTotal={this.caluculateSubTotal}
+                />
+            );
+        });
+
+        const EmptyList = () =><div className="text-center display-4 py-4 w-100">Your Cart is Empty</div>;
+
         return (
             <Router>
                 <Navbar />
@@ -37,7 +87,12 @@ class App extends Component {
                                 <FullProductCard />
                             </Route>
                             <Route path="/cart">
-                                <Cart />
+                                <CartTable 
+                                show={
+                                        (fetchedProducts.length===0)? <EmptyList /> : products
+                                     }
+                                empty={this.state.isProductListEmpty}
+                                gotTotal={<TotalPrice subTotalValue={this.state.subTotal}/>} />
                             </Route>
                             <Route path="/payments">
                                 <Payments />

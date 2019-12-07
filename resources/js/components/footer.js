@@ -42,7 +42,7 @@ class Footer extends Component {
                                 <a href="#" className="social"><i className="fab fa-twitter fa-2x pr-3"></i></a>
                             </div>
                             <div className="pt-2">
-                                <img src="images/maps.png" alt="location" />
+                                <img className="img-fluid" src="images/maps.png" alt="location" />
                             </div>
                         </div>
                     </div>
