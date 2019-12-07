@@ -45,10 +45,10 @@ class CartList extends Component {
             <tr key={id}>
                 <th scope="row">
                     <img src={img} width="80"/>
-                    <span className="px-3">{name}</span>
+                    <span className="px-3 h4">{name}</span>
                 </th>
-                <td className="fix-table-cart">${price}</td>
-                <td className="fix-table-cart">
+                <td className="fix-table-cart h4">${price}</td>
+                <td className="fix-table-cart h4">
                     <button 
                     className="btn btn-outline-danger py-0 pointer"
                     onClick={this.minusOne}
@@ -67,7 +67,7 @@ class CartList extends Component {
                     onClick={this.plusOne}
                     >+1</button>
                 </td>
-                <td className="fix-table-cart h4 text-success text-right font-weight-bolder">$<span>{ price * this.state.quantity }</span></td>
+                <td className="fix-table-cart h3 text-success text-right font-weight-bolder">$<span>{ price * this.state.quantity }</span></td>
             </tr>                 
          );
     }

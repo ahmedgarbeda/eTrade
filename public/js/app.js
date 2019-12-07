@@ -73563,19 +73563,14 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 var fetchedProducts = [{
   id: 1,
-  name: "product1",
+  name: 'product 1',
   price: 100,
-  img: "images/product-red.png"
+  img: "images/product-joy.png"
 }, {
   id: 2,
-  name: "product2",
-  price: 50,
-  img: "images/product-cyan.png"
-}, {
-  id: 3,
-  name: "product3",
-  price: 150,
-  img: "images/product-joy.png"
+  name: 'product 2',
+  price: 55,
+  img: "images/product-blue.png"
 }];
 
 var App =
@@ -73591,6 +73586,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this));
     _this.state = {
       productList: [],
+      isProductListEmpty: false,
       subTotal: 0
     };
     _this.caluculateSubTotal = _this.caluculateSubTotal.bind(_assertThisInitialized(_this));
@@ -73618,6 +73614,13 @@ function (_Component) {
           handleTotal: _this2.caluculateSubTotal
         });
       });
+
+      var EmptyList = function EmptyList() {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "text-center display-4 py-4 w-100"
+        }, "Your Cart is Empty");
+      };
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -73632,7 +73635,8 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cartTable__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        show: products,
+        show: fetchedProducts.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EmptyList, null) : products,
+        empty: this.state.isProductListEmpty,
         gotTotal: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_totalPrice__WEBPACK_IMPORTED_MODULE_10__["default"], {
           subTotalValue: this.state.subTotal
         })
@@ -73840,11 +73844,11 @@ function (_Component) {
         src: img,
         width: "80"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "px-3"
+        className: "px-3 h4"
       }, name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart"
+        className: "fix-table-cart h4"
       }, "$", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart"
+        className: "fix-table-cart h4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-outline-danger py-0 pointer",
         onClick: this.minusOne,
@@ -73860,7 +73864,7 @@ function (_Component) {
         className: "btn btn-outline-primary py-0",
         onClick: this.plusOne
       }, "+1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart h4 text-success text-right font-weight-bolder"
+        className: "fix-table-cart h3 text-success text-right font-weight-bolder"
       }, "$", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, price * this.state.quantity)));
     }
   }]);
@@ -73927,18 +73931,21 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
+        className: "col-md-12"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
-        className: "table table-striped mt-5"
+        className: "table table-striped mt-5 border-bottom"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        scope: "col"
+        scope: "col",
+        className: "h3"
       }, "Product"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        scope: "col"
+        scope: "col",
+        className: "h3"
       }, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
-        scope: "col"
+        scope: "col",
+        className: "px-4 h3"
       }, "Quantitiy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
-        className: "text-right"
+        className: "text-right h3"
       }, "Total"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.show)), this.props.gotTotal, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/payments"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74273,7 +74280,6 @@ function (_Component) {
 
       this.timer = setInterval(function () {
         _this2.state.counter == 3 ? _this2.state.counter = 0 : '';
-        console.log(_this2.state.counter);
 
         _this2.setState({
           counter: _this2.state.counter + 1
@@ -75271,7 +75277,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "d-flex justify-content-end pb-4"
+        className: "d-flex justify-content-end py-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "display-4"
       }, "Sub total: ", this.props.subTotalValue));

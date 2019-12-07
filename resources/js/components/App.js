@@ -22,22 +22,17 @@ import Footer from './footer.js';
 const fetchedProducts = [
     {
         id: 1,
-        name: "product1",
+        name: 'product 1',
         price: 100,
-        img: "images/product-red.png"
+        img: "images/product-joy.png"
     },
     {
         id: 2,
-        name: "product2",
-        price: 50,
-        img: "images/product-cyan.png"
-    },
-    {
-        id: 3,
-        name: "product3",
-        price: 150,
-        img: "images/product-joy.png"
+        name: 'product 2',
+        price: 55,
+        img: "images/product-blue.png"
     }
+
 ]
 
 
@@ -47,6 +42,7 @@ class App extends Component {
         super();
         this.state = {
             productList: [],
+            isProductListEmpty: false,
             subTotal: 0
         }
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this)
@@ -68,7 +64,9 @@ class App extends Component {
                 handleTotal={this.caluculateSubTotal}
                 />
             );
-        })
+        });
+
+        const EmptyList = () =><div className="text-center display-4 py-4 w-100">Your Cart is Empty</div>;
 
         return (
             <Router>
@@ -90,7 +88,10 @@ class App extends Component {
                             </Route>
                             <Route path="/cart">
                                 <CartTable 
-                                show={products} 
+                                show={
+                                        (fetchedProducts.length===0)? <EmptyList /> : products
+                                     }
+                                empty={this.state.isProductListEmpty}
                                 gotTotal={<TotalPrice subTotalValue={this.state.subTotal}/>} />
                             </Route>
                             <Route path="/payments">
