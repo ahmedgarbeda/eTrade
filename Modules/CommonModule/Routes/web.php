@@ -13,8 +13,8 @@
 
 Route::prefix('dashboard')->group(function () {
 
-    Route::get('/', 'CommonModuleController@index');
+    Route::get('/', 'CommonModuleController@index')->middleware('auth');
 
-    Route::get('/contact', 'ContactController@index');
+    Route::resource('/contact', 'ContactController')->middleware('auth');
     Route::resource('/slider', 'SliderController')->middleware('auth');
 });

@@ -5,75 +5,58 @@ namespace Modules\CommonModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CommonModule\Entities\Contact;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
     public function index()
     {
-        return view('commonmodule::layouts.contactus');
+        $contact = Contact::all();
+        return view('commonmodule::layouts.contactus', ['contacts' => $contact]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
-        return view('commonmodule::create');
+        echo "need";
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'email' => 'required',
+            'title' => 'required',
+            'status' => 'required'
+        ]);
+        \Modules\CommonModule\Entities\Contact::create($data);
+
+        return redirect('dashboard/contact');
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('commonmodule::show');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
     public function edit($id)
     {
-        return view('commonmodule::edit');
+        $contact = Contact::find($id);
+        return view('commonmodule::layouts.editcontact', ['contacts' => $contact]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        $data = request()->validate([
+            'email' => 'required',
+            'title' => 'required',
+            'status' => 'required'
+        ]);
+        \Modules\CommonModule\Entities\Contact::where('id', $id)->update($data);
+
+        return redirect('dashboard/contact');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
+
     public function destroy($id)
     {
-        //
+        Contact::where('id', $id)->delete();
+        return redirect('dashboard/contact');
     }
 }

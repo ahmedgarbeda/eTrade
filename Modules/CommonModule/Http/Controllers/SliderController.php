@@ -80,21 +80,20 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "sss";
-        // $data = request()->validate([
-        //     'title' => 'required',
-        //     'description' => 'required',
-        //     'image' => ['required', 'image']
-        // ]);
-        // var_dump($data);
-        // $imagePath = request('image')->store('uploads/slider', 'public');
-        // \Modules\CommonModule\Entities\Slider::where('id', $id)->update([
-        //     'title' => $data['title'],
-        //     'description' => $data['description'],
-        //     'image' => $imagePath
-        // ]);
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => ['required', 'image']
+        ]);
+        var_dump($data);
+        $imagePath = request('image')->store('uploads/slider', 'public');
+        \Modules\CommonModule\Entities\Slider::where('id', $id)->update([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => $imagePath
+        ]);
 
-        // return redirect('dashboard/slider');
+        return redirect('dashboard/slider');
     }
 
     /**
@@ -104,8 +103,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        echo "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        // dd(Slider::where('id', $id)->delete());
-        // return view('commonmodule::layouts.slider');
+        Slider::where('id', $id)->delete();
+        return redirect('dashboard/slider');
     }
 }
