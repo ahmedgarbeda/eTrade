@@ -81,6 +81,9 @@ class CommonModuleController extends Controller
     public function settings()
     {
         $settings = Settings::first();
+        if ($settings){
+            $settings=new Settings;
+        }
         return view('commonmodule::settings',compact('settings'));
     }
 

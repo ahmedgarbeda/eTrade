@@ -42,12 +42,13 @@ class AdminModuleController extends Controller
     public function store(Request $request)
     {
 
-        // $request->validate([
-        //     'name'=>'required|string|unique',
-        //     'email'=>'required | unique | email',
-        //     'password'=>'required | string',
-        //     'address'=>'required | string'
-        // ]);
+        $request->validate([
+            'name'=>'required|string|unique',
+            'email'=>'required | unique | email',
+            'password'=>'required | string',
+            'address'=>'required | string',
+            'phone' => 'required'
+        ]);
         // dd($request);
         // $admin=Admin::create($request['admin']);
         // //$admin->phones->create($request['phones']);
@@ -93,6 +94,13 @@ class AdminModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name'=>'required|string|unique',
+            'email'=>'required | unique | email',
+            'password'=>'required | string',
+            'address'=>'required | string',
+            'phone' => 'required'
+        ]);
         $admin= Admin::find($id);
         $admin->update($request->all());
         return redirect('/dashboard/admin');

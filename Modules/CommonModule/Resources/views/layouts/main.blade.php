@@ -26,7 +26,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a href="/logout" class="btn btn-danger">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+          <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="btn btn-danger">Sign Out</button>
+          </form>
+{{--        <a href="/logout" class="btn btn-danger">Sign Out <i class="fas fa-sign-out-alt"></i></a>--}}
 
 
       </li>

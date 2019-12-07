@@ -1,7 +1,16 @@
 @extends('commonmodule::layouts.main')
 @section('content')
 <h1>Admin Form</h1>
+<div class="danger">
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
 
+    @endif
+</div>
 <div class="col-12">
     <div class="card">
         <div class="card-header">
