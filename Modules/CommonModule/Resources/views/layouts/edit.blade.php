@@ -6,9 +6,9 @@
             <h3 class="box-title">Add Item</h3>
           </div>
         <div class="box-body">
-          <form action="{{route('slider.update',$sliders['id'])}}" enctype="multipart/form-data" method="PUT">
+          <form action={{route('slider.update',$sliders['id'])}} enctype="multipart/form-data" method="post">
             @csrf
-              
+              <input name="_method" type="hidden" value="PUT">
               <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control"  name="title" id="title" placeholder="Television,Cooker ..etc" value="{{$sliders['title']}}">

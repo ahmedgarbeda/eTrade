@@ -5,6 +5,10 @@ namespace Modules\ProductModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\ProductModule\Entities\Offer;
+use Modules\ProductModule\Entities\Category;
+use Modules\ProductModule\Entities\Product;
+use Modules\ProductModule\Http\Requests\CreateOfferRequest;
 
 class OfferModuleController extends Controller
 {
@@ -14,7 +18,10 @@ class OfferModuleController extends Controller
      */
     public function index()
     {
-        return view('productmodule::offer.index');
+
+
+        $offers = Offer::all();
+        return view('productmodule::offer.index' , ['offers' => $offers]);
     }
 
     /**
@@ -22,10 +29,19 @@ class OfferModuleController extends Controller
      * @return Response
      */
     public function create()
-    {
-        $offers = Offer::all();
+    {   $products = Product::all();
+        $productArr = array();
+        foreach ($products as $product){
+            $productArr[$product->id] = $product->name;
+        }
+
+        $categories = Category::all();
+        $categoryArr = array();
+        foreach ($categories as $category){
+            $categoryArr[$category->id] = $category->name ;
+        }
         return view('productmodule::offer.create',
-        ['offers' => $offers]);
+            ['products' => $productArr , 'categories' => $categoryArr] );
     }
 
     /**
@@ -33,10 +49,18 @@ class OfferModuleController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateOfferRequest $request)
     {
-        //
-    }
+        $offer = new Offer();
+        $offer->offer_name = $request->get('offer_name');
+        $offer->start_date = $request->get('start_date');
+        $offer->end_date = $request->get('end_date');
+        $offer->category_id = $request->get('category_id');
+
+        $product = Product::find($request->input('product_id'));
+        $product->offer()->save($offer);
+        return redirect('/productmodule/offer')->with('message' ,"Offer Added Successfully");
+        }
 
     /**
      * Show the specified resource.
@@ -55,7 +79,21 @@ class OfferModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('productmodule::offer.edit');
+        $products = Product::all();
+        $productArr = array();
+        foreach ($products as $product){
+            $productArr[$product->id] = $product->name;
+        }
+
+        $categories = Category::all();
+        $categoryArr = array();
+        foreach ($categories as $category){
+            $categoryArr[$category->id] = $category->name ;
+        }
+
+        $offer = Offer::find($id);
+        return view('productmodule::offer.edit' ,
+        ['offer' => $offer , 'categories' => $categoryArr , 'products' => $productArr]);
     }
 
     /**
@@ -64,9 +102,18 @@ class OfferModuleController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateOfferRequest $request, $id)
     {
-        //
+
+        $offer = Offer::find($id);
+        $offer->offer_name = $request->get('offer_name');
+        $offer->start_date = $request->get('start_date');
+        $offer->end_date = $request->get('end_date');
+        $offer->category_id = $request->get('category_id');
+
+        $product = Product::find($request->input('product_id'));
+        $product->offer()->save($offer);
+        return  redirect('productmodule/offer')->with('message' ,"Offer Updated Successfully");
     }
 
     /**
@@ -76,6 +123,9 @@ class OfferModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $offer = Offer::find($id);
+        $offer->delete();
+        return  redirect('productmodule/offer')->with('message' ,"Offer Deleted Successfully");
+
     }
 }

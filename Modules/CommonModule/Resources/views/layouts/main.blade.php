@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Phone List</title>
+  <title>eTrade</title>
 
 
   <link rel="stylesheet" href="/css/app.css">
@@ -26,7 +26,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a href="/logout" class="btn btn-danger">Sign Out <i class="fas fa-sign-out-alt"></i></a>
+          <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="btn btn-danger">Sign Out</button>
+          </form>
+{{--        <a href="/logout" class="btn btn-danger">Sign Out <i class="fas fa-sign-out-alt"></i></a>--}}
 
 
       </li>
@@ -41,7 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <a href="#" class="brand-link">
       <img src="/images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Phone List</span>
+      <span class="brand-text font-weight-light">eTrade</span>
     </a>
 
     <!-- Sidebar -->
@@ -62,32 +66,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list blue"></i>
+            <a href="{{url('/dashboard/settings')}}" class="nav-link">
+              <i class="nav-icon fas fa-cogs red"></i>
               <p>
                 Settings
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users green"></i>
-              <p>
-                About Us
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="{{url('/dashboard/slider')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-sliders-h green"></i>
               <p>
                 Slider
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+            <a href="{{url('/dashboard/roles')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-friends orange"></i>
               <p>
                 Roles
               </p>
@@ -95,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/admin')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-users-cog blue"></i>
               <p>
                 Admins
               </p>
@@ -103,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/user')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-users cyan"></i>
               <p>
                 users
               </p>
@@ -111,7 +108,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('category.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-list indigo"></i>
               <p>
                 Categories
               </p>
@@ -119,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('product.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-adjust purple"></i>
               <p>
                 Products
               </p>
@@ -127,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-adjust pink"></i>
               <p>
                 Orders
               </p>
@@ -135,15 +132,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-sync pink"></i>
               <p>
                 Order Status
               </p>
             </a>
           </li>
           <li class="nav-item">
-          <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+          <a href="{{route('offer.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-gift teal"></i>
               <p>
                 Offers
               </p>
@@ -151,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/contact')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-envelope yellow"></i>
               <p>
                 Contact Us
               </p>

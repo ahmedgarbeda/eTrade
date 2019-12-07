@@ -40,7 +40,11 @@ use
                <td><span><img src="/storage/{{$slider->image}}" w class="img-fluid" alt="Responsive image" width="100" height="100"></span></td>
                 <td>
                   <a href="{{route('slider.edit',$slider->id)}}" class="btn btn-primary">Edit</a>
-                  <a href="{{route('slider.destroy',$slider->id)}}" class="btn btn-danger">Delete</a>
+                  <form action={{route('slider.destroy',$slider['id'])}} method="post">
+                      @csrf
+                      <input name="_method" type="hidden" value="DELETE">  
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
                 </td>
               </tr>
                @endforeach 

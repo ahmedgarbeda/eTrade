@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,18 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
             $table->string('address');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('youtube');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->string('aboutus');
+            $table->string('aboutphoto');
+            $table->string('logo');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +35,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('settings');
     }
 }

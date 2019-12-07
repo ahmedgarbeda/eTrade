@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Admin extends Model
 {
-    protected $fillable = ['name','email','password','address','role_id'];
+    protected $fillable = ['name','email','password','address','phone','role_id'];
     use SoftDeletes;
 
     public function role()

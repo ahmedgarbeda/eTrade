@@ -15,4 +15,8 @@ class Product extends Model
         return $this->hasOne(ProductPhotos::class);
     }
 
+    public  function offer(){
+        return $this->hasOne(Offer::class);
+    }
+
 }
