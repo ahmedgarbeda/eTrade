@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\ProductModule\Entities\Category;
+use Modules\ProductModule\Entities\Offer;
 use Modules\ProductModule\Http\Requests\CreateCategoryRequest;
 
 
@@ -39,7 +40,7 @@ class CategoryModuleController extends Controller
         $category = new Category();
         $category->name = $request->input('name');
         $category->save();
-      return redirect('/productmodule/category');
+      return redirect('/productmodule/category')->with('message' ,"Category Added Successfully");
     }
 
     /**
@@ -76,7 +77,7 @@ class CategoryModuleController extends Controller
     {
         $category = Category::find($id);
         $category->update($request->all());
-        return redirect('/productmodule/category');
+        return redirect('/productmodule/category')->with('message' ,"Category Updated Successfully");
     }
 
     /**
@@ -87,6 +88,7 @@ class CategoryModuleController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
+        $offers = Offer::where('category_id' , $id)->delete();
         $products =  $category->products()->where('category_id' , $category->id)->get();
             if ($products){
                 foreach ($products as $product){
@@ -97,6 +99,6 @@ class CategoryModuleController extends Controller
             }
         }
             $category->delete();
-        return redirect('/productmodule/category');
+        return redirect('/productmodule/category')->with('message' ,"Category Deleted Successfully");
     }
 }

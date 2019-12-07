@@ -77,7 +77,7 @@ class ProductModuleController extends Controller
         }
         $product->photo()->save($photo);
 
-        return  redirect('productmodule/product');
+        return  redirect('productmodule/product')->with('message' ,"Product Added Successfully");
 
 //
 //        if($product->save()){
@@ -146,7 +146,7 @@ class ProductModuleController extends Controller
             $photo->path = $name;
             $product->photo()->save($photo);
         }
-        return  redirect('productmodule/product');
+        return  redirect('productmodule/product')->with('message' ,"Product Updated Successfully");
     }
 
     /**
@@ -162,7 +162,7 @@ class ProductModuleController extends Controller
             unlink(  public_path() . $product->photo->path);
         }
         $product->delete();
-        return  redirect('productmodule/product');
+        return  redirect('productmodule/product')->with('message' ,"Product Deleted Successfully");
 
 //        if ($product->delete()){
 //            return new ProductResource($product);
