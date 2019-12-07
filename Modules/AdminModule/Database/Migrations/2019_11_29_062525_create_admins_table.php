@@ -19,7 +19,6 @@ class CreateAdminsTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('address');
-            $table->string('phone');
             $table->timestamps();
             $table->softDeletes();
         });

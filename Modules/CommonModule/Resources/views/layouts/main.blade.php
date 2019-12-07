@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{url('/dashboard/settings')}}" class="nav-link">
-              <i class="nav-icon fas fa-cogs blue"></i>
+              <i class="nav-icon fas fa-cogs red"></i>
               <p>
                 Settings
               </p>
@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <li class="nav-item">
             <a href="{{url('/dashboard/slider')}}" class="nav-link">
-              <i class="nav-icon fas fa-sliders-h cyan"></i>
+              <i class="nav-icon fas fa-sliders-h green"></i>
               <p>
                 Slider
               </p>
@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/roles')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-user-friends orange"></i>
               <p>
                 Roles
               </p>
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/admin')}}" class="nav-link">
-              <i class="nav-icon fas fa-users-cog cyan"></i>
+              <i class="nav-icon fas fa-users-cog blue"></i>
               <p>
                 Admins
               </p>
@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('category.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-list cyan"></i>
+              <i class="nav-icon fas fa-list indigo"></i>
               <p>
                 Categories
               </p>
@@ -112,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('product.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-product-hunt cyan"></i>
+              <i class="nav-icon fas fa-adjust purple"></i>
               <p>
                 Products
               </p>
@@ -120,7 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-adjust cyan"></i>
+              <i class="nav-icon fas fa-adjust pink"></i>
               <p>
                 Orders
               </p>
@@ -128,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-sync cyan"></i>
+              <i class="nav-icon fas fa-sync pink"></i>
               <p>
                 Order Status
               </p>
@@ -136,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
           <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-gift cyan"></i>
+              <i class="nav-icon fas fa-gift teal"></i>
               <p>
                 Offers
               </p>
@@ -144,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/contact')}}" class="nav-link">
-              <i class="nav-icon fas fa-envelope cyan"></i>
+              <i class="nav-icon fas fa-envelope yellow"></i>
               <p>
                 Contact Us
               </p>

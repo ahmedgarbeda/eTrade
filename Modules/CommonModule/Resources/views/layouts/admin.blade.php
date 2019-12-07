@@ -1,7 +1,5 @@
 @extends('commonmodule::layouts.main')
 
-
-
 <div class="row justify-content-end mt-4 mr-5">
     <div class="col-lg-9">
         <div class="col-xs-12">
