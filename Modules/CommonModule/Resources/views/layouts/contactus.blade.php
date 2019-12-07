@@ -1,8 +1,10 @@
 @extends('commonmodule::layouts.main')
 
+@section('content')
+    
 
 
-    <div class="row justify-content-end mt-4 mr-5">
+    <div class="row justify-content-center mt-4 mr-5">
             <div class="col-lg-9">
             <div class="col-xs-12">
                     <div class="box">
@@ -29,47 +31,36 @@
                             <th>Status</th>
                             <th>Action</th>
                           </tr>
-                          <tr>
-                            <td>183</td>
-                            <td>Ahmed Rizk</td>
-                            <td>Main Admin</td>
-                            <td><span class="label label-success">Approved</span></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                                <button type="submit" class="btn btn-Danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>219</td>
-                            <td>Steven Ragy</td>
-                            <td>Main Admin</td>
-                            <td><span class="label label-warning">Pending</span></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                                <button type="submit" class="btn btn-Danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>657</td>
-                            <td>Mahmoud Hassan</td>
-                            <td>Order Admin</td>
-                            <td><span class="label label-success">Approved</span></td>
-                            <<td>
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                                <button type="submit" class="btn btn-Danger">Delete</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>175</td>
-                            <td>Ahmed Shrief</td>
-                            <td>Product Admin</td>
-                            <td><span class="label label-danger">Denied</span></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                                <button type="submit" class="btn btn-Danger">Delete</button>
-                            </td>
+                          @foreach ($contacts as $contact )
+                            <tr>
+                              <td>{{$contact['id']}}</td>
+                              <td>{{$contact['email']}}</td>
+                              <td>{{$contact['title']}}</td>
+                              <td><span 
+                                  @if ($contact['status']=='approved')
+                                      {!! "class='label label-success'" !!}
+                                      
+                                  @else
+                                    @if ($contact['status']=='denied')
+                                    {!! "class='label label-danger'" !!}
+                                    @else
+                                    {!!  "class='label label-warning'" !!} 
+                                    @endif
+                                  
+                                  @endif
 
-                          </tr>
+                                  
+                              >{{$contact['status']}}</span></td>
+                              <td>
+                                <a href="{{route('contact.edit',$contact->id)}}" class="btn btn-primary">Edit</a>
+                                <form action={{route('contact.destroy',$contact['id'])}} method="post">
+                                    @csrf
+                                    <input name="_method" type="hidden" value="DELETE">  
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                              </td>
+                            </tr>
+                          @endforeach
                         </tbody></table>
                       </div>
                       <!-- /.box-body -->
@@ -81,35 +72,38 @@
                   <!----->
      
     </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-6 ">
-            <div class="box-header with-border">
-              <h3 class="box-title">Reply Form</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <form role="form">
-                <!-- text input -->
-                <div class="form-group">
-                  <label>To</label>
-                  <input type="email" class="form-control" placeholder="example@etrade.com">
-                </div>
-                <div class="form-group">
-                        <label>Titele</label>
-                        <input type="text" class="form-control" placeholder="Enter your title here.">
-                      </div>
-
-                <!-- textarea -->
-                <div class="form-group">
-                    <label>Textarea</label>
-                    <textarea class="form-control" rows="3" placeholder="Your comment"></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" name="contactSubmit" id="contactSubmit">Send</button>
-                 </div>
-                
-              </form>
-            </div>
+<div class="row justify-content-center">
+  <div class="col-lg-6 ">
+    <div class="box-header with-border">
+      <h3 class="box-title">Reply Form</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <form action="{{route('contact.store')}}" method="POST">
+        @csrf
+        <div class="form-group">
+          <label for="email">To</label>
+          <input type="email" class="form-control" name="email" placeholder="example@etrade.com">
         </div>
-            <!-- /.box-body -->
-          </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" name="title" placeholder="Enter your title here.">
+        </div>
+        {{-- <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" rows="3" name="status" placeholder="Your comment">
+        </div> --}}
+        <select class="custom-select" name="status">
+          <option selected>Select Status</option>
+          <option value="approve">Approved</option>
+          <option value="denied">Denied</option>
+          <option value="pending">Pending</option>
+        </select>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="contactSubmit" id="contactSubmit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endsection

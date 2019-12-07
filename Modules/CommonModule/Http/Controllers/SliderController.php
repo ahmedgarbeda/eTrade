@@ -5,6 +5,7 @@ namespace Modules\CommonModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CommonModule\Entities\Slider;
 
 class SliderController extends Controller
 {
@@ -14,7 +15,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('commonmodule::layouts.slider');
+        $slider = Slider::all();
+        return view('commonmodule::layouts.slider', ['sliders' => $slider]);
     }
 
     /**
@@ -23,7 +25,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('commonmodule::create');
+        // return view('commonmodule::create');
+        echo "ok c";
     }
 
     /**
@@ -33,7 +36,19 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => ['required', 'image']
+        ]);
+        $imagePath = request('image')->store('uploads/slider', 'public');
+        \Modules\CommonModule\Entities\Slider::create([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => $imagePath
+        ]);
+
+        return redirect('dashboard/slider');
     }
 
     /**
@@ -43,7 +58,7 @@ class SliderController extends Controller
      */
     public function show($id)
     {
-        return view('commonmodule::show');
+        // return view('commonmodule::show');
     }
 
     /**
@@ -53,7 +68,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        return view('commonmodule::edit');
+        $slider = Slider::find($id);
+        return view('commonmodule::layouts.edit', ['sliders' => $slider]);
     }
 
     /**
@@ -64,7 +80,20 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image' => ['required', 'image']
+        ]);
+        var_dump($data);
+        $imagePath = request('image')->store('uploads/slider', 'public');
+        \Modules\CommonModule\Entities\Slider::where('id', $id)->update([
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'image' => $imagePath
+        ]);
+
+        return redirect('dashboard/slider');
     }
 
     /**
@@ -74,6 +103,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Slider::where('id', $id)->delete();
+        return redirect('dashboard/slider');
     }
 }

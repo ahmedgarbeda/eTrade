@@ -25,14 +25,16 @@ class Navbar extends Component {
                         </li>
                         <Link to="/">
                             <li className="nav-item ml-5">
-                                <a className="nav-link" href="#">HOME <span className="sr-only"></span></a>
+                                <a className="nav-link" href="#">HOME<span className="sr-only"></span></a>
+                            </li>
+                        </Link>
+                        <Link to="/about-us">
+                            <li className="nav-item ml-5">
+                                <a className="nav-link" href="#">ABOUT<span className="sr-only"></span></a>
                             </li>
                         </Link>
                         <li className="nav-item ml-5">
-                            <a className="nav-link" href="#">ABOUT <span className="sr-only"></span></a>
-                        </li>
-                        <li className="nav-item ml-5">
-                            <a className="nav-link" href="#">CONTACTS <span className="sr-only"></span></a>
+                            <a className="nav-link" href="#">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
                             <Link to="/sign-up">
