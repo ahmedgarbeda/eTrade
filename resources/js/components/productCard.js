@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 
 import {Link} from "react-router-dom";
 
-import Header from './header.js';
 
 class ProductCard extends Component {
     render() { 
-        return (
-            <div>
-                <Header />
-                <div className="container-fluid my-5 bg-white text-dark py-4 card-margin">
+        return (               
+                <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
+                    <h2 className="pt-4 pb-5">Discover eTrade</h2>
                     <div className="row">
                         <div className="col-4">
                             <div className="card border-0 rounded-0">
@@ -19,7 +17,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
@@ -30,7 +28,7 @@ class ProductCard extends Component {
                                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <div className="row">
                                         <div className="col-6 pt-2">
-                                            <small class="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                            <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                         </div>
                                         <div className="col-6">
                                             <a href="#" className="btn btn-primary">
@@ -48,7 +46,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
@@ -59,7 +57,7 @@ class ProductCard extends Component {
                                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <div className="row">
                                         <div className="col-6 pt-2">
-                                            <small class="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                            <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                         </div>
                                         <div className="col-6">
                                             <a href="#" className="btn btn-primary">
@@ -77,7 +75,7 @@ class ProductCard extends Component {
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-12">
                                             <h5 className="card-title">Product name</h5>
                                             <h6 className="text-success font-weight-bolder">$16.25</h6>
                                         </div>
@@ -88,7 +86,7 @@ class ProductCard extends Component {
                                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                     <div className="row">
                                         <div className="col-6 pt-2">
-                                            <small class="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                            <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                         </div>
                                         <div className="col-6">
                                             <a href="#" className="btn btn-primary">
@@ -101,7 +99,6 @@ class ProductCard extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
          );
     }
 }

@@ -9,7 +9,7 @@ class FullProductCard extends Component {
     render() { 
         return (
             <div>
-            <div className="container-fluid my-5 bg-white text-dark">
+            <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card border-0 rounded-0">
@@ -26,7 +26,7 @@ class FullProductCard extends Component {
                                         <p className="card-text mb-2 h4">color: <span>red</span></p>
                                         <div className="row">
                                             <div className="col-6 pt-2">
-                                                <small class="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                                <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                             </div>
                                             <div className="col-6">
                                                 <a href="#" className="btn btn-primary">

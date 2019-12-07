@@ -5,6 +5,7 @@ namespace Modules\CommonModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\CommonModule\Entities\Settings;
 
 class CommonModuleController extends Controller
 {
@@ -76,4 +77,46 @@ class CommonModuleController extends Controller
     {
         //
     }
+
+    public function settings()
+    {
+        $settings = Settings::first();
+        return view('commonmodule::settings',compact('settings'));
+    }
+
+    public function setSettings(Request $request)
+    {
+
+        $settings = Settings::first();
+        if ($settings){
+            $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
+            request()->aboutphoto->move(public_path('images'), $aboutPhoto);
+            $logo = time().'.'.$request->file('logo')->getClientOriginalExtension();
+            request()->logo->move(public_path('images'), $logo);
+            $data=$request->all();
+            $data['aboutphoto']=$aboutPhoto;
+            $data['logo'] = $logo;
+            $settings->update($data);
+            return redirect('/dashboard/settings');
+        }else{
+
+            $settings = $request->all();
+            $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
+            request()->aboutphoto->move(public_path('images'), $aboutPhoto);
+            $logo = time().'.'.$request->file('logo')->getClientOriginalExtension();
+            request()->logo->move(public_path('images'), $logo);
+            $settings=$request->all();
+            $settings['aboutphoto']=$aboutPhoto;
+            $settings['logo'] = $logo;
+
+
+           // dd($settings);
+            $data=Settings::create($settings);
+            return redirect('/dashboard/settings');
+        }
+
+    }
+
+
 }
+

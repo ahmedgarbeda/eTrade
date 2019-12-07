@@ -23,7 +23,7 @@ class CreateAdminsTable extends Migration
             $table->softDeletes();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
