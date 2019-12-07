@@ -135,13 +135,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-<<<<<<< HEAD
           <a href="{{route('offer.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
-=======
-          <a href="#" class="nav-link">
               <i class="nav-icon fas fa-gift teal"></i>
->>>>>>> 98e26f17339eb8ffd07a76e195098a7aa37ca617
               <p>
                 Offers
               </p>
