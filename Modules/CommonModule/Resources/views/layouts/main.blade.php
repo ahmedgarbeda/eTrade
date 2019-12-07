@@ -62,31 +62,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/settings')}}" class="nav-link">
               <i class="nav-icon fas fa-cogs blue"></i>
               <p>
                 Settings
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-address-card green"></i>
-              <p>
-                About Us
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="{{url('/dashboard/slider')}}" class="nav-link">
-              <i class="nav-icon fas fa-slider-h cyan"></i>
+              <i class="nav-icon fas fa-sliders-h cyan"></i>
               <p>
                 Slider
               </p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('/dashboard/roles')}}" class="nav-link">
               <i class="nav-icon fas fa-user-friends cyan"></i>
               <p>
                 Roles
@@ -95,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/admin')}}" class="nav-link">
-              <i class="nav-icon fas fa-users-cogs cyan"></i>
+              <i class="nav-icon fas fa-users-cog cyan"></i>
               <p>
                 Admins
               </p>
@@ -111,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('category.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-list cyan"></i>
               <p>
                 Categories
               </p>
@@ -119,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{route('product.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-product-hunt cyan"></i>
               <p>
                 Products
               </p>
@@ -127,7 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-adjust cyan"></i>
               <p>
                 Orders
               </p>
@@ -135,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-sync cyan"></i>
               <p>
                 Order Status
               </p>
@@ -143,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
           <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-gift cyan"></i>
               <p>
                 Offers
               </p>
@@ -151,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="{{url('/dashboard/contact')}}" class="nav-link">
-              <i class="nav-icon fas fa-user-friends cyan"></i>
+              <i class="nav-icon fas fa-envelope cyan"></i>
               <p>
                 Contact Us
               </p>

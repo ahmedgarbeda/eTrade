@@ -1,71 +1,96 @@
 @extends('commonmodule::layouts.main')
 
-@section('content')
-    <h1>Hello World</h1>
-    <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>                  
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              
-            </div>
-            <!-- /.card -->
 
-            
-          </div>
+@section('content')
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" style="display: inline">Roles</h3>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add New Role
+                </button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($roles as $role)
+                        <tr>
+                            <td>{{$role->id}}</td>
+                            <td>{{($role->role)?$role->role:''}}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="getRole({{$role->id}})" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <form action="/dashboard/roles/{{$role->id}}" method="post" style="display: inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/dashboard/roles" id="myform" method="POST">
+
+                                @csrf
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Name</label>
+                                        <input type="text" class="form-control" name="role" value="" id="roleField">
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
+
+<script>
+    function getRole(id){
+        $.ajax({
+            method:"get",
+            url:"/dashboard/roles/"+id+"/edit",
+            success:function (data) {
+                $('#roleField').val(data.role);
+                $('#myform').attr('action','/dashboard/roles/'+id);
+                $('#myform').append('@method("put")')
+            }
+        })
+    }
+</script>

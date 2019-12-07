@@ -18,8 +18,8 @@ class AdminModuleController extends Controller
     public function index()
     {
         //return view('adminmodule::index');
-        $admins = Admin::with('phones','role')->get();
-        return $admins;
+        $admins = Admin::with('role')->get();
+        return view('adminmodule::admin/index',compact('admins'));
     }
 
     /**
@@ -28,7 +28,9 @@ class AdminModuleController extends Controller
      */
     public function create()
     {
-        return Role::all();
+        $admin=new Admin;
+        $roles= Role::all();
+        return view('adminmodule::admin/create',compact('admin','roles'));
 
     }
 
@@ -53,8 +55,8 @@ class AdminModuleController extends Controller
 
         //dd($request["admin"]);
         $admin=Admin::create($request->all());
-        //$admin->phones->create($request['phones']);
-        return $admin;
+//        $admin->phones->create($request['phones']);
+        return redirect('/dashboard/admin');
 
     }
 
@@ -77,8 +79,10 @@ class AdminModuleController extends Controller
      */
     public function edit($id)
     {
-        //return view('adminmodule::edit');
-        return Admin::find($id);
+        $admin = Admin::find($id);
+        $roles = Role::all();
+        return view('adminmodule::admin/create',compact('admin','roles'));
+
     }
 
     /**
@@ -91,7 +95,7 @@ class AdminModuleController extends Controller
     {
         $admin= Admin::find($id);
         $admin->update($request->all());
-        return $admin;
+        return redirect('/dashboard/admin');
     }
 
     /**
@@ -102,6 +106,6 @@ class AdminModuleController extends Controller
     public function destroy($id)
     {
         $admin= Admin::findOrFail($id)->delete();
-        return $admin;
+        return redirect('/dashboard/admin');
     }
 }

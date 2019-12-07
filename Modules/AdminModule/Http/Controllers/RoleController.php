@@ -15,8 +15,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //return view('adminmodule::index');
-        return Role::all();
+        $roles = Role::all();
+        return view('adminmodule::roles',compact('roles'));
+
     }
 
     /**
@@ -36,7 +37,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
-        return Role::create($request->all());
+        Role::create($request->all());
+        return redirect('/dashboard/roles');
 
     }
 
@@ -72,7 +74,8 @@ class RoleController extends Controller
     {
         //
         $role=Role::find($id);
-        return $role->update($request->all());
+        $role->update($request->all());
+        return redirect('/dashboard/roles');
     }
 
     /**
@@ -82,6 +85,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        return Role::find($id)->delete();
+         Role::find($id)->delete();
+         return redirect('/dashboard/roles');
     }
 }
