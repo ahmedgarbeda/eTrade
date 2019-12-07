@@ -17,18 +17,18 @@
 
         <div class="form-group">
             {!!  Form::label('name', 'Offer Name')  !!}
-            {!!  Form::text('name' , null ,['class'=> 'form-control']) !!}
+            {!!  Form::text('offer_name' , null ,['class'=> 'form-control']) !!}
         </div>
 
 
         <div class="form-group">
             {!!  Form::label('category_id', 'Category')  !!}
-            {!!  Form::select('category_id' , [''=>'select option']  , 0 ,['class'=> 'form-control']) !!}
+            {!!  Form::select('category_id' , [''=>'select option'] + $categories  , 0 ,['class'=> 'form-control']) !!}
         </div>
 
         <div class="form-group">
             {!!  Form::label('product', 'Product')  !!}
-            {!!  Form::select('product_id' , [''=>'select option']  , 0 ,['class'=> 'form-control']) !!}
+            {!!  Form::select('product_id' , [''=>'select option'] + $products , 0 ,['class'=> 'form-control']) !!}
         </div>
 
         <div class="form-group">

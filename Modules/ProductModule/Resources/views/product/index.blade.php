@@ -2,6 +2,16 @@
 
 @section('content')
 
+    @if(session('message') == 'Product Added Successfully' || session('message') == 'Product Updated Successfully')
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+    @elseif(session('message') == 'Product Deleted Successfully')
+        <div class="alert alert-danger">
+            {{session('message')}}
+        </div>
+    @endif
+
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">

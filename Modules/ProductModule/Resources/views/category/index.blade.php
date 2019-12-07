@@ -4,7 +4,15 @@
 
 @section('content')
 
-
+    @if(session('message') == 'Category Added Successfully' || session('message') == 'Category Updated Successfully')
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+    @elseif(session('message') == 'Category Deleted Successfully')
+        <div class="alert alert-danger">
+            {{session('message')}}
+        </div>
+    @endif
 
 
     <h3>Categories</h3>
