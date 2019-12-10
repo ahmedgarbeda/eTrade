@@ -67,7 +67,17 @@ class CartList extends Component {
                     onClick={this.plusOne}
                     >+1</button>
                 </td>
-                <td className="fix-table-cart h3 text-success text-right font-weight-bolder">$<span>{ price * this.state.quantity }</span></td>
+                <td className="fix-table-cart h3 text-right font-weight-bolder">
+                <span className="text-success">${ price * this.state.quantity }</span>
+                </td>
+                <td className="fix-table-cart text-center">
+                    <span 
+                    className="text-danger pointer"
+                    onClick={(e)=> {
+                        e.preventDefault();
+                        this.props.deleteFromCart(this.props);
+                    }}><i className="fas fa-trash-alt fa-2x"></i></span>
+                </td>
             </tr>                 
          );
     }

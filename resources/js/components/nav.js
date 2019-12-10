@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 class Navbar extends Component {
     render() { 
         return (  
-            <nav className="navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0">
+            <nav className="fixed-top shadow-lg navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0">
                 <a className="navbar-brand m-0" href="#">
                     <img className="img-fluid" src="images/Earth.svg" width="48" alt="logo" />
                     <span className="px-2 h5">eTrade</span>
@@ -43,7 +43,8 @@ class Navbar extends Component {
                         </li>
                         <Link to="/cart">
                             <li className="nav-item ml-5">
-                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i>
+                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x">
+                                <span class="badge badge-pill badge-primary">{this.props.count}</span></i>
                                 <span className="px-1 font-weight-bold">Cart</span></a>
                             </li>
                         </Link>

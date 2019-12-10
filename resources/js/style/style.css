@@ -20,3 +20,9 @@
 .social:hover {
     color: #3490dc !important;
 }
+
+.badge {
+    width: 20px;
+    height: 20px;
+    font-size: 45%;
+}

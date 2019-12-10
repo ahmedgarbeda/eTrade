@@ -31,6 +31,12 @@ const fetchedProducts = [
         name: 'product 2',
         price: 55,
         img: "images/product-blue.png"
+    },
+    {
+        id: 3,
+        name: 'product 3',
+        price: 150,
+        img: "images/product-red.png"
     }
 
 ]
@@ -42,19 +48,54 @@ class App extends Component {
         super();
         this.state = {
             productList: [],
+            cartList: [],
+            cartCount: 0,
+            addToCartAnimate: {animateState: false, btnId: 0},
             isProductListEmpty: false,
             subTotal: 0
         }
-        this.caluculateSubTotal = this.caluculateSubTotal.bind(this)
+        this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
+        this.addToCart = this.addToCart.bind(this);
+        this.deleteFromCart = this.deleteFromCart.bind(this);
     }
 
     caluculateSubTotal(price) {
         this.setState({ subTotal: this.state.subTotal + price });
     }
 
+    addToCart(product) {
+        let tmpProduct = this.state.cartList;
+        if(tmpProduct.includes(product)) {
+            return
+        } else {
+            tmpProduct.push(product);
+        }
+
+        let tmpCount = this.state.cartCount;
+        let tmpBtnId = this.state.addToCartAnimate.btnId;
+
+        this.setState({
+            cartList: tmpProduct,
+            cartCount: tmpCount + 1,
+            addToCartAnimate: {animateState: true, btnId: tmpBtnId + 1}
+        })
+    }
+
+    deleteFromCart(product) {
+        let tmpCount = this.state.cartCount;
+
+        this.setState(current=>({
+            cartList: current.cartList.filter(c => {
+                return c.id !== product.id
+            }),
+            cartCount: tmpCount - 1,
+            subTotal: 0,
+        }))
+    }
+
     render() {
 
-        const products = fetchedProducts.map(product => {
+        const products = this.state.cartList.map(product => {
             return (
                 <CartList 
                 id={product.id}
@@ -62,20 +103,26 @@ class App extends Component {
                 price={product.price}
                 img={product.img}
                 handleTotal={this.caluculateSubTotal}
+                deleteFromCart={this.deleteFromCart}
                 />
             );
         });
 
-        const EmptyList = () =><div className="text-center display-4 py-4 w-100">Your Cart is Empty</div>;
+        const EmptyList = () =><div className="text-center text-primary display-4 py-4 w-100">Your Cart is Empty</div>;
 
         return (
             <Router>
-                <Navbar />
+                <Navbar count={this.state.cartCount} />
                 <Header />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
-                                <ProductCard />
+                                <ProductCard 
+                                products={fetchedProducts}
+                                addToCart={this.addToCart}
+                                added={this.state.addToCartAnimate.animateState}
+                                btnId={this.state.addToCartAnimate.btnId}
+                                />
                             </Route>
                             <Route path="/sign-up">
                                 <Signup />
@@ -89,7 +136,7 @@ class App extends Component {
                             <Route path="/cart">
                                 <CartTable 
                                 show={
-                                        (fetchedProducts.length===0)? <EmptyList /> : products
+                                        (this.state.cartList.length===0)? <EmptyList /> : products
                                      }
                                 empty={this.state.isProductListEmpty}
                                 gotTotal={<TotalPrice subTotalValue={this.state.subTotal}/>} />
