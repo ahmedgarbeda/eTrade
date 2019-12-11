@@ -74718,9 +74718,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Payments).call(this));
     _this.state = {
-      paymentMethod: false
+      paymentMethod: false,
+      cash: false
     };
     _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
+    _this.cash = _this.cash.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -74729,6 +74731,14 @@ function (_Component) {
     value: function toggle() {
       this.setState({
         paymentMethod: !this.state.paymentMethod
+      });
+    }
+  }, {
+    key: "cash",
+    value: function cash(e) {
+      e.preventDefault();
+      this.setState({
+        cash: !this.state.cash
       });
     }
   }, {
@@ -74855,7 +74865,20 @@ function (_Component) {
         onClick: this.toggle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fab fa-cc-paypal"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center my-5 py-4 border-top"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "py-5 display-4"
+      }, "OR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "mt-4 btn btn-block btn-" + (this.state.cash ? "primary" : "outline-primary"),
+        style: {
+          fontSize: '4rem'
+        },
+        onClick: this.cash
+      }, "Cash on delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-success btn-block",
+        disabled: !this.state.cash
+      }, "CONTINUE")))));
     }
   }]);
 

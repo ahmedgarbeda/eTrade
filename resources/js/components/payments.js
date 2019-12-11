@@ -8,16 +8,23 @@ class Payments extends Component {
     constructor() {
         super();
         this.state = {
-            paymentMethod: false
+            paymentMethod: false,
+            cash: false
         }
         this.toggle = this.toggle.bind(this);
+        this.cash = this.cash.bind(this);
     }
 
     toggle() {
         this.setState({ 
            paymentMethod: !this.state.paymentMethod
         });
-    } 
+    }
+
+    cash(e) {
+        e.preventDefault();
+        this.setState({ cash: !this.state.cash });
+    }
 
     render() {
 
@@ -89,6 +96,23 @@ class Payments extends Component {
                         </div>
                         <div>
                             {(this.state.paymentMethod ? <PayPalForm /> : <CreditCardForm />)}
+                        </div>
+                        <div className="text-center my-5 py-4 border-top">
+                            <span 
+                            className="py-5 display-4">
+                            OR</span>
+                            <button 
+                            className={"mt-4 btn btn-block btn-" + 
+                            (this.state.cash? "primary": "outline-primary")
+                            }
+                            style={{fontSize: '4rem'}}
+                            onClick={this.cash}
+                            >
+                            Cash on delivery
+                            </button>
+                            <button className="btn btn-success btn-block"
+                            disabled={!this.state.cash}>
+                            CONTINUE</button>
                         </div>
                     </div>
                 </div>
