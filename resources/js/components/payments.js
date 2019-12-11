@@ -80,10 +80,10 @@ class Payments extends Component {
         }
 
         return (
-            <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
-                        <h1 className="text-center">Payment Information</h1>
+            <div className="container-fluid my-5 bg-white text-dark py-5 px-5 shadow card-margin">
+                <div className="row">
+                    <div className="col-md-7">
+                        <h1 className="text-center display-4 pt-4">Payment Information</h1>
                         <div className="py-3 px-1 my-5 text-center display-1">
                             <span id="box" className=
                             {"bg-white border border-dark rounded-lg py-2 px-5 mx-3 pointer " + 
@@ -97,7 +97,9 @@ class Payments extends Component {
                         <div>
                             {(this.state.paymentMethod ? <PayPalForm /> : <CreditCardForm />)}
                         </div>
-                        <div className="text-center my-5 py-4 border-top">
+                    </div>
+                    <div className="col-md-5">
+                        <div className="text-center py-4 ">
                             <span 
                             className="py-5 display-4">
                             OR</span>
@@ -105,7 +107,7 @@ class Payments extends Component {
                             className={"mt-4 btn btn-block btn-" + 
                             (this.state.cash? "primary": "outline-primary")
                             }
-                            style={{fontSize: '4rem'}}
+                            style={{fontSize: '3rem'}}
                             onClick={this.cash}
                             >
                             Cash on delivery

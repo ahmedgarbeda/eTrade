@@ -73798,10 +73798,12 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6 py-5"
+        className: "col-6 py-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: ""
-      }, "Our Team"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This our final project after three month internship in Information Technology Institute (ITI) simple e-commerce wibsite based on web application we implement this project with latest available tools and technologies. That was a great experience."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-4"
+      }, "Our Team"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "h5"
+      }, "This our final project after three month internship in Information Technology Institute (ITI) simple e-commerce wibsite based on web application we implement this project with latest available tools and technologies. That was a great experience."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "pr-3 h3"
@@ -74397,7 +74399,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "position-absolute py-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "pt-5 display-4 font-weight-bolder"
+        className: "pt-4 display-4 font-weight-bolder"
       }, "Say yes to adventure"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "h5 pb-4"
       }, "Our store designed for your journey. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -74845,13 +74847,13 @@ function (_Component) {
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
+        className: "container-fluid my-5 bg-white text-dark py-5 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
+        className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
+        className: "col-md-7"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "text-center"
+        className: "text-center display-4 pt-4"
       }, "Payment Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "py-3 px-1 my-5 text-center display-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -74865,14 +74867,16 @@ function (_Component) {
         onClick: this.toggle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fab fa-cc-paypal"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-center my-5 py-4 border-top"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center py-4 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "py-5 display-4"
       }, "OR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "mt-4 btn btn-block btn-" + (this.state.cash ? "primary" : "outline-primary"),
         style: {
-          fontSize: '4rem'
+          fontSize: '3rem'
         },
         onClick: this.cash
       }, "Cash on delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -74944,7 +74948,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "pt-4 pb-5"
+        className: "pt-4 pb-5 display-4"
       }, "Discover eTrade"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, this.props.products.map(function (product) {

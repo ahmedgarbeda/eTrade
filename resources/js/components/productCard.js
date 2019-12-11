@@ -8,7 +8,7 @@ class ProductCard extends Component {
     render() { 
         return (               
                 <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
-                    <h2 className="pt-4 pb-5">Discover eTrade</h2>
+                    <h2 className="pt-4 pb-5 display-4">Discover eTrade</h2>
                     <div className="row">
                     {this.props.products.map(product => (
                         <div key={product.id} className="col-4">
