@@ -73619,23 +73619,22 @@ function (_Component) {
     key: "addToCart",
     value: function addToCart(product) {
       var tmpProduct = this.state.cartList;
+      var tmpCount = this.state.cartCount;
+      var tmpBtnId = this.state.addToCartAnimate.btnId;
 
       if (tmpProduct.includes(product)) {
         return;
       } else {
         tmpProduct.push(product);
+        this.setState({
+          cartList: tmpProduct,
+          cartCount: tmpCount + 1,
+          addToCartAnimate: {
+            animateState: true,
+            btnId: product.id
+          }
+        });
       }
-
-      var tmpCount = this.state.cartCount;
-      var tmpBtnId = this.state.addToCartAnimate.btnId;
-      this.setState({
-        cartList: tmpProduct,
-        cartCount: tmpCount + 1,
-        addToCartAnimate: {
-          animateState: true,
-          btnId: tmpBtnId + 1
-        }
-      });
     }
   }, {
     key: "deleteFromCart",
@@ -73647,7 +73646,11 @@ function (_Component) {
             return c.id !== product.id;
           }),
           cartCount: tmpCount - 1,
-          subTotal: 0
+          subTotal: 0,
+          addToCartAnimate: {
+            animateState: false,
+            btnId: product.id
+          }
         };
       });
     }
@@ -73697,7 +73700,9 @@ function (_Component) {
         path: "/product"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
         target: this.state.targetProduct,
-        addToCart: this.addToCart
+        addToCart: this.addToCart,
+        added: this.state.addToCartAnimate.animateState,
+        btnId: this.state.addToCartAnimate.btnId
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signup__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
@@ -74293,7 +74298,7 @@ function (_Component) {
         className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
-        className: "btn btn-primary",
+        className: "btn btn-" + (this.props.added && id === this.props.btnId ? "success animated heartBeat" : "primary"),
         onClick: function onClick(e) {
           e.preventDefault();
 
@@ -74956,7 +74961,7 @@ function (_Component) {
           className: "col-6"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: "#",
-          className: "btn btn-primary " + (_this.props.added && product.id === _this.props.btnId ? "animated heartBeat" : ""),
+          className: "btn btn-" + (_this.props.added && product.id === _this.props.btnId ? "success animated heartBeat" : "primary"),
           onClick: function onClick(e) {
             e.preventDefault();
 

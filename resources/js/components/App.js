@@ -67,20 +67,19 @@ class App extends Component {
 
     addToCart(product) {
         let tmpProduct = this.state.cartList;
-        if(tmpProduct.includes(product)) {
-            return
-        } else {
-            tmpProduct.push(product);
-        }
-
         let tmpCount = this.state.cartCount;
         let tmpBtnId = this.state.addToCartAnimate.btnId;
 
-        this.setState({
-            cartList: tmpProduct,
-            cartCount: tmpCount + 1,
-            addToCartAnimate: {animateState: true, btnId: tmpBtnId + 1}
-        })
+        if(tmpProduct.includes(product)) {
+            return 
+        } else {
+            tmpProduct.push(product);
+            this.setState({
+                cartList: tmpProduct,
+                cartCount: tmpCount + 1,
+                addToCartAnimate: {animateState: true, btnId: product.id}
+            })
+        }
     }
 
     deleteFromCart(product) {
@@ -92,6 +91,7 @@ class App extends Component {
             }),
             cartCount: tmpCount - 1,
             subTotal: 0,
+            addToCartAnimate: {animateState: false, btnId: product.id}
         }))
     }
 
@@ -137,6 +137,8 @@ class App extends Component {
                                 <FullProductCard 
                                 target={this.state.targetProduct}
                                 addToCart={this.addToCart}
+                                added={this.state.addToCartAnimate.animateState}
+                                btnId={this.state.addToCartAnimate.btnId}
                                 />
                             </Route>
                             <Route path="/sign-up">

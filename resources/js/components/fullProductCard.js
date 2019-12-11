@@ -32,7 +32,9 @@ class FullProductCard extends Component {
                                             </div>
                                             <div className="col-6">
                                                 <a href="#" 
-                                                className="btn btn-primary"
+                                                className={"btn btn-"+ 
+                                                (this.props.added && id === this.props.btnId?
+                                                "success animated heartBeat" : "primary")}
                                                 onClick={(e)=>{
                                                     e.preventDefault();
                                                     this.props.addToCart(this.props.target)

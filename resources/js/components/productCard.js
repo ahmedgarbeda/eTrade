@@ -37,9 +37,9 @@ class ProductCard extends Component {
                                         </div>
                                         <div className="col-6">
                                             <a href="#"
-                                            className={"btn btn-primary "+ 
+                                            className={"btn btn-"+ 
                                             (this.props.added && product.id === this.props.btnId?
-                                             "animated heartBeat" : "")}
+                                             "success animated heartBeat" : "primary")}
                                             onClick={(e) =>
                                                     {e.preventDefault();
                                                     this.props.addToCart(product)}
