@@ -6,7 +6,9 @@ import {Link} from "react-router-dom";
 import RelatedProduct from './relatedProduct'
 
 class FullProductCard extends Component {
-    render() { 
+    render() {
+        const { id, name, price, img } = this.props.target;
+
         return (
             <div>
             <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
@@ -15,13 +17,13 @@ class FullProductCard extends Component {
                         <div className="card border-0 rounded-0">
                             <div className="row no-gutters">
                                 <div className="col-md-6">
-                                    <img src="images/product-red.png" className="card-img rounded-0" alt="..." />
+                                    <img src={img} className="card-img rounded-0" alt={img} />
                                 </div>
                                 <div className="col-md-6">
                                     <div className="card-body">
-                                        <h5 className="card-title">Product name</h5>
+                                        <h5 className="card-title">{name}</h5>
                                         <p className="card-text h3 font-weight-bold mb-4">Amazon Brand - Peak Velocity Men's VXE Cloud Run Short Sleeve Quick-Dry Athletic-Fit T-Shirt</p>
-                                        <p className="card-text mb-2 h4">price: <span className="font-weight-bolder text-success">$16.25</span></p>
+                                        <p className="card-text mb-2 h4">price: <span className="font-weight-bolder text-success">${price}</span></p>
                                         <p className="card-text mb-2 h4">size: <span>large</span></p>
                                         <p className="card-text mb-2 h4">color: <span>red</span></p>
                                         <div className="row">
@@ -29,7 +31,12 @@ class FullProductCard extends Component {
                                                 <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                                             </div>
                                             <div className="col-6">
-                                                <a href="#" className="btn btn-primary">
+                                                <a href="#" 
+                                                className="btn btn-primary"
+                                                onClick={(e)=>{
+                                                    e.preventDefault();
+                                                    this.props.addToCart(this.props.target)
+                                                }}>
                                                     <i className="fa fa-shopping-cart"></i><span className="px-2">Add to Card</span>
                                                 </a>
                                             </div>

@@ -51,10 +51,12 @@ class App extends Component {
             cartList: [],
             cartCount: 0,
             addToCartAnimate: {animateState: false, btnId: 0},
+            targetProduct: null,
             isProductListEmpty: false,
             subTotal: 0
         }
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
+        this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
     }
@@ -93,6 +95,12 @@ class App extends Component {
         }))
     }
 
+    targetProduct(product) {
+        this.setState({
+            targetProduct: product
+        });
+    }
+
     render() {
 
         const products = this.state.cartList.map(product => {
@@ -122,6 +130,13 @@ class App extends Component {
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
                                 btnId={this.state.addToCartAnimate.btnId}
+                                targetProduct={this.targetProduct}
+                                />
+                            </Route>
+                            <Route path="/product">
+                                <FullProductCard 
+                                target={this.state.targetProduct}
+                                addToCart={this.addToCart}
                                 />
                             </Route>
                             <Route path="/sign-up">
@@ -129,9 +144,6 @@ class App extends Component {
                             </Route>
                             <Route path="/login">
                                 <Login />
-                            </Route>
-                            <Route path="/product">
-                                <FullProductCard />
                             </Route>
                             <Route path="/cart">
                                 <CartTable 

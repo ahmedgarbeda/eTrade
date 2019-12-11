@@ -73597,10 +73597,12 @@ function (_Component) {
         animateState: false,
         btnId: 0
       },
+      targetProduct: null,
       isProductListEmpty: false,
       subTotal: 0
     };
     _this.caluculateSubTotal = _this.caluculateSubTotal.bind(_assertThisInitialized(_this));
+    _this.targetProduct = _this.targetProduct.bind(_assertThisInitialized(_this));
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     _this.deleteFromCart = _this.deleteFromCart.bind(_assertThisInitialized(_this));
     return _this;
@@ -73650,6 +73652,13 @@ function (_Component) {
       });
     }
   }, {
+    key: "targetProduct",
+    value: function targetProduct(product) {
+      this.setState({
+        targetProduct: product
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -73682,14 +73691,18 @@ function (_Component) {
         products: fetchedProducts,
         addToCart: this.addToCart,
         added: this.state.addToCartAnimate.animateState,
-        btnId: this.state.addToCartAnimate.btnId
+        btnId: this.state.addToCartAnimate.btnId,
+        targetProduct: this.targetProduct
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/product"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        target: this.state.targetProduct,
+        addToCart: this.addToCart
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signup__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/login"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cartTable__WEBPACK_IMPORTED_MODULE_8__["default"], {
         show: this.state.cartList.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EmptyList, null) : products,
@@ -74231,6 +74244,13 @@ function (_Component) {
   _createClass(FullProductCard, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
+      var _this$props$target = this.props.target,
+          id = _this$props$target.id,
+          name = _this$props$target.name,
+          price = _this$props$target.price,
+          img = _this$props$target.img;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74244,22 +74264,22 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "images/product-red.png",
+        src: img,
         className: "card-img rounded-0",
-        alt: "..."
+        alt: img
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "card-title"
-      }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text h3 font-weight-bold mb-4"
       }, "Amazon Brand - Peak Velocity Men's VXE Cloud Run Short Sleeve Quick-Dry Athletic-Fit T-Shirt"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
       }, "price: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bolder text-success"
-      }, "$16.25")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "$", price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
       }, "size: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "large")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
@@ -74273,7 +74293,12 @@ function (_Component) {
         className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
-        className: "btn btn-primary"
+        className: "btn btn-primary",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this.props.addToCart(_this.props.target);
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-shopping-cart"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -74624,7 +74649,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-shopping-cart fa-2x"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "class": "badge badge-pill badge-primary"
+        "class": "badge badge-pill " + (this.props.count > 0 ? "badge-primary" : "badge-danger")
       }, this.props.count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "px-1 font-weight-bold"
       }, "Cart")))))));
@@ -74905,7 +74930,7 @@ function (_Component) {
           className: "card-img-top rounded-0",
           alt: product.img,
           onClick: function onClick(e) {
-            return _this.props.targetProduct(product.id);
+            return _this.props.targetProduct(product);
           }
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "card-body"
@@ -74936,8 +74961,6 @@ function (_Component) {
             e.preventDefault();
 
             _this.props.addToCart(product);
-
-            console.log(_this.props.added);
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fa fa-shopping-cart"

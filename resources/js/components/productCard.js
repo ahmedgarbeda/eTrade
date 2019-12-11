@@ -13,12 +13,12 @@ class ProductCard extends Component {
                     {this.props.products.map(product => (
                         <div key={product.id} className="col-4">
                             <div className="card border-0 rounded-0">
-                                <Link to="/product">
+                                <Link to={"/product"}>
                                     <img
                                     src={product.img}
                                     className="card-img-top rounded-0"
                                     alt={product.img}
-                                    onClick={(e)=> this.props.targetProduct(product.id)} />
+                                    onClick={(e)=> this.props.targetProduct(product)} />
                                 </Link>
                                 <div className="card-body">
                                     <div className="row">
@@ -42,8 +42,7 @@ class ProductCard extends Component {
                                              "animated heartBeat" : "")}
                                             onClick={(e) =>
                                                     {e.preventDefault();
-                                                    this.props.addToCart(product);
-                                                    console.log(this.props.added)}
+                                                    this.props.addToCart(product)}
                                                     }>
                                                 <i className="fa fa-shopping-cart"></i><span className="px-2">Add to Card</span>
                                             </a>
