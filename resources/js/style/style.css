@@ -1,9 +1,4 @@
 
-#quantity-input {
-    width: 30px;
-    height: 30px;
-}
-
 .fix-table-cart {
     line-height: 87px;
 }
@@ -21,7 +16,7 @@
     color: #3490dc !important;
 }
 
-.badge {
+.badge.cart-count {
     width: 20px;
     height: 20px;
     font-size: 45%;

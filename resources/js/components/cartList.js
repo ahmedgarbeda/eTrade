@@ -10,15 +10,8 @@ class CartList extends Component {
         this.state= {
             quantity: 0,
         }
-        this.changeHandeler = this.changeHandeler.bind(this);
         this.plusOne = this.plusOne.bind(this);
         this.minusOne = this.minusOne.bind(this);
-    }
-
-    changeHandeler(event) {        
-        this.setState({
-            quantity: event.target.value
-        })
     }
 
     plusOne() {
@@ -47,28 +40,21 @@ class CartList extends Component {
                     <img src={img} width="80"/>
                     <span className="px-3 h4">{name}</span>
                 </th>
-                <td className="fix-table-cart h4">${price}</td>
+                <td className="fix-table-cart h4 text-success font-weight-bolder">${price}</td>
                 <td className="fix-table-cart h4">
                     <button 
                     className="btn btn-outline-danger py-0 pointer"
                     onClick={this.minusOne}
                     disabled={this.state.quantity < 1}
                     >-1</button>
-                    <input 
-                    id="quantity-input" 
-                    className="mx-3 text-center" 
-                    type="text" 
-                    name="qty"
-                    value={this.state.quantity}
-                    onChange={this.changeHandeler}
-                    />
+                    <span className="mx-3 badge badge-light px-3 py-2">{this.state.quantity}</span>
                     <button 
                     className="btn btn-outline-primary py-0"
                     onClick={this.plusOne}
                     >+1</button>
                 </td>
                 <td className="fix-table-cart h3 text-right font-weight-bolder">
-                <span className="text-success">${ price * this.state.quantity }</span>
+                    <span className="text-success">${ price * this.state.quantity }</span>
                 </td>
                 <td className="fix-table-cart text-center">
                     <span 

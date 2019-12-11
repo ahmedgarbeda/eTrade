@@ -23,8 +23,8 @@ class ProductCard extends Component {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-12">
-                                            <h5 className="card-title">{product.name}</h5>
-                                            <h6 className="text-success font-weight-bolder">${product.price}</h6>
+                                            <h1 className="card-title h2">{product.name}</h1>
+                                            <h4 className="text-success font-weight-bolder">${product.price}</h4>
                                         </div>
                                         <div className="col-6">
                                             

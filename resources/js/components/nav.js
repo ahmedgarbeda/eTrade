@@ -44,7 +44,7 @@ class Navbar extends Component {
                         <Link to="/cart">
                             <li className="nav-item ml-5">
                                 <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x">
-                                <span class={"badge badge-pill "+ (this.props.count>0?"badge-primary":"badge-danger")}>
+                                <span class={"badge badge-pill cart-count "+ (this.props.count>0?"badge-primary":"badge-danger")}>
                                 {this.props.count}</span></i>
                                 <span className="px-1 font-weight-bold">Cart</span></a>
                             </li>

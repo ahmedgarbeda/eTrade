@@ -6378,7 +6378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\r\n#quantity-input {\r\n    width: 30px;\r\n    height: 30px;\r\n}\r\n\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n}", ""]);
+exports.push([module.i, "\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n}", ""]);
 
 // exports
 
@@ -73576,6 +73576,21 @@ var fetchedProducts = [{
   name: 'product 3',
   price: 150,
   img: "images/product-red.png"
+}, {
+  id: 4,
+  name: 'product 4',
+  price: 244,
+  img: "images/product-cyan.png"
+}, {
+  id: 5,
+  name: 'product 5',
+  price: 755,
+  img: "images/prodect-tdark.png"
+}, {
+  id: 6,
+  name: 'product 6',
+  price: 814,
+  img: "images/prodect-tblue.png"
 }];
 
 var App =
@@ -73872,20 +73887,12 @@ function (_Component) {
     _this.state = {
       quantity: 0
     };
-    _this.changeHandeler = _this.changeHandeler.bind(_assertThisInitialized(_this));
     _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_this));
     _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(CartList, [{
-    key: "changeHandeler",
-    value: function changeHandeler(event) {
-      this.setState({
-        quantity: event.target.value
-      });
-    }
-  }, {
     key: "plusOne",
     value: function plusOne() {
       var tempquantity = this.state.quantity;
@@ -73923,21 +73930,16 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "px-3 h4"
       }, name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart h4"
+        className: "fix-table-cart h4 text-success font-weight-bolder"
       }, "$", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "fix-table-cart h4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-outline-danger py-0 pointer",
         onClick: this.minusOne,
         disabled: this.state.quantity < 1
-      }, "-1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "quantity-input",
-        className: "mx-3 text-center",
-        type: "text",
-        name: "qty",
-        value: this.state.quantity,
-        onChange: this.changeHandeler
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "-1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "mx-3 badge badge-light px-3 py-2"
+      }, this.state.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-outline-primary py-0",
         onClick: this.plusOne
       }, "+1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
@@ -74654,7 +74656,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-shopping-cart fa-2x"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "class": "badge badge-pill " + (this.props.count > 0 ? "badge-primary" : "badge-danger")
+        "class": "badge badge-pill cart-count " + (this.props.count > 0 ? "badge-primary" : "badge-danger")
       }, this.props.count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "px-1 font-weight-bold"
       }, "Cart")))))));
@@ -74943,9 +74945,9 @@ function (_Component) {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-12"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-          className: "card-title"
-        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "card-title h2"
+        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
           className: "text-success font-weight-bolder"
         }, "$", product.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-6"
@@ -75320,7 +75322,9 @@ function (_Component) {
         className: "d-flex justify-content-end py-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "display-4"
-      }, "Sub total: $", this.props.subTotalValue)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Sub total: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success font-weight-bolder"
+      }, "$", this.props.subTotalValue))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-end"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/payments"

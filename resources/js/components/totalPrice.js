@@ -8,7 +8,7 @@ class TotalPrice extends Component {
         return (
             <div>
                 <div className="d-flex justify-content-end py-4">
-                    <div className="display-4">Sub total: ${this.props.subTotalValue}</div>
+                    <div className="display-4">Sub total: <span className="text-success font-weight-bolder">${this.props.subTotalValue}</span></div>
                 </div>
                 <div className="d-flex justify-content-end">
                     <Link to="/payments">
