@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 class Navbar extends Component {
     render() { 
         return (  
-            <nav className="navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0">
+            <nav className="fixed-top shadow-lg navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0">
                 <a className="navbar-brand m-0" href="#">
                     <img className="img-fluid" src="images/Earth.svg" width="48" alt="logo" />
                     <span className="px-2 h5">eTrade</span>
@@ -24,16 +24,16 @@ class Navbar extends Component {
                             </form>
                         </li>
                         <Link to="/">
-                            <li className="nav-item ml-5">
+                            <li className="nav-item ml-5 font-weight-bold">
                                 <a className="nav-link" href="#">HOME<span className="sr-only"></span></a>
                             </li>
                         </Link>
                         <Link to="/about-us">
-                            <li className="nav-item ml-5">
+                            <li className="nav-item ml-5 font-weight-bold">
                                 <a className="nav-link" href="#">ABOUT<span className="sr-only"></span></a>
                             </li>
                         </Link>
-                        <li className="nav-item ml-5">
+                        <li className="nav-item ml-5 font-weight-bold">
                             <a className="nav-link" href="#">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
@@ -43,7 +43,10 @@ class Navbar extends Component {
                         </li>
                         <Link to="/cart">
                             <li className="nav-item ml-5">
-                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x"></i></a>
+                                <a className="nav-link" href="#"><i className="fa fa-shopping-cart fa-2x">
+                                <span class={"badge badge-pill cart-count "+ (this.props.count>0?"badge-primary":"badge-danger")}>
+                                {this.props.count}</span></i>
+                                <span className="px-1 font-weight-bold">Cart</span></a>
                             </li>
                         </Link>
                     </ul>

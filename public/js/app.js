@@ -6378,7 +6378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\r\n#quantity-input {\r\n    width: 30px;\r\n    height: 30px;\r\n}\r\n\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}", ""]);
+exports.push([module.i, "\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n}", ""]);
 
 // exports
 
@@ -73571,6 +73571,26 @@ var fetchedProducts = [{
   name: 'product 2',
   price: 55,
   img: "images/product-blue.png"
+}, {
+  id: 3,
+  name: 'product 3',
+  price: 150,
+  img: "images/product-red.png"
+}, {
+  id: 4,
+  name: 'product 4',
+  price: 244,
+  img: "images/product-cyan.png"
+}, {
+  id: 5,
+  name: 'product 5',
+  price: 755,
+  img: "images/prodect-tdark.png"
+}, {
+  id: 6,
+  name: 'product 6',
+  price: 814,
+  img: "images/prodect-tblue.png"
 }];
 
 var App =
@@ -73586,10 +73606,20 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this));
     _this.state = {
       productList: [],
+      cartList: [],
+      cartCount: 0,
+      addToCartAnimate: {
+        animateState: false,
+        btnId: 0
+      },
+      targetProduct: null,
       isProductListEmpty: false,
       subTotal: 0
     };
     _this.caluculateSubTotal = _this.caluculateSubTotal.bind(_assertThisInitialized(_this));
+    _this.targetProduct = _this.targetProduct.bind(_assertThisInitialized(_this));
+    _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
+    _this.deleteFromCart = _this.deleteFromCart.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -73601,41 +73631,101 @@ function (_Component) {
       });
     }
   }, {
+    key: "addToCart",
+    value: function addToCart(product) {
+      var tmpProduct = this.state.cartList;
+      var tmpCount = this.state.cartCount;
+      var tmpBtnId = this.state.addToCartAnimate.btnId;
+
+      if (tmpProduct.includes(product)) {
+        return;
+      } else {
+        tmpProduct.push(product);
+        this.setState({
+          cartList: tmpProduct,
+          cartCount: tmpCount + 1,
+          addToCartAnimate: {
+            animateState: true,
+            btnId: product.id
+          }
+        });
+      }
+    }
+  }, {
+    key: "deleteFromCart",
+    value: function deleteFromCart(product) {
+      var tmpCount = this.state.cartCount;
+      this.setState(function (current) {
+        return {
+          cartList: current.cartList.filter(function (c) {
+            return c.id !== product.id;
+          }),
+          cartCount: tmpCount - 1,
+          subTotal: 0,
+          addToCartAnimate: {
+            animateState: false,
+            btnId: product.id
+          }
+        };
+      });
+    }
+  }, {
+    key: "targetProduct",
+    value: function targetProduct(product) {
+      this.setState({
+        targetProduct: product
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var products = fetchedProducts.map(function (product) {
+      var products = this.state.cartList.map(function (product) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cartList__WEBPACK_IMPORTED_MODULE_9__["default"], {
           id: product.id,
           name: product.name,
           price: product.price,
           img: product.img,
-          handleTotal: _this2.caluculateSubTotal
+          handleTotal: _this2.caluculateSubTotal,
+          deleteFromCart: _this2.deleteFromCart
         });
       });
 
       var EmptyList = function EmptyList() {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "text-center display-4 py-4 w-100"
+          className: "text-center text-primary display-4 py-4 w-100"
         }, "Your Cart is Empty");
       };
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        count: this.state.cartCount
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_12__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        products: fetchedProducts,
+        addToCart: this.addToCart,
+        added: this.state.addToCartAnimate.animateState,
+        btnId: this.state.addToCartAnimate.btnId,
+        targetProduct: this.targetProduct
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/product"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        target: this.state.targetProduct,
+        addToCart: this.addToCart,
+        added: this.state.addToCartAnimate.animateState,
+        btnId: this.state.addToCartAnimate.btnId
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signup__WEBPACK_IMPORTED_MODULE_7__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/login"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cartTable__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        show: fetchedProducts.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EmptyList, null) : products,
+        show: this.state.cartList.length === 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(EmptyList, null) : products,
         empty: this.state.isProductListEmpty,
         gotTotal: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_totalPrice__WEBPACK_IMPORTED_MODULE_10__["default"], {
           subTotalValue: this.state.subTotal
@@ -73708,10 +73798,12 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6 py-5"
+        className: "col-6 py-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: ""
-      }, "Our Team"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "This our final project after three month internship in Information Technology Institute (ITI) simple e-commerce wibsite based on web application we implement this project with latest available tools and technologies. That was a great experience."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "display-4"
+      }, "Our Team"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "h5"
+      }, "This our final project after three month internship in Information Technology Institute (ITI) simple e-commerce wibsite based on web application we implement this project with latest available tools and technologies. That was a great experience."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "pr-3 h3"
@@ -73797,20 +73889,12 @@ function (_Component) {
     _this.state = {
       quantity: 0
     };
-    _this.changeHandeler = _this.changeHandeler.bind(_assertThisInitialized(_this));
     _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_this));
     _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(CartList, [{
-    key: "changeHandeler",
-    value: function changeHandeler(event) {
-      this.setState({
-        quantity: event.target.value
-      });
-    }
-  }, {
     key: "plusOne",
     value: function plusOne() {
       var tempquantity = this.state.quantity;
@@ -73831,6 +73915,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           id = _this$props.id,
           name = _this$props.name,
@@ -73846,26 +73932,34 @@ function (_Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "px-3 h4"
       }, name)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart h4"
+        className: "fix-table-cart h4 text-success font-weight-bolder"
       }, "$", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "fix-table-cart h4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-outline-danger py-0 pointer",
         onClick: this.minusOne,
         disabled: this.state.quantity < 1
-      }, "-1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "quantity-input",
-        className: "mx-3 text-center",
-        type: "text",
-        name: "qty",
-        value: this.state.quantity,
-        onChange: this.changeHandeler
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "-1"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "mx-3 badge badge-light px-3 py-2"
+      }, this.state.quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-outline-primary py-0",
         onClick: this.plusOne
       }, "+1")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "fix-table-cart h3 text-success text-right font-weight-bolder"
-      }, "$", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, price * this.state.quantity)));
+        className: "fix-table-cart h3 text-right font-weight-bolder"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success"
+      }, "$", price * this.state.quantity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "fix-table-cart text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger pointer",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.props.deleteFromCart(_this2.props);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-trash-alt fa-2x"
+      }))));
     }
   }]);
 
@@ -73946,13 +74040,10 @@ function (_Component) {
       }, "Quantitiy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
         scope: "col",
         className: "text-right h3"
-      }, "Total"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.show)), this.props.gotTotal, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/payments"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "d-flex justify-content-end"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-success mb-4 font-weight-bolder"
-      }, "PROCEED TO CHECKOUT"))))));
+      }, "Total"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
+        scope: "col",
+        className: "text-center h3"
+      }, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.show)), this.props.gotTotal)));
     }
   }]);
 
@@ -74162,6 +74253,13 @@ function (_Component) {
   _createClass(FullProductCard, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
+      var _this$props$target = this.props.target,
+          id = _this$props$target.id,
+          name = _this$props$target.name,
+          price = _this$props$target.price,
+          img = _this$props$target.img;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74175,22 +74273,22 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "images/product-red.png",
+        src: img,
         className: "card-img rounded-0",
-        alt: "..."
+        alt: img
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "card-title"
-      }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text h3 font-weight-bold mb-4"
       }, "Amazon Brand - Peak Velocity Men's VXE Cloud Run Short Sleeve Quick-Dry Athletic-Fit T-Shirt"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
       }, "price: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bolder text-success"
-      }, "$16.25")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, "$", price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
       }, "size: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "large")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "card-text mb-2 h4"
@@ -74204,7 +74302,12 @@ function (_Component) {
         className: "col-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "#",
-        className: "btn btn-primary"
+        className: "btn btn-" + (this.props.added && id === this.props.btnId ? "success animated heartBeat" : "primary"),
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this.props.addToCart(_this.props.target);
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-shopping-cart"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -74290,13 +74393,13 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-secondary"
+        className: "bg-secondary pt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container"
+        className: "container pt-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "position-absolute py-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "pt-5 display-4 font-weight-bolder"
+        className: "pt-4 display-4 font-weight-bolder"
       }, "Say yes to adventure"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "h5 pb-4"
       }, "Our store designed for your journey. "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -74473,7 +74576,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0"
+        className: "fixed-top shadow-lg navbar navbar-expand-lg navbar-light bg-dark text-light pt-0 pb-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "navbar-brand m-0",
         href: "#"
@@ -74516,7 +74619,7 @@ function (_Component) {
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item ml-5"
+        className: "nav-item ml-5 font-weight-bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
         href: "#"
@@ -74525,14 +74628,14 @@ function (_Component) {
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/about-us"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item ml-5"
+        className: "nav-item ml-5 font-weight-bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
         href: "#"
       }, "ABOUT", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sr-only"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item ml-5"
+        className: "nav-item ml-5 font-weight-bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
         href: "#"
@@ -74554,7 +74657,11 @@ function (_Component) {
         href: "#"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-shopping-cart fa-2x"
-      })))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "class": "badge badge-pill cart-count " + (this.props.count > 0 ? "badge-primary" : "badge-danger")
+      }, this.props.count)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "px-1 font-weight-bold"
+      }, "Cart")))))));
     }
   }]);
 
@@ -74613,9 +74720,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Payments).call(this));
     _this.state = {
-      paymentMethod: false
+      paymentMethod: false,
+      cash: false
     };
     _this.toggle = _this.toggle.bind(_assertThisInitialized(_this));
+    _this.cash = _this.cash.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -74624,6 +74733,14 @@ function (_Component) {
     value: function toggle() {
       this.setState({
         paymentMethod: !this.state.paymentMethod
+      });
+    }
+  }, {
+    key: "cash",
+    value: function cash(e) {
+      e.preventDefault();
+      this.setState({
+        cash: !this.state.cash
       });
     }
   }, {
@@ -74730,13 +74847,13 @@ function (_Component) {
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
+        className: "container-fluid my-5 bg-white text-dark py-5 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row justify-content-center"
+        className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-6"
+        className: "col-md-7"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "text-center"
+        className: "text-center display-4 pt-4"
       }, "Payment Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "py-3 px-1 my-5 text-center display-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -74750,7 +74867,22 @@ function (_Component) {
         onClick: this.toggle
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fab fa-cc-paypal"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null)))));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center py-4 "
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "py-5 display-4"
+      }, "OR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "mt-4 btn btn-block btn-" + (this.state.cash ? "primary" : "outline-primary"),
+        style: {
+          fontSize: '3rem'
+        },
+        onClick: this.cash
+      }, "Cash on delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-success btn-block",
+        disabled: !this.state.cash
+      }, "CONTINUE")))));
     }
   }]);
 
@@ -74811,130 +74943,65 @@ function (_Component) {
   _createClass(ProductCard, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "pt-4 pb-5"
+        className: "pt-4 pb-5 display-4"
       }, "Discover eTrade"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card border-0 rounded-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "images/product-red.png",
-        className: "card-img-top rounded-0",
-        alt: "fokay"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "card-title"
-      }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "text-success font-weight-bolder"
-      }, "$16.25")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "card-text"
-      }, "Some quick example text to build on the card title and make up the bulk of the card's content."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6 pt-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-        className: "text-warning h6"
-      }, "\u2605 \u2605 \u2605 \u2605 \u2606")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "btn btn-primary"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-shopping-cart"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "px-2"
-      }, "Add to Card"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card border-0 rounded-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "images/product-joy.png",
-        className: "card-img-top rounded-0",
-        alt: "fokay"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "card-title"
-      }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "text-success font-weight-bolder"
-      }, "$16.25")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "card-text"
-      }, "Some quick example text to build on the card title and make up the bulk of the card's content."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6 pt-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-        className: "text-warning h6"
-      }, "\u2605 \u2605 \u2605 \u2605 \u2606")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "btn btn-primary"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-shopping-cart"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "px-2"
-      }, "Add to Card"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card border-0 rounded-0"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: "images/product-cyan.png",
-        className: "card-img-top rounded-0",
-        alt: "fokay"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "card-body"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-12"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "card-title"
-      }, "Product name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
-        className: "text-success font-weight-bolder"
-      }, "$16.25")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "card-text"
-      }, "Some quick example text to build on the card title and make up the bulk of the card's content."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6 pt-2"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
-        className: "text-warning h6"
-      }, "\u2605 \u2605 \u2605 \u2605 \u2606")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-6"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "#",
-        className: "btn btn-primary"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-shopping-cart"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "px-2"
-      }, "Add to Card")))))))));
+      }, this.props.products.map(function (product) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: product.id,
+          className: "col-4"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card border-0 rounded-0"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/product"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: product.img,
+          className: "card-img-top rounded-0",
+          alt: product.img,
+          onClick: function onClick(e) {
+            return _this.props.targetProduct(product);
+          }
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-12"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+          className: "card-title h2"
+        }, product.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+          className: "text-success font-weight-bolder"
+        }, "$", product.price)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-6"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "card-text"
+        }, "Some quick example text to build on the card title and make up the bulk of the card's content."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-6 pt-2"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+          className: "text-warning h6"
+        }, "\u2605 \u2605 \u2605 \u2605 \u2606")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-6"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: "#",
+          className: "btn btn-" + (_this.props.added && product.id === _this.props.btnId ? "success animated heartBeat" : "primary"),
+          onClick: function onClick(e) {
+            e.preventDefault();
+
+            _this.props.addToCart(product);
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-shopping-cart"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "px-2"
+        }, "Add to Card")))))));
+      })));
     }
   }]);
 
@@ -75241,6 +75308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -75262,6 +75330,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var TotalPrice =
 /*#__PURE__*/
 function (_Component) {
@@ -75276,11 +75345,20 @@ function (_Component) {
   _createClass(TotalPrice, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "d-flex justify-content-end py-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "display-4"
-      }, "Sub total: ", this.props.subTotalValue));
+      }, "Sub total: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success font-weight-bolder"
+      }, "$", this.props.subTotalValue))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-end"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/payments"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-success mb-4 font-weight-bolder",
+        disabled: this.props.subTotalValue === 0
+      }, "PROCEED TO CHECKOUT"))));
     }
   }]);
 

@@ -16,6 +16,7 @@ class CartTable extends Component {
                                     <th scope="col" className="h3">Price</th>
                                     <th scope="col" className="px-4 h3">Quantitiy</th>
                                     <th scope="col" className="text-right h3">Total</th>
+                                    <th scope="col" className="text-center h3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -23,11 +24,6 @@ class CartTable extends Component {
                             </tbody>
                         </table>
                         {this.props.gotTotal}
-                        <Link to="/payments">
-                        <div className="d-flex justify-content-end">
-                            <button className="btn btn-success mb-4 font-weight-bolder">PROCEED TO CHECKOUT</button>
-                        </div>
-                        </Link>
                     </div>
                 </div>
             </div>
