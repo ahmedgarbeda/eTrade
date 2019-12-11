@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import '../style/style.css';
 
+import ScrollToTop from './scrollToTop';
 import Navbar from './nav.js';
 import Header from './header.js';
 import Login from './login';
@@ -78,6 +79,7 @@ class App extends Component {
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
     }
+    
 
     caluculateSubTotal(price) {
         this.setState({ subTotal: this.state.subTotal + price });
@@ -120,6 +122,7 @@ class App extends Component {
     }
 
     render() {
+        //(window.scrollY?window.scroll(0, 0):"");
 
         const products = this.state.cartList.map(product => {
             return (
@@ -138,6 +141,7 @@ class App extends Component {
 
         return (
             <Router>
+                <ScrollToTop />
                 <Navbar count={this.state.cartCount} />
                 <Header />
                     <div className="container">
@@ -152,7 +156,7 @@ class App extends Component {
                                 />
                             </Route>
                             <Route path="/product">
-                                <FullProductCard 
+                                <FullProductCard
                                 target={this.state.targetProduct}
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
