@@ -14,6 +14,7 @@ import CartTable from './cartTable';
 import CartList from './cartList';
 import TotalPrice from './totalPrice';
 import Payments from './payments';
+import OrderDone from './onTheWay';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
 import Aboutus from './aboutus.js';
@@ -182,6 +183,9 @@ class App extends Component {
                             </Route>
                             <Route path="/about-us">
                                 <Aboutus />
+                            </Route>
+                            <Route path="/onTheWay">
+                                <OrderDone />
                             </Route>
                         </Switch>
                     </div>
