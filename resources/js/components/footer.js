@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 class Footer extends Component {
     render() { 
         return ( 
-            <div className="bg-dark py-3">
+            <div className="bg-dark py-3" id="contact-us">
                 <div className="container pt-5">
                     <div className="row">
                         <div className="col-8">
-                            <h2 className="text-left  mb-5"><strong>Contact Us</strong></h2>
+                            <h2 className="text-left mb-5"><strong>Contact Us</strong></h2>
                             <form method="post">
                                 <div className="form-group">
                                     <label className="" htmlFor="name">Name</label>

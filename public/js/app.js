@@ -74110,7 +74110,8 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-dark py-3"
+        className: "bg-dark py-3",
+        id: "contact-us"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container pt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74118,7 +74119,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "text-left  mb-5"
+        className: "text-left mb-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Contact Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         method: "post"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74681,7 +74682,7 @@ function (_Component) {
         className: "nav-item ml-5 font-weight-bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
-        href: "#"
+        href: "#contact-us"
       }, "CONTACTS", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sr-only"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
