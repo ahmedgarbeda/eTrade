@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
-use Auth;
+
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 class LoginController extends Controller
@@ -35,27 +36,32 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        // $this->middleware('guest:admin')->except('logout');
+        $this->middleware('guest:admin')->except('logout');
     }
 
-    // public function showAdminLoginForm()
-    // {
-    //     return view('auth.login', ['url' => 'admin']);
-    // }
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 
-    // public function adminLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'email'   => 'required|email',
-    //         'password' => 'required|min:6'
-    //     ]);
+    public function showAdminLoginForm()
+    {
+        return view('auth.login', ['url' => 'admin']);
+    }
 
-    //     if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+    public function adminLogin(Request $request)
+    {
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
+        ]);
 
-    //         dd(Auth::id());
-    //         return redirect('/dashboard');
-    //     }
-    //     return back()->withInput($request->only('email', 'remember'));
-    // }
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+
+            //dd(Auth::id());
+            return redirect('/dashboard');
+        }
+        return back()->withInput($request->only('email', 'remember'));
+    }
 
 }

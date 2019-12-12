@@ -11,7 +11,7 @@
 |
 */
 
-Route::middleware('auth')->prefix('dashboard')->group(function () {
+Route::middleware('auth:admin')->prefix('dashboard')->group(function () {
 
     Route::get('/', 'CommonModuleController@index');
     Route::get('/contact', 'ContactController@index');
