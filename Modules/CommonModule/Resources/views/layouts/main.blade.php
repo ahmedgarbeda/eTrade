@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <title>eTrade</title>
 
-
+<link rel="icon" href="{{ URL::to('/') }}/images/logo.png">
   <link rel="stylesheet" href="/css/app.css">
 
 </head>
@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="/images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="{{ URL::to('/') }}/images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">eTrade</span>
     </a>
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('/dashboard/user')}}" class="nav-link">
+            <a href="{{url('/dashboard/users')}}" class="nav-link">
               <i class="nav-icon fas fa-users cyan"></i>
               <p>
                 users
@@ -178,16 +178,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-<!--   <aside class="control-sidebar control-sidebar-dark"> -->
-    <!-- Control sidebar content goes here -->
-  <!--   <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>  -->
-  <!-- /.control-sidebar -->
-
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -195,7 +185,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <a href="#">eTrade</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

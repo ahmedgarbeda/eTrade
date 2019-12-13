@@ -17,7 +17,6 @@
                       <th>Name</th>
                       <th>Email</th>
                       <th>Phone</th>
-                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -25,23 +24,16 @@
     
                     @foreach ($users as $user )
                     <tr>
-                      <td>{{($user->id)?$user->id:''}}</td>
-                      <td>{{($user->name)?$user->name:''}}</td>
-                      <td>{{($user->email)?$user->email:''}}</td>
-                      <td>{{($user->phone)?$user->phone:''}}</td>
-                    <td>
-                        @if($user->status == 1)
-                            {{'Approved'}}
-                        @else
-                            <a href="/dashboard/users/{{$user->id}}/approve" class="btn btn-info">Approve</a>
-                        @endif
-                        </td>
+                      <td>{{$user->id}}</td>
+                      <td>{{$user->name}}</td>
+                      <td>{{$user->email}}</td>
+                      <td>{{$user->phone}}</td>
                       <td>
-                      <a class="btn btn-primary" href="/dashboard/users/{{ $user->id }}/edit">
+                        <button type="button" class="btn btn-primary" onclick="getRole({{$user->id}})" data-toggle="modal" data-target="#exampleModal">
                           <i class="fas fa-edit"></i>
-                        </a>                   
+                      </button>                   
       
-                        <form action="/dashboard/users/{{$user->id}}" method="post" style="display: inline">
+                        <form action="/dashboard/slider/{{$user->id}}" method="post" style="display: inline">
                           @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button>

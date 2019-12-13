@@ -11,6 +11,10 @@
 |
 */
 
-Route::prefix('usermodule')->group(function() {
+Route::middleware('auth:admin')->prefix('dashboard/users')->group(function() {
     Route::get('/', 'UserModuleController@index');
+    Route::get('/{id}/edit','UserModuleController@edit');
+    Route::put('/{id}','UserModuleController@update');
+    Route::get('/{id}/approve','UserModuleController@approve');
+    Route::delete('/{id}','UserModuleController@destroy');
 });

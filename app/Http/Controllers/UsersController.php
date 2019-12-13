@@ -15,11 +15,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $allUsers=User::where('id', '!=', auth()->id())->pluck('id')->toArray();
-        $friends=Auth::user()->friends->pluck('id')->toArray();
-        $filtered_users=array_diff($allUsers,$friends);
-        $users = User::whereIn('id',$filtered_users)->get();
-        return view('users.index',['users'=>$users]);
+        $users=User::all();
+        
+        return view('users',compact('users'));
     }
 
     /**

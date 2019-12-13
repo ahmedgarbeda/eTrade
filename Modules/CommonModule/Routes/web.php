@@ -11,6 +11,9 @@
 |
 */
 
+
+Route::get('/dashboard/login','CommonModuleController@loginView')->name('adminLogin');
+//Route::post('/dashboard/login','CommonModuleController@login');
 Route::middleware('auth:admin')->prefix('dashboard')->group(function () {
 
     Route::get('/', 'CommonModuleController@index');
@@ -18,10 +21,7 @@ Route::middleware('auth:admin')->prefix('dashboard')->group(function () {
     Route::get('/slider', 'SliderController@index');
     Route::get('/settings', 'CommonModuleController@settings');
     Route::post('/settings', 'CommonModuleController@setSettings');
-
-
     Route::get('/', 'CommonModuleController@index');
-
     Route::resource('/contact', 'ContactController');
     Route::resource('/slider', 'SliderController');
 });
