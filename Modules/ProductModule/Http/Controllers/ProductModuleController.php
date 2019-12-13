@@ -168,4 +168,16 @@ class ProductModuleController extends Controller
 //            return new ProductResource($product);
 //        }
     }
+
+
+    public  function  approvment($id){
+        $product = Product::find($id);
+        if ($product->is_active == 0)
+            $product->is_active = 1 ;
+        else if ($product->is_active == 1){
+            $product->is_active = 0 ;
+        }
+        $product->save();
+        return  redirect('productmodule/product');
+    }
 }
