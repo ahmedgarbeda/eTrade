@@ -5,6 +5,47 @@ import {Link} from "react-router-dom";
 
 import RelatedProduct from './relatedProduct'
 
+const similarProducts = [
+    {
+        id: 1,
+        name: 'product 1',
+        price: 100,
+        img: "images/product-blue.png"
+    },
+    {
+        id: 2,
+        name: 'product 2',
+        price: 55,
+        img: "images/product-cyan.png"
+    },
+    {
+        id: 3,
+        name: 'product 3',
+        price: 150,
+        img: "images/prodect-tblue.png"
+    },
+    {
+        id: 4,
+        name: 'product 4',
+        price: 244,
+        img: "images/product-red.png"
+    },
+    {
+        id: 5,
+        name: 'product 5',
+        price: 755,
+        img: "images/prodect-tdark.png"
+    },
+    {
+        id: 6,
+        name: 'product 6',
+        price: 814,
+        img: "images/product-joy.png"
+    }
+
+]
+
+
 class FullProductCard extends Component {
     render() {
         const { id, name, price, img } = this.props.target;
@@ -50,7 +91,9 @@ class FullProductCard extends Component {
                     </div>
                 </div>
             </div>
-            <RelatedProduct />
+            <RelatedProduct
+            relatedProducts={similarProducts}
+            />
             </div>
          );
     }

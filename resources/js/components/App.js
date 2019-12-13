@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import '../style/style.css';
 
+import ScrollToTop from './scrollToTop';
 import Navbar from './nav.js';
 import Header from './header.js';
 import Login from './login';
@@ -13,6 +14,7 @@ import CartTable from './cartTable';
 import CartList from './cartList';
 import TotalPrice from './totalPrice';
 import Payments from './payments';
+import OrderDone from './onTheWay';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
 import Aboutus from './aboutus.js';
@@ -78,6 +80,7 @@ class App extends Component {
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
     }
+    
 
     caluculateSubTotal(price) {
         this.setState({ subTotal: this.state.subTotal + price });
@@ -120,6 +123,7 @@ class App extends Component {
     }
 
     render() {
+        //(window.scrollY?window.scroll(0, 0):"");
 
         const products = this.state.cartList.map(product => {
             return (
@@ -138,6 +142,7 @@ class App extends Component {
 
         return (
             <Router>
+                <ScrollToTop />
                 <Navbar count={this.state.cartCount} />
                 <Header />
                     <div className="container">
@@ -152,7 +157,7 @@ class App extends Component {
                                 />
                             </Route>
                             <Route path="/product">
-                                <FullProductCard 
+                                <FullProductCard
                                 target={this.state.targetProduct}
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
@@ -178,6 +183,9 @@ class App extends Component {
                             </Route>
                             <Route path="/about-us">
                                 <Aboutus />
+                            </Route>
+                            <Route path="/onTheWay">
+                                <OrderDone />
                             </Route>
                         </Switch>
                     </div>

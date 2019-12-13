@@ -34,7 +34,7 @@ class Navbar extends Component {
                             </li>
                         </Link>
                         <li className="nav-item ml-5 font-weight-bold">
-                            <a className="nav-link" href="#">CONTACTS<span className="sr-only"></span></a>
+                            <a className="nav-link" href="#contact-us">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
                             <Link to="/sign-up">

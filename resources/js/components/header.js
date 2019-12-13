@@ -24,7 +24,7 @@ class Header extends Component {
             <div className="bg-secondary pt-5">
                 <div className="container pt-1">
                     <div className="position-absolute py-5">
-                        <h1 className="pt-5 display-4 font-weight-bolder">Say yes to adventure</h1>
+                        <h1 className="pt-4 display-4 font-weight-bolder">Say yes to adventure</h1>
                         <p className="h5 pb-4">Our store designed for your journey. </p>
                         <Link to="/">
                             <button className="btn btn-primary">Shop Now</button>
