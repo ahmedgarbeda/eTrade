@@ -6378,7 +6378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n}", ""]);
+exports.push([module.i, "\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n    padding-right: .88rem;\r\n    padding-top: .24rem;\r\n}", ""]);
 
 // exports
 
@@ -73524,10 +73524,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cartList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cartList */ "./resources/js/components/cartList.js");
 /* harmony import */ var _totalPrice__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./totalPrice */ "./resources/js/components/totalPrice.js");
 /* harmony import */ var _payments__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./payments */ "./resources/js/components/payments.js");
-/* harmony import */ var _productCard_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./productCard.js */ "./resources/js/components/productCard.js");
-/* harmony import */ var _fullProductCard_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fullProductCard.js */ "./resources/js/components/fullProductCard.js");
-/* harmony import */ var _aboutus_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./aboutus.js */ "./resources/js/components/aboutus.js");
-/* harmony import */ var _footer_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./footer.js */ "./resources/js/components/footer.js");
+/* harmony import */ var _onTheWay__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./onTheWay */ "./resources/js/components/onTheWay.js");
+/* harmony import */ var _productCard_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./productCard.js */ "./resources/js/components/productCard.js");
+/* harmony import */ var _fullProductCard_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./fullProductCard.js */ "./resources/js/components/fullProductCard.js");
+/* harmony import */ var _aboutus_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./aboutus.js */ "./resources/js/components/aboutus.js");
+/* harmony import */ var _footer_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./footer.js */ "./resources/js/components/footer.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73545,6 +73546,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -73708,7 +73710,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: "/"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_13__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_productCard_js__WEBPACK_IMPORTED_MODULE_14__["default"], {
         products: fetchedProducts,
         addToCart: this.addToCart,
         added: this.state.addToCartAnimate.animateState,
@@ -73716,7 +73718,7 @@ function (_Component) {
         targetProduct: this.targetProduct
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/product"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fullProductCard_js__WEBPACK_IMPORTED_MODULE_15__["default"], {
         target: this.state.targetProduct,
         addToCart: this.addToCart,
         added: this.state.addToCartAnimate.animateState,
@@ -73737,7 +73739,9 @@ function (_Component) {
         path: "/payments"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_payments__WEBPACK_IMPORTED_MODULE_12__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: "/about-us"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_aboutus_js__WEBPACK_IMPORTED_MODULE_15__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_js__WEBPACK_IMPORTED_MODULE_16__["default"], null));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_aboutus_js__WEBPACK_IMPORTED_MODULE_16__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/onTheWay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_onTheWay__WEBPACK_IMPORTED_MODULE_13__["default"], null)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_js__WEBPACK_IMPORTED_MODULE_17__["default"], null));
     }
   }]);
 
@@ -74106,7 +74110,8 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-dark py-3"
+        className: "bg-dark py-3",
+        id: "contact-us"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container pt-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74114,7 +74119,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-8"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        className: "text-left  mb-5"
+        className: "text-left mb-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Contact Us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         method: "post"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74123,6 +74128,7 @@ function (_Component) {
         className: "",
         htmlFor: "name"
       }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: true,
         id: "name",
         className: "form-control",
         type: "text",
@@ -74134,6 +74140,7 @@ function (_Component) {
         className: "",
         htmlFor: "email"
       }, "E-mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: true,
         id: "email",
         className: "form-control",
         type: "email",
@@ -74145,6 +74152,7 @@ function (_Component) {
         className: "",
         htmlFor: "password"
       }, "Message"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        required: true,
         className: "form-control",
         col: "18"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74674,7 +74682,7 @@ function (_Component) {
         className: "nav-item ml-5 font-weight-bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "nav-link",
-        href: "#"
+        href: "#contact-us"
       }, "CONTACTS", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "sr-only"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -74705,6 +74713,83 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./resources/js/components/onTheWay.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/onTheWay.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var OrderDone =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(OrderDone, _Component);
+
+  function OrderDone() {
+    _classCallCheck(this, OrderDone);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(OrderDone).apply(this, arguments));
+  }
+
+  _createClass(OrderDone, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center py-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8 text-center py-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check-circle display-1 text-success"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "display-4 pt-1 text-success"
+      }, "Done"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "display-4 text-dark"
+      }, "Your order on the way"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "my-5 alert alert-primary h3"
+      }, "complete shopping")))));
+    }
+  }]);
+
+  return OrderDone;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (OrderDone);
 
 /***/ }),
 
@@ -74797,6 +74882,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "cardnum"
         }, "CARD NUMBER"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "cardnum",
           className: "form-control",
           type: "number",
@@ -74808,6 +74894,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "name"
         }, "CARDHOLDER NAME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "name",
           className: "form-control",
           type: "text",
@@ -74819,6 +74906,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "date"
         }, "EXPIRE DATE"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "date",
           className: "form-control",
           type: "text",
@@ -74830,6 +74918,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "cvv"
         }, "CVV"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "cvv",
           className: "form-control",
           type: "number",
@@ -74858,6 +74947,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "email"
         }, "E-mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "email",
           className: "form-control",
           type: "email",
@@ -74869,6 +74959,7 @@ function (_Component) {
           className: "text-primary",
           htmlFor: "password"
         }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          required: true,
           id: "password",
           className: "form-control",
           type: "password",
@@ -74876,10 +74967,12 @@ function (_Component) {
           placeholder: "Password"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/onTheWay"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "btn btn-primary btn-block",
           type: "submit"
-        }, "Log in"))));
+        }, "Log in")))));
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74910,22 +75003,24 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "py-5 display-4"
       }, "OR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "mt-4 btn btn-block btn-" + (this.state.cash ? "primary" : "outline-primary"),
+        className: "my-4 btn btn-block btn-" + (this.state.cash ? "primary" : "outline-primary"),
         style: {
           fontSize: '3rem'
         },
         onClick: this.cash
-      }, "Cash on delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Cash on delivery"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/onTheWay"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-success btn-block",
         disabled: !this.state.cash
-      }, "CONTINUE")))));
+      }, "CONTINUE"))))));
     }
   }]);
 
   return Payments;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Payments);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Payments));
 
 /***/ }),
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 class Payments extends Component {
 
@@ -36,22 +36,24 @@ class Payments extends Component {
                     <form method="post">
                         <div className="form-group">
                             <label className="text-primary" htmlFor="cardnum">CARD NUMBER</label>
-                            <input id="cardnum" className="form-control" type="number" name="cardnum" placeholder="Card Number" />
+                            <input required id="cardnum" className="form-control" type="number" name="cardnum" placeholder="Card Number" />
                         </div>
                         <div className="form-group">
                             <label className="text-primary" htmlFor="name">CARDHOLDER NAME</label>
-                            <input id="name" className="form-control" type="text" name="name" placeholder="name" />
+                            <input required id="name" className="form-control" type="text" name="name" placeholder="name" />
                         </div>
                         <div className="form-group">
                             <label className="text-primary" htmlFor="date">EXPIRE DATE</label>
-                            <input id="date" className="form-control" type="text" name="date" placeholder="MM / YY" />
+                            <input required id="date" className="form-control" type="text" name="date" placeholder="MM / YY" />
                         </div>
                         <div className="form-group">
                             <label className="text-primary" htmlFor="cvv">CVV</label>
-                            <input id="cvv" className="form-control" type="number" name="cvv" placeholder="CVV" />
+                            <input required id="cvv" className="form-control" type="number" name="cvv" placeholder="CVV" />
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-primary btn-block" type="submit">Pay Now</button>
+                        <button 
+                        className="btn btn-primary btn-block" 
+                        type="submit">Pay Now</button>
                         </div>
                     </form>
                     </React.Fragment>
@@ -65,14 +67,18 @@ class Payments extends Component {
                     <form method="post">
                         <div className="form-group">
                             <label className="text-primary" htmlFor="email">E-mail</label>
-                            <input id="email" className="form-control" type="email" name="email" placeholder="email" />
+                            <input required id="email" className="form-control" type="email" name="email" placeholder="email" />
                         </div>
                         <div className="form-group">
                             <label className="text-primary" htmlFor="password">Password</label>
-                            <input id="password" className="form-control" type="password" name="password" placeholder="Password" />
+                            <input required id="password" className="form-control" type="password" name="password" placeholder="Password" />
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-primary btn-block" type="submit">Log in</button>
+                            <Link to="/onTheWay">
+                                <button 
+                                className="btn btn-primary btn-block" 
+                                type="submit">Log in</button>
+                            </Link>
                         </div>
                     </form>
                 </React.Fragment>
@@ -104,7 +110,7 @@ class Payments extends Component {
                             className="py-5 display-4">
                             OR</span>
                             <button 
-                            className={"mt-4 btn btn-block btn-" + 
+                            className={"my-4 btn btn-block btn-" + 
                             (this.state.cash? "primary": "outline-primary")
                             }
                             style={{fontSize: '3rem'}}
@@ -112,9 +118,11 @@ class Payments extends Component {
                             >
                             Cash on delivery
                             </button>
-                            <button className="btn btn-success btn-block"
-                            disabled={!this.state.cash}>
-                            CONTINUE</button>
+                            <Link to="/onTheWay">
+                                <button className="btn btn-success btn-block"
+                                disabled={!this.state.cash}>
+                                CONTINUE</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -123,4 +131,4 @@ class Payments extends Component {
     }
 }
  
-export default Payments;
+export default withRouter(Payments);

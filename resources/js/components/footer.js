@@ -4,23 +4,23 @@ import ReactDOM from 'react-dom';
 class Footer extends Component {
     render() { 
         return ( 
-            <div className="bg-dark py-3">
+            <div className="bg-dark py-3" id="contact-us">
                 <div className="container pt-5">
                     <div className="row">
                         <div className="col-8">
-                            <h2 className="text-left  mb-5"><strong>Contact Us</strong></h2>
+                            <h2 className="text-left mb-5"><strong>Contact Us</strong></h2>
                             <form method="post">
                                 <div className="form-group">
                                     <label className="" htmlFor="name">Name</label>
-                                    <input id="name" className="form-control" type="text" name="name" placeholder="name" />
+                                    <input required id="name" className="form-control" type="text" name="name" placeholder="name" />
                                 </div>
                                 <div className="form-group">
                                     <label className="" htmlFor="email">E-mail</label>
-                                    <input id="email" className="form-control" type="email" name="email" placeholder="email" />
+                                    <input required id="email" className="form-control" type="email" name="email" placeholder="email" />
                                 </div>
                                 <div className="form-group">
                                     <label className="" htmlFor="password">Message</label>
-                                    <textarea className="form-control" col="18">
+                                    <textarea required className="form-control" col="18">
 
                                     </textarea>
                                 </div>

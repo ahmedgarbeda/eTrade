@@ -30,7 +30,6 @@ class ProductModuleController extends Controller
 //        $product = Product::all();
 //        //http://127.0.0.1:8000/productmodule/product
 //        return ProductResource::collection($product);
-//        //        return view('productmodule::index');
     }
 
     /**
@@ -65,7 +64,7 @@ class ProductModuleController extends Controller
         $product->price = $request->input('price');
         $product->admin_id = $request->input('admin_id');
         $currentCategory = $request->input('category_id') ;
-
+        $product->is_active = Product::has('admin') ? 1 : 0 ;
         $category = Category::find($currentCategory);
         $category->products()->save($product);
 
@@ -167,5 +166,17 @@ class ProductModuleController extends Controller
 //        if ($product->delete()){
 //            return new ProductResource($product);
 //        }
+    }
+
+
+    public  function  approvment($id){
+        $product = Product::find($id);
+        if ($product->is_active == 0)
+            $product->is_active = 1 ;
+        else if ($product->is_active == 1){
+            $product->is_active = 0 ;
+        }
+        $product->save();
+        return  redirect('productmodule/product');
     }
 }
