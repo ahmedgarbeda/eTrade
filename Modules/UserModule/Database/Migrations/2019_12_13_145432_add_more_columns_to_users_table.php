@@ -18,6 +18,7 @@ class AddMoreColumnsToUsersTable extends Migration
             $table->string('phone');
             $table->unsignedBigInteger('governrate_id');
             $table->unsignedInteger('status');
+            $table->string('api_token')->nullable()->default(null);
         });
     }
 

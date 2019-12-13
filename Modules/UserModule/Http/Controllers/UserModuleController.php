@@ -133,16 +133,6 @@ class UserModuleController extends Controller
         }else{
             return response()->json(['messege'=>'loged in faild','user'=>$user]);
         }
-
-
-        // if (Auth::guard('api')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-        //     $token = Str::random(80);
-        //     $api_token = hash('sha256', $token);
-        //     //dd(Auth::id());
-        //     return response()->json(['messege'=>'loged in successfully','token'=>$token]);
-        // }else{
-        //     return response()->json(['messege'=>'loged in faild']);
-        // }
         
     }
 }
