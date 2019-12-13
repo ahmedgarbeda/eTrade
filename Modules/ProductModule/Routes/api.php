@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Route;
+/*
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +14,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/productmodule', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('/productmodule/product' , 'ProductApiController', ['only' => ['index']]);
+Route::apiResource('/productmodule/category' , 'CategoryApiController', ['only' => ['index']]);
+Route::apiResource('/productmodule/offer' , 'OfferApiController', ['only' => ['index']]);

@@ -63,7 +63,7 @@
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->category->name}}</td>
-                    <td>{{$product->admin_id}}</td>
+                    <td>{{$product->admin->name}}</td>
                     <td>{{$product->created_at}}</td>
                     <td>{{$product->updated_at}}</td>
                     <td> {!! link_to_route('product.edit', $title = "Update",
