@@ -125,13 +125,13 @@ class UserModuleController extends Controller
                 $api_token = hash('sha256', $token);
                 $user->api_token = $api_token;
                 $user->update();
-                return response()->json(['messege'=>'loged in successfully','token'=>$token]);
+                return response()->json(['messege'=>'loged in successfully','token'=>$api_token]);
             }else{
                 return response()->json(['messege'=>'loged in faild error password']);
             }
             
         }else{
-            return response()->json(['messege'=>'loged in faild','user'=>$user]);
+            return response()->json(['messege'=>'loged in faild']);
         }
         
     }
