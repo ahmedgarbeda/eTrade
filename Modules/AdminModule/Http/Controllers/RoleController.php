@@ -37,6 +37,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([ 'role' => 'required|string']);
         Role::create($request->all());
         return redirect('/dashboard/roles');
 
@@ -73,6 +74,7 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([ 'role' => 'required|string']);
         $role=Role::find($id);
         $role->update($request->all());
         return redirect('/dashboard/roles');

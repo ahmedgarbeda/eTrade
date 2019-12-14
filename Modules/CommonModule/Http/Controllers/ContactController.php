@@ -12,7 +12,7 @@ class ContactController extends Controller
     public function index()
     {
         $contact = Contact::all();
-        return view('commonmodule::layouts.contactus', ['contacts' => $contact]);
+        return view('commonmodule::contactus', ['contacts' => $contact]);
     }
 
     public function create()
@@ -37,7 +37,7 @@ class ContactController extends Controller
     public function edit($id)
     {
         $contact = Contact::find($id);
-        return view('commonmodule::layouts.editcontact', ['contacts' => $contact]);
+        return view('commonmodule::editcontact', ['contacts' => $contact]);
     }
 
 

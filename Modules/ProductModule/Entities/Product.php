@@ -3,6 +3,7 @@
 namespace Modules\ProductModule\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\AdminModule\Entities\Admin;
 
 class Product extends Model
 {
@@ -17,6 +18,10 @@ class Product extends Model
 
     public  function offer(){
         return $this->hasOne(Offer::class);
+    }
+
+    public function admin(){
+        return $this->belongsTo(Admin::class);
     }
 
 }

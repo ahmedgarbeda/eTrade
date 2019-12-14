@@ -81,38 +81,63 @@ class CommonModuleController extends Controller
     public function settings()
     {
         $settings = Settings::first();
-        if ($settings){
+        if (!$settings){
             $settings=new Settings;
         }
+        
         return view('commonmodule::settings',compact('settings'));
     }
 
     public function setSettings(Request $request)
     {
+        $request->validate([
+            'address'=>'required|string|min:6',
+            'email' => 'required|email',
+            'phone'=> 'required|string',
+            'youtube' => 'string',
+            'facebook' => 'string',
+            'twitter' => 'string',
+            'aboutus' => 'string| min:50'
+        ]);
 
         $settings = Settings::first();
+        $data=$request->all();
         if ($settings){
-            $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
-            request()->aboutphoto->move(public_path('images'), $aboutPhoto);
-            $logo = time().'.'.$request->file('logo')->getClientOriginalExtension();
-            request()->logo->move(public_path('images'), $logo);
-            $data=$request->all();
-            $data['aboutphoto']=$aboutPhoto;
-            $data['logo'] = $logo;
+            if ($request->file('aboutphoto')){
+                $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
+                request()->aboutphoto->move(public_path('images'), $aboutPhoto);
+                $data['aboutphoto']=$aboutPhoto;
+            }
+            
+            if($request->file('logo')){
+                $logo = 'logo.png';
+                request()->logo->move(public_path('images'), $logo);
+                $data['logo'] = $logo;
+            } 
+            
             $settings->update($data);
             return redirect('/dashboard/settings');
         }else{
-
+            
             $settings = $request->all();
-            $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
-            request()->aboutphoto->move(public_path('images'), $aboutPhoto);
-            $logo = time().'.'.$request->file('logo')->getClientOriginalExtension();
-            request()->logo->move(public_path('images'), $logo);
-            $settings=$request->all();
-            $settings['aboutphoto']=$aboutPhoto;
-            $settings['logo'] = $logo;
+            if ($request->file('aboutphoto')){
+                $aboutPhoto = time().'.'.$request->file('aboutphoto')->getClientOriginalExtension();
+                request()->aboutphoto->move(public_path('images'), $aboutPhoto);
 
+                $settings['aboutphoto']=$aboutPhoto;
+            }else{
+                $settings['aboutphoto']='';
+            }
+            
+            if ($request->file('logo')){
+                $logo = time().'.'.$request->file('logo')->getClientOriginalExtension();
+                request()->logo->move(public_path('images'), $logo);
+                $settings['logo'] = $logo;
 
+            }else{
+                $settings['logo'] = '';
+            }
+            
            // dd($settings);
             $data=Settings::create($settings);
             return redirect('/dashboard/settings');
@@ -120,6 +145,10 @@ class CommonModuleController extends Controller
 
     }
 
+    public function loginView()
+    {
+        return view('auth.login');
+    }
 
 }
 

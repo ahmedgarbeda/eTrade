@@ -45,6 +45,7 @@
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th>Action</th>
+                        <th>Approvment</th>
                     </tr>
 
 
@@ -62,16 +63,24 @@
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->category->name}}</td>
-                    <td>{{$product->admin_id}}</td>
+                    <td>{{$product->admin->name}}</td>
                     <td>{{$product->created_at}}</td>
                     <td>{{$product->updated_at}}</td>
-                    <td> {!! link_to_route('product.edit', $title = "Edit",
-                    $parameters = [$product->id], $attributes = ['class' => 'btn btn-info'])!!}
+                    <td> {!! link_to_route('product.edit', $title = "Update",
+                    $parameters = [$product->id], $attributes = ['class' => 'btn btn-success'])!!}
                     {!!  Form::open(['route' =>['product.destroy' , $product->id] , 'method' => 'delete']) !!}
                     @method('DELETE')
                     {!!  Form::submit('Delete!' , ['class' => 'btn btn-danger ']) !!}
                     {!! Form::close() !!}
                     </td>
+                   <td>@if ($product->is_active == 0 )
+                    {!! link_to_route('approve.product', $title = "Approve",
+                    $parameters = [$product->id], $attributes = ['class' => 'btn btn-secondary'])!!}
+                        @else
+                        {!! link_to_route('approve.product', $title = "Reject",
+                      $parameters = [$product->id], $attributes = ['class' => 'btn btn-dark'])!!}
+                        @endif
+                </td>
             </tr>
 
                             @endforeach

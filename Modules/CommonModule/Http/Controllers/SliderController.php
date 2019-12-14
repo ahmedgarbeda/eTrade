@@ -16,7 +16,7 @@ class SliderController extends Controller
     public function index()
     {
         $slider = Slider::all();
-        return view('commonmodule::layouts.slider', ['sliders' => $slider]);
+        return view('commonmodule::slider', ['sliders' => $slider]);
     }
 
     /**
@@ -36,17 +36,23 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $data = request()->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => ['required', 'image']
+            'image' => 'required'
         ]);
-        $imagePath = request('image')->store('uploads/slider', 'public');
-        \Modules\CommonModule\Entities\Slider::create([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'image' => $imagePath
-        ]);
+        $slider= $request->all();
+
+        if ($request->file('image')){
+            $photo = time().'.'.$request->file('image')->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $photo);
+
+            $slider['image']=$photo;
+        }else{
+            $slider['image']='';
+        }
+
+        $data = Slider::create($slider);
 
         return redirect('dashboard/slider');
     }
@@ -69,7 +75,7 @@ class SliderController extends Controller
     public function edit($id)
     {
         $slider = Slider::find($id);
-        return view('commonmodule::layouts.edit', ['sliders' => $slider]);
+        return $slider;
     }
 
     /**
@@ -80,18 +86,20 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = request()->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => ['required', 'image']
         ]);
-        var_dump($data);
-        $imagePath = request('image')->store('uploads/slider', 'public');
-        \Modules\CommonModule\Entities\Slider::where('id', $id)->update([
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'image' => $imagePath
-        ]);
+
+        $slider=Slider::find($id);
+        $data=$request->all();
+        if ($request->file('image')){
+            $photo = time().'.'.$request->file('image')->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $photo);
+
+            $data['image']=$photo;
+        }
+        $slider->update($data);
 
         return redirect('dashboard/slider');
     }
