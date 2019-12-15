@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\User;
+use JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Modules\CommonModule\Entities\Governrate;
@@ -109,30 +110,37 @@ class UserModuleController extends Controller
         return redirect('/dashboard/users');
     }
 
-    public function login(Request $request)
-    {
-        // dd($request);
-        $request->validate([
-            'email'   => 'required|email',
-            'password' => 'required|min:8'
-        ]);
-        $password = hash::make($request->password);
-        $user=User::where(['email'=>$request->email,'status'=>'1', 'deleted_at'=>null])->first();
-        if($user){
-            if (Hash::check($request->password, $user->password)) {
-                // The passwords match...
-                $token = Str::random(80);
-                $api_token = hash('sha256', $token);
-                $user->api_token = $api_token;
-                $user->update();
-                return response()->json(['messege'=>'loged in successfully','token'=>$api_token]);
-            }else{
-                return response()->json(['messege'=>'loged in faild error password']);
-            }
+    // public function login(Request $request)
+    // {
+    //     // dd($request);
+    //     $request->validate([
+    //         'email'   => 'required|email',
+    //         'password' => 'required|min:8'
+    //     ]);
+    //     $password = hash::make($request->password);
+    //     $user=User::where(['email'=>$request->email,'status'=>'1', 'deleted_at'=>null])->first();
+    //     if($user){
+    //         if (Hash::check($request->password, $user->password)) {
+    //             // The passwords match...
+    //             $token = Str::random(80);
+    //             $api_token = hash('sha256', $token);
+    //             $user->api_token = $api_token;
+    //             $user->update();
+    //             return response()->json(['messege'=>'loged in successfully','token'=>$api_token]);
+    //         }else{
+    //             return response()->json(['messege'=>'loged in faild error password']);
+    //         }
             
-        }else{
-            return response()->json(['messege'=>'loged in faild']);
-        }
+    //     }else{
+    //         return response()->json(['messege'=>'loged in faild']);
+    //     }
         
+    // }
+
+    public function getAuthUser()
+    {
+        return $user = JWTAuth::parseToken()->authenticate();
     }
 }
+
+
