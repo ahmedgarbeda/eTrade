@@ -18,9 +18,9 @@ class Navbar extends Component {
                 <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
                     <ul className="navbar-nav align-items-center">
                         <li className="nav-item">
-                            <form className="form-inline">
+                            <form className="form-inline position-relative">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit"><i className="fa fa-search"></i></button>
+                                <button className="btn btn-primary my-2 my-sm-0 inline-search-btn"><i className="fa fa-search"></i></button>
                             </form>
                         </li>
                         <Link to="/">
