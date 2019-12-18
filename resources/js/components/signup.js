@@ -33,26 +33,22 @@ class Signup extends Component {
             password: this.state.password
         }
 
-        console.log(tmpData);
-        
-
-        // fetch("url", {
-        //     method: 'POST',
-        //     body: JSON.stringify(fetchData),
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //         'Content-Type': 'application/json'
-        //     }
-        // }).then(res => {
-        //         res.json();
-        //         if(res) {
-        //             this.props.add_admin(fetchData);
-        //             this.props.history.push('/dashboard/admin');
-        //         }
-        //     })
-        //     //.then(data => console.log(data))
-        //     .catch(err => console.error("Error:", err));
-
+        fetch("/api/governrates", {
+            method: 'get',
+            body: JSON.stringify(tmpData),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+                return res.json();
+                // if(res) {
+                //     this.props.add_admin(fetchData);
+                //     this.props.history.push('/dashboard/admin');
+                // }
+            })
+            //.then(data => console.log(data))
+            .catch(err => console.error("Error:", err));
 
 
         this.setState({
@@ -62,13 +58,13 @@ class Signup extends Component {
         })
     }
 
-    render() { 
+    render() {
         return (
             <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="p-5 m-4 border border-primary">
-                            <form method="post" onSubmit={this.sendData}>
+                            <form onSubmit={this.sendData}>
                                 <h2 className="text-left text-primary mb-5"><strong>Create</strong> an account.</h2>
                                 <div className="form-group">
                                     <label className="text-primary" htmlFor="name">Name</label>

@@ -1,4 +1,10 @@
 
+.inline-search-btn {
+    position: absolute;
+    right: 0;
+}
+
+
 .fix-table-cart {
     line-height: 87px;
 }

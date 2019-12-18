@@ -6378,7 +6378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n    padding-right: .88rem;\r\n    padding-top: .24rem;\r\n}", ""]);
+exports.push([module.i, "\r\n.inline-search-btn {\r\n    position: absolute;\r\n    right: 0;\r\n}\r\n\r\n\r\n.fix-table-cart {\r\n    line-height: 87px;\r\n}\r\n\r\n.pointer {\r\n    cursor: pointer;\r\n}\r\n\r\n.active {\r\n    border: 1px solid #3490dc !important;\r\n    color:#3490dc !important;\r\n}\r\n\r\n.social:hover {\r\n    color: #3490dc !important;\r\n}\r\n\r\n.badge.cart-count {\r\n    width: 20px;\r\n    height: 20px;\r\n    font-size: 45%;\r\n    padding-right: .88rem;\r\n    padding-top: .24rem;\r\n}", ""]);
 
 // exports
 
@@ -74649,15 +74649,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "form-inline"
+        className: "form-inline position-relative"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control mr-sm-2",
         type: "search",
         placeholder: "Search",
         "aria-label": "Search"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-outline-success my-2 my-sm-0",
-        type: "submit"
+        className: "btn btn-primary my-2 my-sm-0 inline-search-btn"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-search"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -75383,23 +75382,22 @@ function (_Component) {
         email: this.state.email,
         password: this.state.password
       };
-      console.log(tmpData); // fetch("url", {
-      //     method: 'POST',
-      //     body: JSON.stringify(fetchData),
-      //     headers: {
-      //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-      //         'Content-Type': 'application/json'
-      //     }
-      // }).then(res => {
-      //         res.json();
-      //         if(res) {
-      //             this.props.add_admin(fetchData);
-      //             this.props.history.push('/dashboard/admin');
-      //         }
-      //     })
-      //     //.then(data => console.log(data))
-      //     .catch(err => console.error("Error:", err));
-
+      fetch("/api/governrates", {
+        method: 'get',
+        body: JSON.stringify(tmpData),
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'Content-Type': 'application/json'
+        }
+      }).then(function (res) {
+        return res.json(); // if(res) {
+        //     this.props.add_admin(fetchData);
+        //     this.props.history.push('/dashboard/admin');
+        // }
+      }) //.then(data => console.log(data))
+      ["catch"](function (err) {
+        return console.error("Error:", err);
+      });
       this.setState({
         name: '',
         email: '',
@@ -75418,7 +75416,6 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-5 m-4 border border-primary"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        method: "post",
         onSubmit: this.sendData
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "text-left text-primary mb-5"
