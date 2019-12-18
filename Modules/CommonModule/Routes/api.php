@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/commonmodule', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/commonmodule', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('jwt.verify')->get('/governrates','GovernrateController@getAllGovernrates');
+Route::post('/contact','ContactController@saveContactMessage');

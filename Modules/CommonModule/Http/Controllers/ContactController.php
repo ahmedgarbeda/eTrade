@@ -59,4 +59,23 @@ class ContactController extends Controller
         Contact::where('id', $id)->delete();
         return redirect('dashboard/contact');
     }
+
+    public function saveContactMessage(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
+
+        $data=$request->all();
+        $data['status'] = 'pending';
+        $message = Contact::create($data);
+        if ($message){
+            return response()->json(['message'=>'your request has been sent'],200);
+        }else{
+            return response()->json(['message'=>'There is an error'],400);
+        }
+
+    }
 }
