@@ -17,5 +17,5 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::middleware('jwt.verify')->get('/governrates','GovernrateController@getAllGovernrates');
+Route::get('/governrates','GovernrateController@getAllGovernrates');
 Route::post('/contact','ContactController@saveContactMessage');
