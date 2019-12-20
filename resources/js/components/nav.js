@@ -37,9 +37,15 @@ class Navbar extends Component {
                             <a className="nav-link" href="#contact-us">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
+                            {(this.props.isLogging?
+                            <div className="text-warning animated jackInTheBox h3 m-0">
+                                <i className="fas fa-user px-3"></i>
+                                <span className="text-capitalize">{this.props.username}</span>
+                            </div> : 
                             <Link to="/sign-up">
                                 <button type="button" className="btn btn-primary">SIGN UP</button>
                             </Link>
+                            )}
                         </li>
                         <Link to="/cart">
                             <li className="nav-item ml-5">

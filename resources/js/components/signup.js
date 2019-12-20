@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 
 
@@ -11,7 +11,13 @@ class Signup extends Component {
         this.state = {
             name: '',
             email: '',
-            password: ''
+            username: '',
+            password: '',
+            password_confirmation: '',
+            phone: '',
+            address:'',
+            governrate_id: '',
+            governrates: []
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.sendData = this.sendData.bind(this);
@@ -30,31 +36,49 @@ class Signup extends Component {
         let tmpData = {
             name: this.state.name,
             email: this.state.email,
-            password: this.state.password
+            username: this.state.username,
+            password: this.state.password,
+            password_confirmation: this.state.password_confirmation,
+            phone: this.state.phone,
+            address: this.state.address,
+            governrate_id: this.state.governrate_id
         }
 
-        fetch("/api/governrates", {
-            method: 'get',
-            body: JSON.stringify(tmpData),
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-                return res.json();
-                // if(res) {
-                //     this.props.add_admin(fetchData);
-                //     this.props.history.push('/dashboard/admin');
-                // }
-            })
-            //.then(data => console.log(data))
-            .catch(err => console.error("Error:", err));
-
-
+        if(this.state.password !== this.state.password_confirmation) {
+            return 
+        }else {
+            this.props.addUser(tmpData);
+            this.props.history.push("/");
+            // .then(res => {
+            //         console.log(res.json());
+            //         // if(res) {
+            //         //     this.props.add_admin(fetchData);
+            //         //     this.props.history.push('/dashboard/admin');
+            //         // }
+            //     }).catch(err => console.error("Error:", err));
+        }
         this.setState({
             name: '',
             email: '',
-            password: ''
+            username: '',
+            password: '',
+            password_confirmation: '',
+            phone: '',
+            address: '',
+            governrate_id: ''
+        })
+    }
+
+    componentDidMount() {
+        fetch("/api/governrates")
+        .then(req => req.json())
+        .then(res => {
+            const governrates = res.map(governrate => {
+                return governrate;
+            })
+            this.setState({
+                governrates: governrates
+            })
         })
     }
 
@@ -89,6 +113,17 @@ class Signup extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
+                                    <label className="text-primary" htmlFor="username">User name</label>
+                                    <input required 
+                                    id="username" 
+                                    className="form-control" 
+                                    type="text" 
+                                    name="username" 
+                                    placeholder="username"
+                                    onChange={this.changeHandler} 
+                                    />
+                                </div>
+                                <div className="form-group">
                                     <label className="text-primary" htmlFor="password">Password</label>
                                     <input required 
                                     id="password" 
@@ -100,8 +135,52 @@ class Signup extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label className="text-primary" htmlFor="re-password">Re-Password</label>
-                                    <input required id="re-password" className="form-control" type="password" name="password-repeat" placeholder="Password (repeat)" />
+                                    <label className="text-primary" htmlFor="password-confirm">Confirmation password</label>
+                                    <input 
+                                    required id="password-confirm" 
+                                    className="form-control" 
+                                    type="password" 
+                                    name="password_confirmation" 
+                                    placeholder="comfirmation password"
+                                    onChange={this.changeHandler}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-primary" htmlFor="address">Address</label>
+                                    <input required 
+                                    id="address" 
+                                    className="form-control" 
+                                    type="text" 
+                                    name="address"
+                                    placeholder="address" 
+                                    onChange={this.changeHandler}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-primary" htmlFor="governrate">Governrate</label>
+                                    <select 
+                                    required id="governrate" 
+                                    className="form-control"
+                                    name="governrate_id"
+                                    onChange={this.changeHandler}
+                                    value={this.state.governrate_id}>
+                                       {
+                                            this.state.governrates.map(governrate=> (
+                                                <option key={governrate.id} value={governrate.id}>{governrate.name}</option>
+                                            ))
+                                       }
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="text-primary" htmlFor="phone">Phone</label>
+                                    <input required 
+                                    id="phone" 
+                                    className="form-control" 
+                                    type="tel" 
+                                    name="phone"
+                                    placeholder="phone" 
+                                    onChange={this.changeHandler}
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <div className="form-check">
@@ -125,4 +204,4 @@ class Signup extends Component {
     }
 }
  
-export default Signup;
+export default withRouter(Signup);

@@ -73,12 +73,16 @@ class App extends Component {
             addToCartAnimate: {animateState: false, btnId: 0},
             targetProduct: null,
             isProductListEmpty: false,
-            subTotal: 0
+            subTotal: 0,
+            userToken: '',
+            isLogging: false,
+            loggingUser: ''
         }
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
         this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
+        this.register = this.register.bind(this);
     }
     
 
@@ -122,6 +126,27 @@ class App extends Component {
         });
     }
 
+    async register(data) {
+        const res = await fetch("/api/register", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataPayload = await res.json();
+            try {
+                this.setState({ 
+                    userToken: dataPayload.token,
+                    isLogging: !this.state.isLogging,
+                    loggingUser: dataPayload.user.username
+                });
+            } catch {
+                err => console.error("Error:", err);
+            }
+    }
+
     render() {
         //(window.scrollY?window.scroll(0, 0):"");
 
@@ -143,7 +168,10 @@ class App extends Component {
         return (
             <Router>
                 <ScrollToTop />
-                <Navbar count={this.state.cartCount} />
+                <Navbar 
+                isLogging={this.state.isLogging}
+                username={this.state.loggingUser}
+                count={this.state.cartCount} />
                 <Header />
                     <div className="container">
                         <Switch>
@@ -165,7 +193,7 @@ class App extends Component {
                                 />
                             </Route>
                             <Route path="/sign-up">
-                                <Signup />
+                                <Signup addUser={this.register} />
                             </Route>
                             <Route path="/login">
                                 <Login />
