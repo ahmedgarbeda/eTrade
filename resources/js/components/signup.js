@@ -164,6 +164,7 @@ class Signup extends Component {
                                     name="governrate_id"
                                     onChange={this.changeHandler}
                                     value={this.state.governrate_id}>
+                                        <option value="default">select government</option>
                                        {
                                             this.state.governrates.map(governrate=> (
                                                 <option key={governrate.id} value={governrate.id}>{governrate.name}</option>

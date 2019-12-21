@@ -83,6 +83,7 @@ class App extends Component {
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
         this.register = this.register.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
     
 
@@ -147,6 +148,32 @@ class App extends Component {
             }
     }
 
+    async login(data) {
+        const res = await fetch("/api/login", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataPayload = await res.json();
+            try {
+                console.log(dataPayload);
+                //localStorage.setItem("access_token", dataPayload.token);
+            } catch {
+                err => console.error("Error:", err);
+            } 
+    }
+
+    logOut() {
+        this.setState({ 
+            userToken: '',
+            isLogging: !this.state.isLogging,
+            loggingUser: ''
+        });
+    }
+
     render() {
         //(window.scrollY?window.scroll(0, 0):"");
 
@@ -171,6 +198,7 @@ class App extends Component {
                 <Navbar 
                 isLogging={this.state.isLogging}
                 username={this.state.loggingUser}
+                logOut={this.logOut}
                 count={this.state.cartCount} />
                 <Header />
                     <div className="container">
@@ -196,7 +224,7 @@ class App extends Component {
                                 <Signup addUser={this.register} />
                             </Route>
                             <Route path="/login">
-                                <Login />
+                                <Login logUser={this.login} />
                             </Route>
                             <Route path="/cart">
                                 <CartTable 

@@ -74381,6 +74381,7 @@ function (_Component) {
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     _this.deleteFromCart = _this.deleteFromCart.bind(_assertThisInitialized(_this));
     _this.register = _this.register.bind(_assertThisInitialized(_this));
+    _this.logOut = _this.logOut.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -74483,6 +74484,56 @@ function (_Component) {
       }, null, this);
     }
   }, {
+    key: "login",
+    value: function login(data) {
+      var res, dataPayload;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/login", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                  'Content-Type': 'application/json'
+                }
+              }));
+
+            case 2:
+              res = _context2.sent;
+              _context2.next = 5;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
+
+            case 5:
+              dataPayload = _context2.sent;
+
+              try {
+                console.log(dataPayload); //localStorage.setItem("access_token", dataPayload.token);
+              } catch (_unused2) {
+                (function (err) {
+                  return console.error("Error:", err);
+                });
+              }
+
+            case 7:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    }
+  }, {
+    key: "logOut",
+    value: function logOut() {
+      this.setState({
+        userToken: '',
+        isLogging: !this.state.isLogging,
+        loggingUser: ''
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -74508,6 +74559,7 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_scrollToTop__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
         isLogging: this.state.isLogging,
         username: this.state.loggingUser,
+        logOut: this.logOut,
         count: this.state.cartCount
       }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_header_js__WEBPACK_IMPORTED_MODULE_7__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "container"
@@ -74533,7 +74585,9 @@ function (_Component) {
         addUser: this.register
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/login"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_login__WEBPACK_IMPORTED_MODULE_8__["default"], null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_login__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        logUser: this.login
+      })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_cartTable__WEBPACK_IMPORTED_MODULE_10__["default"], {
         show: this.state.cartList.length === 0 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(EmptyList, null) : products,
@@ -75287,6 +75341,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -75295,9 +75351,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -75313,12 +75369,37 @@ function (_Component) {
   _inherits(Login, _Component);
 
   function Login() {
+    var _this;
+
     _classCallCheck(this, Login);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Login).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this));
+    _this.state = {
+      email: '',
+      password: ''
+    };
+    _this.changeHandler = _this.changeHandler.bind(_assertThisInitialized(_this));
+    _this.sendData = _this.sendData.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Login, [{
+    key: "changeHandler",
+    value: function changeHandler(event) {
+      var fieldValue = event.target.name;
+      this.setState(_defineProperty({}, fieldValue, event.target.value));
+    }
+  }, {
+    key: "sendData",
+    value: function sendData(event) {
+      event.preventDefault();
+      var tmpData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.logUser(tmpData);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75330,7 +75411,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "p-5 m-4 border border-primary"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        method: "post"
+        onSubmit: this.sendData
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "text-left text-primary mb-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Sign in.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75339,22 +75420,26 @@ function (_Component) {
         className: "text-primary",
         htmlFor: "email"
       }, "E-mail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: true,
         id: "email",
         className: "form-control",
         type: "email",
         name: "email",
-        placeholder: "email"
+        placeholder: "email",
+        onChange: this.changeHandler
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
         htmlFor: "password"
       }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        required: true,
         id: "password",
         className: "form-control",
         type: "password",
         name: "password",
-        placeholder: "Password"
+        placeholder: "Password",
+        onChange: this.changeHandler
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -75452,20 +75537,7 @@ function (_Component) {
         id: "navbarNav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "navbar-nav align-items-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "nav-item"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        className: "form-inline position-relative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-control mr-sm-2",
-        type: "search",
-        placeholder: "Search",
-        "aria-label": "Search"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary my-2 my-sm-0 inline-search-btn"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fa fa-search"
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item ml-5 font-weight-bold"
@@ -75493,17 +75565,36 @@ function (_Component) {
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item ml-5"
       }, this.props.isLogging ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "text-warning animated jackInTheBox h3 m-0"
+        className: "btn-group text-warning animated jackInTheBox h3 m-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-user px-3"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "text-capitalize"
-      }, this.props.username)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+      }, this.props.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "pointer dropdown-toggle dropdown-toggle-split",
+        "data-toggle": "dropdown",
+        "aria-haspopup": "true",
+        "aria-expanded": "false"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "sr-only"
+      }, "Toggle Dropdown")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dropdown-menu pointer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "dropdown-item h4 m-0",
+        onClick: this.props.logOut
+      }, "log out"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: ""
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/login"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-primary mr-4"
+      }, "Log In")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn btn-primary"
-      }, "SIGN UP"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "btn btn-outline-primary"
+      }, "Register")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "nav-item ml-5"
@@ -76352,7 +76443,9 @@ function (_Component) {
         name: "governrate_id",
         onChange: this.changeHandler,
         value: this.state.governrate_id
-      }, this.state.governrates.map(function (governrate) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "default"
+      }, "select government"), this.state.governrates.map(function (governrate) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: governrate.id,
           value: governrate.id
