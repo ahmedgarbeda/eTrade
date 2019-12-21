@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $userData= $request->all();
         $userData['status'] = 0;
-        // $userData['password']=Hash::make($request->get('password'));
+         $userData['password']=Hash::make($request->get('password'));
         //dd($userData);
         $user = User::create($userData);
 
