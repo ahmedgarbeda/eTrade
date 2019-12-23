@@ -211,7 +211,6 @@ class App extends Component {
                 isLogging: !this.state.isLogging
             })
         }
-        
     }
 
     render() {
