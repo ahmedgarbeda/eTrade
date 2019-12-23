@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 
