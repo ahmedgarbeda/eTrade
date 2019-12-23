@@ -16,19 +16,22 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         
         $user= User::where('email',$credentials['email'])->first();
-        
+        $token='';
         if ($user){
                 if(Hash::check($credentials['password'], $user->password)){
                         try {
                                 if (! $token = JWTAuth::fromUser($user)) {
                                     return response()->json(['error' => 'invalid_credentials'], 400);
+                                }else{
+                                        return response()->json(compact('token'));
                                 }
                             } catch (JWTException $e) {
                                 return response()->json(['error' => 'could_not_create_token'], 500);
                             }
+                }else{
+                        return response()->json(['error' => 'invalid cresedtials'], 400);  
                 }
         }
-        
 
         return response()->json(compact('token'));
     }
@@ -52,8 +55,8 @@ class UserController extends Controller
 
         $userData= $request->all();
         $userData['status'] = 0;
-        // $userData['password']=Hash::make($request->get('password'));
-        //dd($userData);
+        $userData['password']=Hash::make($request->get('password'));
+
         $user = User::create($userData);
 
         $token = JWTAuth::fromUser($user);

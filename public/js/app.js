@@ -74374,13 +74374,17 @@ function (_Component) {
       subTotal: 0,
       userToken: '',
       isLogging: false,
-      loggingUser: ''
+      waitingTime: false,
+      loggingUser: '',
+      errorState: false,
+      errorMessage: ''
     };
     _this.caluculateSubTotal = _this.caluculateSubTotal.bind(_assertThisInitialized(_this));
     _this.targetProduct = _this.targetProduct.bind(_assertThisInitialized(_this));
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     _this.deleteFromCart = _this.deleteFromCart.bind(_assertThisInitialized(_this));
     _this.register = _this.register.bind(_assertThisInitialized(_this));
+    _this.login = _this.login.bind(_assertThisInitialized(_this));
     _this.logOut = _this.logOut.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -74446,7 +74450,10 @@ function (_Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              this.setState({
+                waitingTime: !this.state.waitingTime
+              });
+              _context.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/register", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -74456,12 +74463,12 @@ function (_Component) {
                 }
               }));
 
-            case 2:
+            case 3:
               res = _context.sent;
-              _context.next = 5;
+              _context.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
 
-            case 5:
+            case 6:
               dataPayload = _context.sent;
 
               try {
@@ -74476,7 +74483,7 @@ function (_Component) {
                 });
               }
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -74486,12 +74493,17 @@ function (_Component) {
   }, {
     key: "login",
     value: function login(data) {
-      var res, dataPayload;
+      var res, dataPayload_token, key;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _context2.next = 2;
+              this.setState({
+                waitingTime: !this.state.waitingTime,
+                errorState: false,
+                errorMessage: ''
+              });
+              _context2.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/login", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -74501,28 +74513,43 @@ function (_Component) {
                 }
               }));
 
-            case 2:
+            case 3:
               res = _context2.sent;
-              _context2.next = 5;
+              _context2.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
 
-            case 5:
-              dataPayload = _context2.sent;
+            case 6:
+              dataPayload_token = _context2.sent;
 
               try {
-                console.log(dataPayload); //localStorage.setItem("access_token", dataPayload.token);
+                // console.log(dataPayload_token.token);
+                sessionStorage.setItem("access_token", dataPayload_token.token);
+                key = sessionStorage.getItem('access_token');
+
+                if (key === '') {
+                  this.setState({
+                    waitingTime: !this.state.waitingTime,
+                    errorState: !this.state.errorState,
+                    errorMessage: 'invalid email or password'
+                  });
+                } else {
+                  this.setState({
+                    userToken: dataPayload_token.token,
+                    isLogging: !this.state.isLogging
+                  });
+                }
               } catch (_unused2) {
                 (function (err) {
                   return console.error("Error:", err);
                 });
               }
 
-            case 7:
+            case 8:
             case "end":
               return _context2.stop();
           }
         }
-      });
+      }, null, this);
     }
   }, {
     key: "logOut",
@@ -74530,8 +74557,23 @@ function (_Component) {
       this.setState({
         userToken: '',
         isLogging: !this.state.isLogging,
+        waitingTime: false,
         loggingUser: ''
       });
+      sessionStorage.clear();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // sessionStorage.clear();
+      var key = sessionStorage.getItem('access_token');
+      sessionStorage.setItem("access_token", this.state.userToken);
+
+      if (key) {
+        this.setState({
+          isLogging: !this.state.isLogging
+        });
+      }
     }
   }, {
     key: "render",
@@ -74556,7 +74598,9 @@ function (_Component) {
         }, "Your Cart is Empty");
       };
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_scrollToTop__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], null, this.state.isLogging ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+        to: "/"
+      }) : '', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_scrollToTop__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_nav_js__WEBPACK_IMPORTED_MODULE_6__["default"], {
         isLogging: this.state.isLogging,
         username: this.state.loggingUser,
         logOut: this.logOut,
@@ -74582,11 +74626,15 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/sign-up"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_signup__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        addUser: this.register
+        addUser: this.register,
+        waitingTime: this.state.waitingTime
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/login"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_login__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        logUser: this.login
+        logUser: this.login,
+        waitingTime: this.state.waitingTime,
+        errorState: this.state.errorState,
+        errorMessage: this.state.errorMessage
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/cart"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_cartTable__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -75415,6 +75463,11 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "text-left text-primary mb-5"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Sign in.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        "class": "alert alert-danger h4 text-center " + (this.props.errorState ? '' : 'd-none'),
+        role: "alert"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-2"
+      }), this.props.errorMessage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -75440,7 +75493,15 @@ function (_Component) {
         name: "password",
         placeholder: "Password",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), this.props.waitingTime ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        "class": "btn btn-primary btn-block",
+        type: "button",
+        disabled: true
+      }, "Loading...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "class": "spinner-border spinner-border-sm mx-3",
+        role: "status",
+        "aria-hidden": "true"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary btn-block",
@@ -75456,7 +75517,7 @@ function (_Component) {
   return Login;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Login);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Login));
 
 /***/ }),
 
@@ -75899,7 +75960,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fab fa-cc-paypal"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.paymentMethod ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PayPalForm, null) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CreditCardForm, null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-5"
+        className: "col-md-5 d-flex align-items-center justify-content-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center py-4 "
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -76286,40 +76347,41 @@ function (_Component) {
     key: "sendData",
     value: function sendData(event) {
       event.preventDefault();
+      var _this$state = this.state,
+          name = _this$state.name,
+          email = _this$state.email,
+          username = _this$state.username,
+          password = _this$state.password,
+          password_confirmation = _this$state.password_confirmation,
+          phone = _this$state.phone,
+          address = _this$state.address,
+          governrate_id = _this$state.governrate_id;
       var tmpData = {
-        name: this.state.name,
-        email: this.state.email,
-        username: this.state.username,
-        password: this.state.password,
-        password_confirmation: this.state.password_confirmation,
-        phone: this.state.phone,
-        address: this.state.address,
-        governrate_id: this.state.governrate_id
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        password_confirmation: password_confirmation,
+        phone: phone,
+        address: address,
+        governrate_id: governrate_id
       };
 
-      if (this.state.password !== this.state.password_confirmation) {
-        return;
+      if (name === ' ' && name < 6 || username === ' ' && username < 6 || !email.includes('@') && !email.includes('.') || password < 6 || password !== password_confirmation || address === ' ' && address < 6 || phone < 6) {
+        alert('false');
       } else {
         this.props.addUser(tmpData);
-        this.props.history.push("/"); // .then(res => {
-        //         console.log(res.json());
-        //         // if(res) {
-        //         //     this.props.add_admin(fetchData);
-        //         //     this.props.history.push('/dashboard/admin');
-        //         // }
-        //     }).catch(err => console.error("Error:", err));
+        this.setState({
+          name: '',
+          email: '',
+          username: '',
+          password: '',
+          password_confirmation: '',
+          phone: '',
+          address: '',
+          governrate_id: ''
+        });
       }
-
-      this.setState({
-        name: '',
-        email: '',
-        username: '',
-        password: '',
-        password_confirmation: '',
-        phone: '',
-        address: '',
-        governrate_id: ''
-      });
     }
   }, {
     key: "componentDidMount",
@@ -76475,7 +76537,15 @@ function (_Component) {
         id: "agree",
         className: "form-check-input",
         type: "checkbox"
-      }), "I agree to the license terms."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "I agree to the license terms."))), this.props.waitingTime ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        "class": "btn btn-primary btn-block",
+        type: "button",
+        disabled: true
+      }, "Loading...", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "class": "spinner-border spinner-border-sm mx-3",
+        role: "status",
+        "aria-hidden": "true"
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-primary btn-block",
@@ -76492,7 +76562,7 @@ function (_Component) {
   return Signup;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Signup));
+/* harmony default export */ __webpack_exports__["default"] = (Signup);
 
 /***/ }),
 

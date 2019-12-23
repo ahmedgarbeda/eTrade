@@ -33,40 +33,42 @@ class Signup extends Component {
     sendData(event) {
         event.preventDefault();
 
+        const {name, email, username, password, password_confirmation, phone, address, governrate_id} = this.state;
+
         let tmpData = {
-            name: this.state.name,
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password,
-            password_confirmation: this.state.password_confirmation,
-            phone: this.state.phone,
-            address: this.state.address,
-            governrate_id: this.state.governrate_id
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            password_confirmation: password_confirmation,
+            phone: phone,
+            address: address,
+            governrate_id: governrate_id
         }
 
-        if(this.state.password !== this.state.password_confirmation) {
-            return 
+        if(
+            (name === ' ' && name < 6) || 
+            (username === ' ' && username < 6) || 
+            (!email.includes('@') && !email.includes('.')) ||
+            (password < 6) ||
+            (password !== password_confirmation) ||
+            (address === ' ' && address < 6) ||
+            (phone < 6)) {
+            alert('false')
         }else {
             this.props.addUser(tmpData);
-            this.props.history.push("/");
-            // .then(res => {
-            //         console.log(res.json());
-            //         // if(res) {
-            //         //     this.props.add_admin(fetchData);
-            //         //     this.props.history.push('/dashboard/admin');
-            //         // }
-            //     }).catch(err => console.error("Error:", err));
+
+            this.setState({
+                name: '',
+                email: '',
+                username: '',
+                password: '',
+                password_confirmation: '',
+                phone: '',
+                address: '',
+                governrate_id: ''
+            })
         }
-        this.setState({
-            name: '',
-            email: '',
-            username: '',
-            password: '',
-            password_confirmation: '',
-            phone: '',
-            address: '',
-            governrate_id: ''
-        })
     }
 
     componentDidMount() {
@@ -190,9 +192,15 @@ class Signup extends Component {
                                         </label>
                                     </div>
                                 </div>
+                                {(this.props.waitingTime?
+                                <button class="btn btn-primary btn-block" type="button" disabled>
+                                    Loading...
+                                    <span class="spinner-border spinner-border-sm mx-3" role="status" aria-hidden="true"></span>
+                                </button>:
                                 <div className="form-group">
                                     <button className="btn btn-primary btn-block" type="submit">Create account</button>
                                 </div>
+                                )}
                                 <Link to="/login">
                                     <a className="text-center already d-block" href="#">You already have an account? Login here.</a>
                                 </Link>
@@ -205,4 +213,4 @@ class Signup extends Component {
     }
 }
  
-export default withRouter(Signup);
+export default Signup;

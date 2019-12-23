@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 
 import '../style/style.css';
 
@@ -76,13 +76,17 @@ class App extends Component {
             subTotal: 0,
             userToken: '',
             isLogging: false,
-            loggingUser: ''
+            waitingTime: false,
+            loggingUser: '',
+            errorState: false,
+            errorMessage: ''
         }
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
         this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
         this.register = this.register.bind(this);
+        this.login = this.login.bind(this);
         this.logOut = this.logOut.bind(this);
     }
     
@@ -128,6 +132,9 @@ class App extends Component {
     }
 
     async register(data) {
+        this.setState({
+            waitingTime: !this.state.waitingTime
+        });
         const res = await fetch("/api/register", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -149,6 +156,11 @@ class App extends Component {
     }
 
     async login(data) {
+        this.setState({
+            waitingTime: !this.state.waitingTime,
+            errorState: false,
+            errorMessage: ''
+        });
         const res = await fetch("/api/login", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -157,10 +169,23 @@ class App extends Component {
                     'Content-Type': 'application/json'
                 }
             });
-            const dataPayload = await res.json();
+            const dataPayload_token = await res.json();
             try {
-                console.log(dataPayload);
-                //localStorage.setItem("access_token", dataPayload.token);
+                // console.log(dataPayload_token.token);
+                sessionStorage.setItem("access_token", dataPayload_token.token);
+                let key = sessionStorage.getItem('access_token');
+                if(key==='') {
+                    this.setState({
+                        waitingTime: !this.state.waitingTime,
+                        errorState: !this.state.errorState,
+                        errorMessage: 'invalid email or password'
+                    })
+                }else {
+                    this.setState({
+                        userToken: dataPayload_token.token,
+                        isLogging: !this.state.isLogging
+                    });
+                }
             } catch {
                 err => console.error("Error:", err);
             } 
@@ -170,8 +195,23 @@ class App extends Component {
         this.setState({ 
             userToken: '',
             isLogging: !this.state.isLogging,
+            waitingTime: false,
             loggingUser: ''
         });
+        sessionStorage.clear();
+    }
+
+    componentDidMount() {
+        // sessionStorage.clear();
+        let key = sessionStorage.getItem('access_token');
+        sessionStorage.setItem("access_token", this.state.userToken);
+        
+        if(key) {
+            this.setState({
+                isLogging: !this.state.isLogging
+            })
+        }
+        
     }
 
     render() {
@@ -191,9 +231,10 @@ class App extends Component {
         });
 
         const EmptyList = () =><div className="text-center text-primary display-4 py-4 w-100">Your Cart is Empty</div>;
-
+        
         return (
             <Router>
+                {(this.state.isLogging?<Redirect to="/"/>:'')}
                 <ScrollToTop />
                 <Navbar 
                 isLogging={this.state.isLogging}
@@ -221,10 +262,15 @@ class App extends Component {
                                 />
                             </Route>
                             <Route path="/sign-up">
-                                <Signup addUser={this.register} />
+                                <Signup addUser={this.register} waitingTime={this.state.waitingTime} />
                             </Route>
                             <Route path="/login">
-                                <Login logUser={this.login} />
+                                <Login 
+                                logUser={this.login} 
+                                waitingTime={this.state.waitingTime}
+                                errorState={this.state.errorState}
+                                errorMessage={this.state.errorMessage}
+                                />
                             </Route>
                             <Route path="/cart">
                                 <CartTable 
