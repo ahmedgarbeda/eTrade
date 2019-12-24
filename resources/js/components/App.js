@@ -26,37 +26,43 @@ const fetchedProducts = [
         id: 1,
         name: 'product 1',
         price: 100,
-        img: "images/product-joy.png"
+        img: "images/product-joy.png",
+        catID: 1
     },
     {
         id: 2,
         name: 'product 2',
         price: 55,
-        img: "images/product-blue.png"
+        img: "images/product-blue.png",
+        catID: 2
     },
     {
         id: 3,
         name: 'product 3',
         price: 150,
-        img: "images/product-red.png"
+        img: "images/product-red.png",
+        catID: 3
     },
     {
         id: 4,
         name: 'product 4',
         price: 244,
-        img: "images/product-cyan.png"
+        img: "images/product-cyan.png",
+        catID: 3
     },
     {
         id: 5,
         name: 'product 5',
         price: 755,
-        img: "images/prodect-tdark.png"
+        img: "images/prodect-tdark.png",
+        catID: 4
     },
     {
         id: 6,
         name: 'product 6',
         price: 814,
-        img: "images/prodect-tblue.png"
+        img: "images/prodect-tblue.png",
+        catID: 2
     }
 
 ]
@@ -201,7 +207,7 @@ class App extends Component {
         sessionStorage.clear();
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // sessionStorage.clear();
         let key = sessionStorage.getItem('access_token');
         sessionStorage.setItem("access_token", this.state.userToken);
