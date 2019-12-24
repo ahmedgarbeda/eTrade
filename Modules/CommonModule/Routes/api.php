@@ -19,5 +19,5 @@ use Illuminate\Http\Request;
 
 Route::get('/governrates','GovernrateController@getAllGovernrates');
 Route::post('/contact','ContactController@saveContactMessage');
-Route::get('/shipping_methods','ShippingMethodsController@getShippingMethods');
+Route::get('/shipping_methods/{governrate_id}','ShippingMethodsController@getShippingMethods');
 Route::get('/payment_methods','PaymentMethodsController@getPaymentMethods');
