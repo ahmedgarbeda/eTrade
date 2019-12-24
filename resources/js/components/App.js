@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 
 import '../style/style.css';
 
 import ScrollToTop from './scrollToTop';
 import Navbar from './nav.js';
 import Header from './header.js';
+import Categories from './categories';
 import Login from './login';
 import Signup from './signup';
 import CartTable from './cartTable';
@@ -26,37 +27,43 @@ const fetchedProducts = [
         id: 1,
         name: 'product 1',
         price: 100,
-        img: "images/product-joy.png"
+        img: "images/product-joy.png",
+        catID: 1
     },
     {
         id: 2,
         name: 'product 2',
         price: 55,
-        img: "images/product-blue.png"
+        img: "images/product-blue.png",
+        catID: 2
     },
     {
         id: 3,
         name: 'product 3',
         price: 150,
-        img: "images/product-red.png"
+        img: "images/product-red.png",
+        catID: 3
     },
     {
         id: 4,
         name: 'product 4',
         price: 244,
-        img: "images/product-cyan.png"
+        img: "images/product-cyan.png",
+        catID: 3
     },
     {
         id: 5,
         name: 'product 5',
         price: 755,
-        img: "images/prodect-tdark.png"
+        img: "images/prodect-tdark.png",
+        catID: 4
     },
     {
         id: 6,
         name: 'product 6',
         price: 814,
-        img: "images/prodect-tblue.png"
+        img: "images/prodect-tblue.png",
+        catID: 2
     }
 
 ]
@@ -67,23 +74,44 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
+            categories: [],
             productList: [],
             cartList: [],
             cartCount: 0,
             addToCartAnimate: {animateState: false, btnId: 0},
             targetProduct: null,
             isProductListEmpty: false,
-            subTotal: 0
+            subTotal: 0,
+            userToken: '',
+            isLogging: false,
+            waitingTime: false,
+            loggingUser: '',
+            errorState: false,
+            errorMessage: ''
         }
+        //this.selectedCategory = this.selectedCategory.bind(this);
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
         this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
+        this.register = this.register.bind(this);
+        this.login = this.login.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
+
+    // selectedCategory(orderBy) {
+    //     let orderKey = orderBy.id;
+
+    //     this.setState(current=>({
+    //         productList: current.productList.filter(p => {
+    //             return p.category_id == orderKey
+    //         })
+    //     }))
+    // }
     
 
     caluculateSubTotal(price) {
-        this.setState({ subTotal: this.state.subTotal + price });
+        this.setState({ subTotal: this.state.subTotal + Number(price) });
     }
 
     addToCart(product) {
@@ -117,9 +145,125 @@ class App extends Component {
     }
 
     targetProduct(product) {
+        console.log(product)
         this.setState({
             targetProduct: product
         });
+    }
+
+    async register(data) {
+        this.setState({
+            waitingTime: !this.state.waitingTime
+        });
+        const res = await fetch("/api/register", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataPayload = await res.json();
+            try {
+                this.setState({ 
+                    userToken: dataPayload.token,
+                    isLogging: !this.state.isLogging,
+                    loggingUser: dataPayload.user.username
+                });
+            } catch {
+                err => console.error("Error:", err);
+            }
+    }
+
+    async login(data) {
+        this.setState({
+            waitingTime: !this.state.waitingTime,
+            errorState: false,
+            errorMessage: ''
+        });
+        const res = await fetch("/api/login", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataPayload_token = await res.json();
+            try {
+                // console.log(dataPayload_token.token);
+                sessionStorage.setItem("access_token", dataPayload_token.token);
+                let key = sessionStorage.getItem('access_token');
+                if(key==='') {
+                    this.setState({
+                        waitingTime: !this.state.waitingTime,
+                        errorState: !this.state.errorState,
+                        errorMessage: 'invalid email or password'
+                    })
+                }else {
+                    this.setState({
+                        userToken: dataPayload_token.token,
+                        isLogging: !this.state.isLogging
+                    });
+                }
+            } catch {
+                err => console.error("Error:", err);
+            } 
+    }
+
+    logOut() {
+        this.setState({ 
+            userToken: '',
+            isLogging: !this.state.isLogging,
+            waitingTime: false,
+            loggingUser: ''
+        });
+        sessionStorage.clear();
+    }
+
+    getCategories() {
+        return (
+            fetch("api/productmodule/category")
+            .then(req => req.json())
+            .then(res => {
+                const categories = res.data.map(category=> {
+                    return category
+                });
+                this.setState({
+                    categories: categories
+                });
+            })
+        );
+    }
+
+    getProducts() {
+        return (
+            fetch("api/productmodule/product")
+            .then(req => req.json())
+            .then(res => {
+                const products = res.data.map(product=> {
+                    return product
+                });
+                this.setState({
+                    productList: products
+                });
+            })
+        );
+    }
+
+    async componentDidMount() {
+        // sessionStorage.clear();
+        let key = sessionStorage.getItem('access_token');
+        sessionStorage.setItem("access_token", this.state.userToken);
+        
+        if(key) {
+            this.setState({
+                isLogging: !this.state.isLogging
+            })
+        }
+
+        await this.getCategories();
+        await this.getProducts();
     }
 
     render() {
@@ -131,7 +275,7 @@ class App extends Component {
                 id={product.id}
                 name={product.name}
                 price={product.price}
-                img={product.img}
+                img={product.photo.path}
                 handleTotal={this.caluculateSubTotal}
                 deleteFromCart={this.deleteFromCart}
                 />
@@ -139,17 +283,26 @@ class App extends Component {
         });
 
         const EmptyList = () =><div className="text-center text-primary display-4 py-4 w-100">Your Cart is Empty</div>;
-
+        
         return (
             <Router>
+                {(this.state.isLogging?<Redirect to="/"/>:'')}
                 <ScrollToTop />
-                <Navbar count={this.state.cartCount} />
+                <Navbar 
+                isLogging={this.state.isLogging}
+                username={this.state.loggingUser}
+                logOut={this.logOut}
+                count={this.state.cartCount} />
                 <Header />
+                <Categories 
+                categories={this.state.categories}
+                selectedCategory={this.selectedCategory}
+                />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
                                 <ProductCard 
-                                products={fetchedProducts}
+                                products={this.state.productList}
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
                                 btnId={this.state.addToCartAnimate.btnId}
@@ -165,10 +318,15 @@ class App extends Component {
                                 />
                             </Route>
                             <Route path="/sign-up">
-                                <Signup />
+                                <Signup addUser={this.register} waitingTime={this.state.waitingTime} />
                             </Route>
                             <Route path="/login">
-                                <Login />
+                                <Login 
+                                logUser={this.login} 
+                                waitingTime={this.state.waitingTime}
+                                errorState={this.state.errorState}
+                                errorMessage={this.state.errorMessage}
+                                />
                             </Route>
                             <Route path="/cart">
                                 <CartTable 

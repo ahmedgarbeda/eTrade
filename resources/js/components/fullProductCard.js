@@ -48,7 +48,7 @@ const similarProducts = [
 
 class FullProductCard extends Component {
     render() {
-        const { id, name, price, img } = this.props.target;
+        const { id, name, price, photo } = this.props.target;
 
         return (
             <div>
@@ -58,7 +58,7 @@ class FullProductCard extends Component {
                         <div className="card border-0 rounded-0">
                             <div className="row no-gutters">
                                 <div className="col-md-6">
-                                    <img src={img} className="card-img rounded-0" alt={img} />
+                                    <img src={photo.path} className="card-img rounded-0" alt={photo.path} />
                                 </div>
                                 <div className="col-md-6">
                                     <div className="card-body">

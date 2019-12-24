@@ -20,7 +20,7 @@ class Header extends Component {
     }
 
     render() {
-        return ( 
+        return (
             <div className="bg-secondary pt-5">
                 <div className="container pt-1">
                     <div className="position-absolute py-5">
