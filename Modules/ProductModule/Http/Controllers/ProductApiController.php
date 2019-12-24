@@ -17,7 +17,7 @@ class ProductApiController extends Controller
      */
     public function index() : ProductResource
     {
-        $products = Product::where('is_active' ,1)->get();
+        $products = Product::where('is_active' ,1)->with('photo')->get();
         return new ProductResource($products);
         //http://127.0.0.1:8000/api/productmodule/product
     }
