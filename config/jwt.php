@@ -264,6 +264,8 @@ return [
     |
     */
 
+    'user' => App\User::class,
+    'identifier' => 'email',
     'providers' => [
 
         /*
@@ -274,6 +276,7 @@ return [
         | Specify the provider that is used to create and decode the tokens.
         |
         */
+        
 
         'jwt' => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
 
