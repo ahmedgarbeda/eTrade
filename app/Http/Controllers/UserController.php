@@ -48,7 +48,7 @@ class UserController extends Controller
 
         $userData= $request->all();
         $userData['status'] = 0;
-        // $userData['password']=Hash::make($request->get('password'));
+        $userData['password']=Hash::make($request->get('password'));
         //dd($userData);
         $user = User::create($userData);
 
@@ -86,4 +86,11 @@ class UserController extends Controller
 
                 return response()->json(compact('user'));
         }
+        public function logout() {
+                if(JWTAuth::invalidate(JWTAuth::getToken())){
+                        return response()->json(["message"=>"logoud out successfully"],200);
+                }else{
+                        return response()->json(["message"=>"logoud out faild"],400);
+                }
+            }
 }
