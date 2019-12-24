@@ -190,12 +190,11 @@ class App extends Component {
                 }
             });
             const dataPayload_token = await res.json();
-            console.log(dataPayload_token);
             try {
-                // console.log(dataPayload_token.token);
                 sessionStorage.setItem("access_token", dataPayload_token.token);
                 let key = sessionStorage.getItem('access_token');
-                if(key==='') {
+
+                if(dataPayload_token.error) {
                     this.setState({
                         waitingTime: !this.state.waitingTime,
                         errorState: !this.state.errorState,
@@ -206,6 +205,20 @@ class App extends Component {
                         userToken: dataPayload_token.token,
                         isLogging: !this.state.isLogging
                     });
+                    const resUser = await fetch("/api/user", {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${dataPayload_token.token}`
+                            }
+                        });
+                    if(resUser.status == 200) {
+                        const user = await resUser.json();
+                        this.setState({
+                            loggingUser: user.user.username
+                        })
+                    }else {
+                        console.log("user not found");
+                    }
                 }
             } catch {
                 err => console.error("Error:", err);
@@ -256,12 +269,6 @@ class App extends Component {
         // sessionStorage.clear();
         let key = sessionStorage.getItem('access_token');
         sessionStorage.setItem("access_token", this.state.userToken);
-        
-        if(key) {
-            this.setState({
-                isLogging: !this.state.isLogging
-            })
-        }
 
         await this.getCategories();
         await this.getProducts();

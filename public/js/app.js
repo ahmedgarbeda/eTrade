@@ -74512,7 +74512,7 @@ function (_Component) {
   }, {
     key: "login",
     value: function login(data) {
-      var res, dataPayload_token, key;
+      var res, dataPayload_token, key, resUser, user;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -74539,37 +74539,76 @@ function (_Component) {
 
             case 6:
               dataPayload_token = _context2.sent;
-              console.log(dataPayload_token);
+              _context2.prev = 7;
+              sessionStorage.setItem("access_token", dataPayload_token.token);
+              key = sessionStorage.getItem('access_token');
 
-              try {
-                // console.log(dataPayload_token.token);
-                sessionStorage.setItem("access_token", dataPayload_token.token);
-                key = sessionStorage.getItem('access_token');
-
-                if (key === '') {
-                  this.setState({
-                    waitingTime: !this.state.waitingTime,
-                    errorState: !this.state.errorState,
-                    errorMessage: 'invalid email or password'
-                  });
-                } else {
-                  this.setState({
-                    userToken: dataPayload_token.token,
-                    isLogging: !this.state.isLogging
-                  });
-                }
-              } catch (_unused2) {
-                (function (err) {
-                  return console.error("Error:", err);
-                });
+              if (!dataPayload_token.error) {
+                _context2.next = 14;
+                break;
               }
 
-            case 9:
+              this.setState({
+                waitingTime: !this.state.waitingTime,
+                errorState: !this.state.errorState,
+                errorMessage: 'invalid email or password'
+              });
+              _context2.next = 26;
+              break;
+
+            case 14:
+              this.setState({
+                userToken: dataPayload_token.token,
+                isLogging: !this.state.isLogging
+              });
+              _context2.next = 17;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/user", {
+                method: 'GET',
+                headers: {
+                  'Authorization': "Bearer ".concat(dataPayload_token.token)
+                }
+              }));
+
+            case 17:
+              resUser = _context2.sent;
+
+              if (!(resUser.status == 200)) {
+                _context2.next = 25;
+                break;
+              }
+
+              _context2.next = 21;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(resUser.json());
+
+            case 21:
+              user = _context2.sent;
+              this.setState({
+                loggingUser: user.user.username
+              });
+              _context2.next = 26;
+              break;
+
+            case 25:
+              console.log("user not found");
+
+            case 26:
+              _context2.next = 31;
+              break;
+
+            case 28:
+              _context2.prev = 28;
+              _context2.t0 = _context2["catch"](7);
+
+              (function (err) {
+                return console.error("Error:", err);
+              });
+
+            case 31:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this);
+      }, null, this, [[7, 28]]);
     }
   }, {
     key: "logOut",
@@ -74627,21 +74666,14 @@ function (_Component) {
               // sessionStorage.clear();
               key = sessionStorage.getItem('access_token');
               sessionStorage.setItem("access_token", this.state.userToken);
-
-              if (key) {
-                this.setState({
-                  isLogging: !this.state.isLogging
-                });
-              }
-
-              _context3.next = 5;
+              _context3.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getCategories());
 
-            case 5:
-              _context3.next = 7;
+            case 4:
+              _context3.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getProducts());
 
-            case 7:
+            case 6:
             case "end":
               return _context3.stop();
           }
