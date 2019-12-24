@@ -160,7 +160,7 @@ class ProductModuleController extends Controller
         if($product->photo){
             unlink(  public_path() . $product->photo->path);
         }
-        $product->delete();
+            $product->delete();
         return  redirect('productmodule/product')->with('message' ,"Product Deleted Successfully");
 
 //        if ($product->delete()){
