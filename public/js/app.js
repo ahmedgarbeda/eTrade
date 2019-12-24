@@ -76330,7 +76330,15 @@ function (_Component) {
       phone: '',
       address: '',
       governrate_id: '',
-      governrates: []
+      governrates: [],
+      validName: true,
+      validEmail: true,
+      validUsername: true,
+      validPassword: true,
+      validPassword_confirmation: true,
+      validpPhone: true,
+      validAddress: true,
+      validGovernrate_id: true
     };
     _this.changeHandler = _this.changeHandler.bind(_assertThisInitialized(_this));
     _this.sendData = _this.sendData.bind(_assertThisInitialized(_this));
@@ -76365,23 +76373,187 @@ function (_Component) {
         phone: phone,
         address: address,
         governrate_id: governrate_id
-      };
+      }; // if(
+      //     (name.length < 6) ||
+      //     (username.length < 6) ||
+      //     (!email.includes('@') || !email.includes('.')) ||
+      //     (password.length < 6) ||
+      //     (password !== password_confirmation) ||
+      //     (address.length < 6) ||
+      //     (phone.length < 6)
+      // ) {
+      //     this.setState({ 
+      //         validName: !this.state.validName,
+      //         validEmail: !this.state.validEmail,
+      //         validUsername: !this.state.validUsername,
+      //         validPassword:!this.state.validPassword,
+      //         validPassword_confirmation: !this.state.validPassword_confirmation,
+      //         validpPhone: !this.state.validpPhone,
+      //         validAddress: !this.state.validAddress,
+      //         validGovernrate_id: !this.state.validGovernrate_id
+      //     });
+      // }
 
-      if (name === ' ' && name < 6 || username === ' ' && username < 6 || !email.includes('@') && !email.includes('.') || password < 6 || password !== password_confirmation || address === ' ' && address < 6 || phone < 6) {
-        alert('false');
-      } else {
-        this.props.addUser(tmpData);
-        this.setState({
-          name: '',
-          email: '',
-          username: '',
-          password: '',
-          password_confirmation: '',
-          phone: '',
-          address: '',
-          governrate_id: ''
-        });
-      }
+      var validator = true;
+
+      switch (validator) {
+        case name.length < 6:
+          this.setState({
+            validName: false,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        case !email.includes('@') && !email.includes('.'):
+          this.setState({
+            validName: false,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        case username.length < 6:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: false,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        case password.length < 6:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: false,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        case password !== password_confirmation:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: false,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        case address.length < 4:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: false,
+            validGovernrate_id: true
+          });
+          break;
+
+        case phone.length < 11:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: false,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          break;
+
+        default:
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: true
+          });
+          this.props.addUser(tmpData);
+          this.setState({
+            name: '',
+            email: '',
+            username: '',
+            password: '',
+            password_confirmation: '',
+            phone: '',
+            address: '',
+            governrate_id: ''
+          });
+          break;
+      } // if (name.length < 6) 
+      // {
+      //     this.setState({ validName: false });
+      // }
+      // if(username.length < 6)
+      // {
+      //     this.setState({ validUsername: false });
+      // }
+      // if(!email.includes('@') && !email.includes('.'))
+      // {
+      //     this.setState({ validEmail: false });
+      // }
+      // if (password.length < 6) 
+      // {
+      //     this.setState({ validPassword: false });
+      // }
+      // if (password !== password_confirmation) 
+      // {
+      //     this.setState({ validPassword_confirmation: false });
+      // }
+      // if (address.length < 6) 
+      // {
+      //     this.setState({ validAddress: false });
+      // }
+      // if (phone.length < 6)
+      // {
+      //     this.setState({ validpPhone: false });
+      // }
+      // else {
+      //     alert('yes');
+      //     //this.props.addUser(tmpData);
+      //     this.setState({
+      //         name: '',
+      //         email: '',
+      //         username: '',
+      //         password: '',
+      //         password_confirmation: '',
+      //         phone: '',
+      //         address: '',
+      //         governrate_id: ''
+      //     })
+      // }
+
     }
   }, {
     key: "componentDidMount",
@@ -76428,7 +76600,11 @@ function (_Component) {
         name: "name",
         placeholder: "name",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validName ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "name must be at least 6 character")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76441,7 +76617,11 @@ function (_Component) {
         name: "email",
         placeholder: "email",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validEmail ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "invalid email")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76454,7 +76634,11 @@ function (_Component) {
         name: "username",
         placeholder: "username",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validUsername ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "username must be at least 6 character")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76467,7 +76651,11 @@ function (_Component) {
         name: "password",
         placeholder: "Password",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validPassword ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "password must be at least 6 character")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76480,7 +76668,11 @@ function (_Component) {
         name: "password_confirmation",
         placeholder: "comfirmation password",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validPassword_confirmation ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "password does't match")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76493,7 +76685,11 @@ function (_Component) {
         name: "address",
         placeholder: "address",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validAddress ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "address must be at least 4 character")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76512,7 +76708,11 @@ function (_Component) {
           key: governrate.id,
           value: governrate.id
         }, governrate.name);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validGovernrate_id ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "required")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
@@ -76525,7 +76725,11 @@ function (_Component) {
         name: "phone",
         placeholder: "phone",
         onChange: this.changeHandler
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-danger " + (!this.state.validpPhone ? 'd-inline-block' : 'd-none')
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-exclamation-triangle pr-3"
+      }), "phone must be at least 11 number")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-check"
