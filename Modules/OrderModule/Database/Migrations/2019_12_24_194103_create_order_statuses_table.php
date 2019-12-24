@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShippingCostsTable extends Migration
+class CreateOrderStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateShippingCostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipping_costs', function (Blueprint $table) {
+        Schema::create('order_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('shipping_method_id');
-            $table->unsignedBigInteger('governrate_id');
-            $table->unsignedInteger('cost');
+            $table->string('status_name');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateShippingCostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipping_costs');
+        Schema::dropIfExists('order_statuses');
     }
 }
