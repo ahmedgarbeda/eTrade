@@ -67321,7 +67321,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74456,6 +74456,7 @@ function (_Component) {
   }, {
     key: "targetProduct",
     value: function targetProduct(product) {
+      console.log(product);
       this.setState({
         targetProduct: product
       });
@@ -74657,7 +74658,7 @@ function (_Component) {
           id: product.id,
           name: product.name,
           price: product.price,
-          img: product.img,
+          img: product.photo.path,
           handleTotal: _this4.caluculateSubTotal,
           deleteFromCart: _this4.deleteFromCart
         });
@@ -75362,7 +75363,7 @@ function (_Component) {
           id = _this$props$target.id,
           name = _this$props$target.name,
           price = _this$props$target.price,
-          img = _this$props$target.img;
+          photo = _this$props$target.photo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75376,9 +75377,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: img,
+        src: photo.path,
         className: "card-img rounded-0",
-        alt: img
+        alt: photo.path
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -76217,7 +76218,7 @@ function (_Component) {
         }, product.category_id === categories.home ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Home") : product.category_id === categories.mobile ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Mobiles & Tablets") : product.category_id === categories.supermarket ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Supermarket") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Toys")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: "/product"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: product.img,
+          src: product.photo.path,
           className: "card-img-top rounded-0",
           alt: product.img,
           onClick: function onClick(e) {

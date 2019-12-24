@@ -31,7 +31,7 @@ class ProductCard extends Component {
                             </span>
                                     <Link to={"/product"}>
                                         <img
-                                        src={product.img}
+                                        src={product.photo.path}
                                         className="card-img-top rounded-0"
                                         alt={product.img}
                                         onClick={(e)=> this.props.targetProduct(product)} />

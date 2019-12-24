@@ -145,6 +145,7 @@ class App extends Component {
     }
 
     targetProduct(product) {
+        console.log(product)
         this.setState({
             targetProduct: product
         });
@@ -274,7 +275,7 @@ class App extends Component {
                 id={product.id}
                 name={product.name}
                 price={product.price}
-                img={product.img}
+                img={product.photo.path}
                 handleTotal={this.caluculateSubTotal}
                 deleteFromCart={this.deleteFromCart}
                 />
