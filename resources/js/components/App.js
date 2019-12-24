@@ -8,6 +8,7 @@ import '../style/style.css';
 import ScrollToTop from './scrollToTop';
 import Navbar from './nav.js';
 import Header from './header.js';
+import Categories from './categories';
 import Login from './login';
 import Signup from './signup';
 import CartTable from './cartTable';
@@ -73,6 +74,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
+            categories: [],
             productList: [],
             cartList: [],
             cartCount: 0,
@@ -87,6 +89,7 @@ class App extends Component {
             errorState: false,
             errorMessage: ''
         }
+        //this.selectedCategory = this.selectedCategory.bind(this);
         this.caluculateSubTotal = this.caluculateSubTotal.bind(this);
         this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
@@ -95,10 +98,20 @@ class App extends Component {
         this.login = this.login.bind(this);
         this.logOut = this.logOut.bind(this);
     }
+
+    // selectedCategory(orderBy) {
+    //     let orderKey = orderBy.id;
+
+    //     this.setState(current=>({
+    //         productList: current.productList.filter(p => {
+    //             return p.category_id == orderKey
+    //         })
+    //     }))
+    // }
     
 
     caluculateSubTotal(price) {
-        this.setState({ subTotal: this.state.subTotal + price });
+        this.setState({ subTotal: this.state.subTotal + Number(price) });
     }
 
     addToCart(product) {
@@ -207,6 +220,36 @@ class App extends Component {
         sessionStorage.clear();
     }
 
+    getCategories() {
+        return (
+            fetch("api/productmodule/category")
+            .then(req => req.json())
+            .then(res => {
+                const categories = res.data.map(category=> {
+                    return category
+                });
+                this.setState({
+                    categories: categories
+                });
+            })
+        );
+    }
+
+    getProducts() {
+        return (
+            fetch("api/productmodule/product")
+            .then(req => req.json())
+            .then(res => {
+                const products = res.data.map(product=> {
+                    return product
+                });
+                this.setState({
+                    productList: products
+                });
+            })
+        );
+    }
+
     async componentDidMount() {
         // sessionStorage.clear();
         let key = sessionStorage.getItem('access_token');
@@ -217,6 +260,9 @@ class App extends Component {
                 isLogging: !this.state.isLogging
             })
         }
+
+        await this.getCategories();
+        await this.getProducts();
     }
 
     render() {
@@ -247,11 +293,15 @@ class App extends Component {
                 logOut={this.logOut}
                 count={this.state.cartCount} />
                 <Header />
+                <Categories 
+                categories={this.state.categories}
+                selectedCategory={this.selectedCategory}
+                />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
                                 <ProductCard 
-                                products={fetchedProducts}
+                                products={this.state.productList}
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
                                 btnId={this.state.addToCartAnimate.btnId}

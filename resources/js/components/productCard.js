@@ -24,9 +24,9 @@ class ProductCard extends Component {
                                 <div className="position-relative">
                                 <span className="position-absolute cate-badge py-1 px-2 font-weight-bolder">
                                     {
-                                        product.catID===categories.home?<span>Home</span>:
-                                        product.catID===categories.mobile?<span>Mobiles & Tablets</span>:
-                                        product.catID===categories.supermarket?<span>Supermarket</span>:<span>Toys</span>
+                                        product.category_id===categories.home?<span>Home</span>:
+                                        product.category_id===categories.mobile?<span>Mobiles & Tablets</span>:
+                                        product.category_id===categories.supermarket?<span>Supermarket</span>:<span>Toys</span>
                                     }
                             </span>
                                     <Link to={"/product"}>
@@ -47,7 +47,7 @@ class ProductCard extends Component {
                                             
                                         </div>
                                     </div>
-                                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <p className="card-text">{product.description}</p>
                                     <div className="row">
                                         <div className="col-6 pt-2">
                                             <small className="text-warning h6">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
