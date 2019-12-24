@@ -67321,7 +67321,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74539,6 +74539,7 @@ function (_Component) {
 
             case 6:
               dataPayload_token = _context2.sent;
+              console.log(dataPayload_token);
 
               try {
                 // console.log(dataPayload_token.token);
@@ -74563,7 +74564,7 @@ function (_Component) {
                 });
               }
 
-            case 8:
+            case 9:
             case "end":
               return _context2.stop();
           }

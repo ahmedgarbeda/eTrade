@@ -190,6 +190,7 @@ class App extends Component {
                 }
             });
             const dataPayload_token = await res.json();
+            console.log(dataPayload_token);
             try {
                 // console.log(dataPayload_token.token);
                 sessionStorage.setItem("access_token", dataPayload_token.token);
