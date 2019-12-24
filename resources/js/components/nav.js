@@ -17,12 +17,12 @@ class Navbar extends Component {
                 </button>
                 <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
                     <ul className="navbar-nav align-items-center">
-                        <li className="nav-item">
-                            <form className="form-inline">
+                        {/*<li className="nav-item">
+                            <form className="form-inline position-relative">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit"><i className="fa fa-search"></i></button>
+                                <button className="btn btn-primary my-2 my-sm-0 inline-search-btn"><i className="fa fa-search"></i></button>
                             </form>
-                        </li>
+                        </li>*/}
                         <Link to="/">
                             <li className="nav-item ml-5 font-weight-bold">
                                 <a className="nav-link" href="#">HOME<span className="sr-only"></span></a>
@@ -37,9 +37,27 @@ class Navbar extends Component {
                             <a className="nav-link" href="#contact-us">CONTACTS<span className="sr-only"></span></a>
                         </li>
                         <li className="nav-item ml-5">
-                            <Link to="/sign-up">
-                                <button type="button" className="btn btn-primary">SIGN UP</button>
-                            </Link>
+                            {(this.props.isLogging?
+                            <div className="btn-group text-warning animated jackInTheBox h3 m-0">
+                                <i className="fas fa-user px-3"></i>
+                                <span className="text-capitalize">{this.props.username}</span>
+                                <span className="pointer dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span className="sr-only">Toggle Dropdown</span>
+                                </span>
+
+                                <div className="dropdown-menu pointer">
+                                    <span className="dropdown-item h4 m-0" onClick={this.props.logOut}>log out</span>
+                                </div>
+                            </div> :
+                            <div className="">
+                                <Link to="/login">
+                                    <button type="button" className="btn btn-primary mr-4">Log In</button>
+                                </Link>
+                                <Link to="/sign-up">
+                                    <button type="button" className="btn btn-outline-primary">Register</button>
+                                </Link>
+                            </div>
+                            )}
                         </li>
                         <Link to="/cart">
                             <li className="nav-item ml-5">

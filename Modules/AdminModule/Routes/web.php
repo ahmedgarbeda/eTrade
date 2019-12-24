@@ -11,7 +11,7 @@
 |
 */
 //Auth::routes();
-Route::middleware('web','auth')->prefix('dashboard/admin')->group(function() {
+Route::middleware('auth:admin')->prefix('dashboard/admin')->group(function() {
     //Route::resource('/admin','AdminModuleController');
     Route::get('/', 'AdminModuleController@index');
     Route::post('/','AdminModuleController@store');
@@ -22,8 +22,8 @@ Route::middleware('web','auth')->prefix('dashboard/admin')->group(function() {
 });
 
 
-Route::middleware('web','auth')->prefix('dashboard/roles')->group(function() {
-    //Route::resource('/admin','AdminModuleController');
+Route::middleware('auth:admin')->prefix('dashboard/roles')->group(function() {
+    
     Route::get('/', 'RoleController@index');
     Route::post('/','RoleController@store');
     Route::get('/create','RoleController@create');

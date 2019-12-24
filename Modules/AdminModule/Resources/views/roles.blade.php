@@ -2,6 +2,16 @@
 
 
 @section('content')
+<div class="alert-danger">
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+
+    @endif
+</div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">

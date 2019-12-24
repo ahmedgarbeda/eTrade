@@ -6,6 +6,14 @@ import {Link} from "react-router-dom";
 
 class ProductCard extends Component {
     render() { 
+        const categories = {
+            "home": 1,
+            "mobile": 2,
+            "supermarket": 3,
+            "toys": 4
+        }
+
+
         return (               
                 <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
                     <h2 className="pt-4 pb-5 display-4">Discover eTrade</h2>
@@ -13,13 +21,22 @@ class ProductCard extends Component {
                     {this.props.products.map(product => (
                         <div key={product.id} className="col-4">
                             <div className="card border-0 rounded-0">
-                                <Link to={"/product"}>
-                                    <img
-                                    src={product.img}
-                                    className="card-img-top rounded-0"
-                                    alt={product.img}
-                                    onClick={(e)=> this.props.targetProduct(product)} />
-                                </Link>
+                                <div className="position-relative">
+                                <span className="position-absolute cate-badge py-1 px-2 font-weight-bolder">
+                                    {
+                                        product.catID===categories.home?<span>Home</span>:
+                                        product.catID===categories.mobile?<span>Mobiles & Tablets</span>:
+                                        product.catID===categories.supermarket?<span>Supermarket</span>:<span>Toys</span>
+                                    }
+                            </span>
+                                    <Link to={"/product"}>
+                                        <img
+                                        src={product.img}
+                                        className="card-img-top rounded-0"
+                                        alt={product.img}
+                                        onClick={(e)=> this.props.targetProduct(product)} />
+                                    </Link>
+                                </div>
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-12">

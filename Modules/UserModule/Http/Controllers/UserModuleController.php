@@ -5,7 +5,13 @@ namespace Modules\UserModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use App\User;
+use JWTAuth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Modules\CommonModule\Entities\Governrate;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 class UserModuleController extends Controller
 {
     /**
@@ -14,7 +20,8 @@ class UserModuleController extends Controller
      */
     public function index()
     {
-        return view('usermodule::index');
+        $users = User::all();
+        return view('usermodule::index',compact('users'));
     }
 
     /**
@@ -53,7 +60,9 @@ class UserModuleController extends Controller
      */
     public function edit($id)
     {
-        return view('usermodule::edit');
+        $user = User::find($id);
+        $govs= Governrate::all();
+        return view('usermodule::edit',compact('user','govs'));
     }
 
     /**
@@ -64,7 +73,22 @@ class UserModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'governrate_id' => 'required|numeric',
+            'address' => 'required|string|min:15',
+            'phone' => 'required'
+        ]);
+        if(!$request->password)
+        $data=$request->except(['password','_method','_token']);
+        else 
+        $data=$request->except(['_method','_token']);
+        $user = User::find($id);
+        
+        $user->update($data);
+
+        return redirect('/dashboard/users');
     }
 
     /**
@@ -74,6 +98,24 @@ class UserModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id)->delete();
+        return redirect('/dashboard/users');
+    }
+
+    public function approve($id)
+    {
+        $user=User::find($id);
+        $user->status=1;
+        $user->update();
+        return redirect('/dashboard/users');
+    }
+
+    
+
+    public function getAuthUser()
+    {
+        return $user = JWTAuth::parseToken()->authenticate();
     }
 }
+
+

@@ -16,7 +16,10 @@ class CreateContactUsTale extends Migration
         Schema::create('contact_us', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('title');
+            $table->string('email');
+            $table->string('message');
+            $table->string('reply')->nullable();
+            $table->string('admin_id')->nullable();
             $table->enum('status', ['approved', 'denied','pending']);
             $table->timestamps();
         });

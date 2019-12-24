@@ -1,4 +1,25 @@
 
+.category:hover {
+    background-color: #3490dc;
+    color: #FFF !important
+}
+
+.category:hover span {
+    color: #FFF !important
+}
+
+.cate-badge {
+    z-index: 99;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 237, 74, 0.8);
+}
+.inline-search-btn {
+    position: absolute;
+    right: 0;
+}
+
+
 .fix-table-cart {
     line-height: 87px;
 }

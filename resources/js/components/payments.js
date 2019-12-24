@@ -104,7 +104,7 @@ class Payments extends Component {
                             {(this.state.paymentMethod ? <PayPalForm /> : <CreditCardForm />)}
                         </div>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-5 d-flex align-items-center justify-content-center">
                         <div className="text-center py-4 ">
                             <span 
                             className="py-5 display-4">

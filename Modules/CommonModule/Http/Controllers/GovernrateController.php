@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\AdminModule\Http\Controllers;
+namespace Modules\CommonModule\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\AdminModule\Entities\Role;
+use Modules\CommonModule\Entities\Governrate;
 
-class RoleController extends Controller
+class GovernrateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('adminmodule::roles',compact('roles'));
-
+        return view('commonmodule::index');
     }
 
     /**
@@ -26,7 +24,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //return view('adminmodule::create');
+        return view('commonmodule::create');
     }
 
     /**
@@ -37,10 +35,6 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([ 'role' => 'required|string']);
-        Role::create($request->all());
-        return redirect('/dashboard/roles');
-
     }
 
     /**
@@ -50,8 +44,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //return view('adminmodule::show');
-        return  Role::find($id);
+        return view('commonmodule::show');
     }
 
     /**
@@ -61,8 +54,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //return view('adminmodule::edit');
-        return Role::find($id);
+        return view('commonmodule::edit');
     }
 
     /**
@@ -74,10 +66,6 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([ 'role' => 'required|string']);
-        $role=Role::find($id);
-        $role->update($request->all());
-        return redirect('/dashboard/roles');
     }
 
     /**
@@ -87,7 +75,13 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-         Role::find($id)->delete();
-         return redirect('/dashboard/roles');
+        //
+    }
+
+    public function getAllGovernrates()
+    {
+        $governrates = Governrate::select('id','name')->get();
+        //$governrates = $governrates->only(['id','name']);
+        return $governrates;
     }
 }
