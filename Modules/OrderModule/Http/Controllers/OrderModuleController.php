@@ -9,6 +9,7 @@ use JWTAuth;
 use Modules\OrderModule\Entities\Order;
 use Modules\OrderModule\Entities\OrderItem;
 use Modules\OrderModule\Entities\Cart;
+use Modules\ProductModule\Entities\Product;
 
 class OrderModuleController extends Controller
 {
@@ -18,7 +19,10 @@ class OrderModuleController extends Controller
      */
     public function index()
     {
-        return view('ordermodule::index');
+        $newOrders=Order::with('user')->where('order_status_id','0')->get();
+        $confirmed = Order::with('user')->where('order_status_id','1')->get();
+        $shipped = Order::with('user')->where('order_status_id','2')->get();
+        return view('ordermodule::index',compact(['newOrders','confirmed','shipped']));
     }
 
     /**
@@ -78,7 +82,8 @@ class OrderModuleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order=Order::find($id)->delete();
+        return redirect('/dashboard/order/');
     }
 
     public function addToCart(Request $request)
@@ -115,6 +120,27 @@ class OrderModuleController extends Controller
 
     }
 
+    public function deleteCart($id)
+    {
+        $item = Cart::find($id)->delete();
+        $items = Cart::all();
+        foreach($items as $item){
+            $product=Product::find($item->product_id);
+            $item->product = $product->name;
+        }
+        return $items;
+    }
+
+    public function getCart()
+    {
+        $items = Cart::all();
+        foreach($items as $item){
+            $product=Product::find($item->product_id);
+            $item->product = $product->name;
+        }
+        return $items;
+    }
+
     public function checkout(Request $request)
     {
         $user = JWTAuth::toUser(JWTAuth::getToken());
@@ -149,5 +175,13 @@ class OrderModuleController extends Controller
         }
 
         return response()->json('order added successfully',200);
+    }
+
+    public function updateStatus($order_id,$status_id)
+    {
+        $order=Order::find($order_id);
+        $order->order_status_id = $status_id;
+        $order->update();
+        return redirect('/dashboard/order/');
     }
 }

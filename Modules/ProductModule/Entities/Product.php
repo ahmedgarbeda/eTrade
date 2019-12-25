@@ -3,6 +3,7 @@
 namespace Modules\ProductModule\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 use Modules\AdminModule\Entities\Admin;
 
 class Product extends Model
@@ -22,6 +23,10 @@ class Product extends Model
 
     public function admin(){
         return $this->belongsTo(Admin::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

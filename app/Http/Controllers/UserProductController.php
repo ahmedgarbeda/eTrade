@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Modules\ProductModule\Entities\Category;
 use Modules\ProductModule\Entities\Product;
 use Modules\ProductModule\Entities\ProductPhotos;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class UserProductController extends Controller
 {
+
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,13 +33,15 @@ class UserProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $categoryArr = array();
-        foreach ($categories as $category){
-            $categoryArr[$category->id] = $category->name ;
-        }
-
-        return view('products.create' , ['categories' => $categoryArr ]);
+        $user =   JWTAuth::toUser(JWTAuth::getToken());
+        return $user;
+//        $categories = Category::all();
+//        $categoryArr = array();
+//        foreach ($categories as $category){
+//            $categoryArr[$category->id] = $category->name ;
+//        }
+//
+//        return view('products.create' , ['categories' => $categoryArr ]);
     }
 
     /**
@@ -49,6 +58,7 @@ class UserProductController extends Controller
         $product->price = $request->input('price');
         $currentCategory = $request->input('category_id') ;
         $product->is_active =  0 ;
+        $product->user_id = jso;
         $category = Category::find($currentCategory);
         $category->products()->save($product);
 

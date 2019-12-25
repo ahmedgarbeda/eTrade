@@ -113,7 +113,7 @@ class App extends Component {
     //         })
     //     }))
     // }
-    
+
 
     caluculateSubTotal(price) {
         this.setState({ subTotal: this.state.subTotal + Number(price) });
@@ -191,7 +191,7 @@ class App extends Component {
             });
             const dataPayload = await res.json();
             try {
-                this.setState({ 
+                this.setState({
                     userToken: dataPayload.token,
                     isLogging: !this.state.isLogging,
                     loggingUser: dataPayload.user.username
@@ -239,6 +239,7 @@ class App extends Component {
                         });
                     if(resUser.status === 200) {
                         const user = await resUser.json();
+                        console.log(resUser);
                         this.setState({
                             loggingUser: user.user.username
                         });
@@ -253,11 +254,11 @@ class App extends Component {
                 }
             } catch {
                 err => console.error("Error:", err);
-            } 
+            }
     }
 
     logOut() {
-        this.setState({ 
+        this.setState({
             userToken: '',
             isLogging: !this.state.isLogging,
             waitingTime: false,
@@ -310,7 +311,7 @@ class App extends Component {
 
         const products = this.state.cartList.map(product => {
             return (
-                <CartList 
+                <CartList
                 id={product.id}
                 name={product.name}
                 price={product.price}
@@ -323,25 +324,25 @@ class App extends Component {
         });
 
         const EmptyList = () =><div className="text-center text-primary display-4 py-4 w-100">Your Cart is Empty</div>;
-        
+
         return (
             <Router>
                 {(this.state.isLogging?<Redirect to="/"/>:'')}
                 <ScrollToTop />
-                <Navbar 
+                <Navbar
                 isLogging={this.state.isLogging}
                 username={this.state.loggingUser}
                 logOut={this.logOut}
                 count={this.state.cartCount} />
                 <Header />
-                <Categories 
+                <Categories
                 categories={this.state.categories}
                 selectedCategory={this.selectedCategory}
                 />
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
-                                <ProductCard 
+                                <ProductCard
                                 products={this.state.productList}
                                 addToCart={this.addToCart}
                                 added={this.state.addToCartAnimate.animateState}
@@ -361,15 +362,15 @@ class App extends Component {
                                 <Signup addUser={this.register} waitingTime={this.state.waitingTime} />
                             </Route>
                             <Route path="/login">
-                                <Login 
-                                logUser={this.login} 
+                                <Login
+                                logUser={this.login}
                                 waitingTime={this.state.waitingTime}
                                 errorState={this.state.errorState}
                                 errorMessage={this.state.errorMessage}
                                 />
                             </Route>
                             <Route path="/cart">
-                                <CartTable 
+                                <CartTable
                                 show={
                                         (this.state.cartList.length===0)? <EmptyList /> : products
                                      }
