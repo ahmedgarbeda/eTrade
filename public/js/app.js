@@ -74562,7 +74562,7 @@ function (_Component) {
                 errorState: !this.state.errorState,
                 errorMessage: 'invalid email or password'
               });
-              _context2.next = 29;
+              _context2.next = 28;
               break;
 
             case 14:
@@ -74582,7 +74582,7 @@ function (_Component) {
               resUser = _context2.sent;
 
               if (!(resUser.status == 200)) {
-                _context2.next = 28;
+                _context2.next = 27;
                 break;
               }
 
@@ -74594,33 +74594,37 @@ function (_Component) {
               this.setState({
                 loggingUser: user.user.username
               });
-              cookies = document.cookie;
-              cookies = "id: ".concat(user.user.id, ", username: ").concat(user.user.username);
-              document.cookie = cookies;
-              _context2.next = 29;
+              cookies = document.cookie; //cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+              //document.cookie = cookies
+
+              document.cookie = JSON.stringify({
+                id: user.user.id,
+                username: user.user.username
+              });
+              _context2.next = 28;
               break;
 
-            case 28:
+            case 27:
               console.log("user not found");
 
-            case 29:
-              _context2.next = 34;
+            case 28:
+              _context2.next = 33;
               break;
 
-            case 31:
-              _context2.prev = 31;
+            case 30:
+              _context2.prev = 30;
               _context2.t0 = _context2["catch"](7);
 
               (function (err) {
                 return console.error("Error:", err);
               });
 
-            case 34:
+            case 33:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[7, 31]]);
+      }, null, this, [[7, 30]]);
     }
   }, {
     key: "logOut",

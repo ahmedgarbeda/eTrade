@@ -224,9 +224,10 @@ class App extends Component {
                             loggingUser: user.user.username
                         });
                         let cookies = document.cookie;
-                        cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+                        //cookies = `id: ${user.user.id}, username: ${user.user.username}`;
 
-                        document.cookie = cookies
+                        //document.cookie = cookies
+                        document.cookie = JSON.stringify({id: user.user.id, username: user.user.username})
                     }else {
                         console.log("user not found");
                     }
