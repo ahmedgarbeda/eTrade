@@ -151,6 +151,18 @@ class Signup extends Component {
                     validGovernrate_id: true
                 });
                 break;
+                case governrate_id === "default" || governrate_id === "":
+                this.setState({ 
+                    validName: true,
+                    validEmail: true,
+                    validUsername: true,
+                    validPassword:true,
+                    validPassword_confirmation: true,
+                    validpPhone: true,
+                    validAddress: true,
+                    validGovernrate_id: false
+                });
+                break;
             case phone.length < 11:
                 this.setState({ 
                     validName: true,
@@ -341,7 +353,7 @@ class Signup extends Component {
                                     <i class="fas fa-exclamation-triangle pr-3"></i>address must be at least 4 character</span>
                                 </div>
                                 <div className="form-group">
-                                    <label className="text-primary" htmlFor="governrate">Governrate</label>
+                                    <label className="text-primary" htmlFor="governrate">Government</label>
                                     <select 
                                     required id="governrate" 
                                     className="form-control"
@@ -357,7 +369,7 @@ class Signup extends Component {
                                     </select>
                                     <span 
                                     className={"text-danger "+(!this.state.validGovernrate_id?'d-inline-block':'d-none')}>
-                                    <i class="fas fa-exclamation-triangle pr-3"></i>required</span>
+                                    <i class="fas fa-exclamation-triangle pr-3"></i>government must be selected</span>
                                 </div>
                                 <div className="form-group">
                                     <label className="text-primary" htmlFor="phone">Phone</label>

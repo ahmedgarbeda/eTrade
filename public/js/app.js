@@ -67321,7 +67321,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76696,6 +76696,19 @@ function (_Component) {
           });
           break;
 
+        case governrate_id === "default" || governrate_id === "":
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: false
+          });
+          break;
+
         case phone.length < 11:
           this.setState({
             validName: true,
@@ -76915,7 +76928,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
         htmlFor: "governrate"
-      }, "Governrate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, "Government"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         required: true,
         id: "governrate",
         className: "form-control",
@@ -76933,7 +76946,7 @@ function (_Component) {
         className: "text-danger " + (!this.state.validGovernrate_id ? 'd-inline-block' : 'd-none')
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-exclamation-triangle pr-3"
-      }), "required")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "government must be selected")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
