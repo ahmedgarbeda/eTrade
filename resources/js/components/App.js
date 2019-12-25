@@ -15,6 +15,7 @@ import CartTable from './cartTable';
 import CartList from './cartList';
 import TotalPrice from './totalPrice';
 import Payments from './payments';
+import Shopping from './shopping';
 import OrderDone from './onTheWay';
 import ProductCard from './productCard.js';
 import FullProductCard from './fullProductCard.js';
@@ -77,6 +78,8 @@ class App extends Component {
             categories: [],
             productList: [],
             cartList: [],
+            updateQuantity: 0,
+            qty: 0,
             cartCount: 0,
             addToCartAnimate: {animateState: false, btnId: 0},
             targetProduct: null,
@@ -94,6 +97,7 @@ class App extends Component {
         this.targetProduct = this.targetProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.deleteFromCart = this.deleteFromCart.bind(this);
+        this.updateQuantity = this.updateQuantity.bind(this);
         this.register = this.register.bind(this);
         this.login = this.login.bind(this);
         this.logOut = this.logOut.bind(this);
@@ -143,12 +147,10 @@ class App extends Component {
             addToCartAnimate: {animateState: false, btnId: product.id}
         }))
     }
-    updateQuantity(state) {
-        if(state === 0) {
-            console.log(state+1);
-        }else if(state > 0){
-            console.log(state-1);
-        }
+    updateQuantity(quantityState) {
+        this.setState({ 
+            updateQuantity: Math.abs(quantityState+2)
+        });
     }
 
     targetProduct(product) {
@@ -156,6 +158,10 @@ class App extends Component {
         this.setState({
             targetProduct: product
         });
+    }
+
+    shoppingOrder(data) {
+        console.log(data);
     }
 
     async register(data) {
@@ -225,9 +231,10 @@ class App extends Component {
                             loggingUser: user.user.username
                         });
                         let cookies = document.cookie;
-                        cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+                        //cookies = `id: ${user.user.id}, username: ${user.user.username}`;
 
-                        document.cookie = cookies
+                        //document.cookie = cookies
+                        document.cookie = JSON.stringify({id: user.user.id, username: user.user.username})
                     }else {
                         console.log("user not found");
                     }
@@ -358,7 +365,10 @@ class App extends Component {
                                 gotTotal={<TotalPrice subTotalValue={this.state.subTotal}/>} />
                             </Route>
                             <Route path="/payments">
-                                <Payments />
+                                <Shopping 
+                                totalPrice={this.state.subTotal} 
+                                sendShopping={this.shoppingOrder}
+                                />
                             </Route>
                             <Route path="/about-us">
                                 <Aboutus />

@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/ordermodule', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/ordermodule', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('jwt.verify')->post('/addToCart','OrderModuleController@addToCart');
+Route::middleware('jwt.verify')->post('/checkout','OrderModuleController@checkout');
+Route::middleware('jwt.verify')->get('/deleteCart/{id}','OrderModuleController@deleteCart');
+Route::middleware('jwt.verify')->get('/getCart','OrderModuleController@getCart');
