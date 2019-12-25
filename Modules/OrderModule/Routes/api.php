@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/ordermodule', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/ordermodule', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('jwt.verify')->post('/addToCart','OrderModuleController@addToCart');
+Route::middleware('jwt.verify')->post('/checkout','OrderModuleController@checkout');
