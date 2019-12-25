@@ -74521,7 +74521,7 @@ function (_Component) {
   }, {
     key: "login",
     value: function login(data) {
-      var res, dataPayload_token, key, resUser, user;
+      var res, dataPayload_token, key, resUser, user, cookies;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -74562,7 +74562,7 @@ function (_Component) {
                 errorState: !this.state.errorState,
                 errorMessage: 'invalid email or password'
               });
-              _context2.next = 26;
+              _context2.next = 29;
               break;
 
             case 14:
@@ -74582,7 +74582,7 @@ function (_Component) {
               resUser = _context2.sent;
 
               if (!(resUser.status == 200)) {
-                _context2.next = 25;
+                _context2.next = 28;
                 break;
               }
 
@@ -74594,30 +74594,33 @@ function (_Component) {
               this.setState({
                 loggingUser: user.user.username
               });
-              _context2.next = 26;
-              break;
-
-            case 25:
-              console.log("user not found");
-
-            case 26:
-              _context2.next = 31;
+              cookies = document.cookie;
+              cookies = "id: ".concat(user.user.id, ", username: ").concat(user.user.username);
+              document.cookie = cookies;
+              _context2.next = 29;
               break;
 
             case 28:
-              _context2.prev = 28;
+              console.log("user not found");
+
+            case 29:
+              _context2.next = 34;
+              break;
+
+            case 31:
+              _context2.prev = 31;
               _context2.t0 = _context2["catch"](7);
 
               (function (err) {
                 return console.error("Error:", err);
               });
 
-            case 31:
+            case 34:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[7, 28]]);
+      }, null, this, [[7, 31]]);
     }
   }, {
     key: "logOut",

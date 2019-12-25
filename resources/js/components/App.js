@@ -222,7 +222,11 @@ class App extends Component {
                         const user = await resUser.json();
                         this.setState({
                             loggingUser: user.user.username
-                        })
+                        });
+                        let cookies = document.cookie;
+                        cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+
+                        document.cookie = cookies
                     }else {
                         console.log("user not found");
                     }
