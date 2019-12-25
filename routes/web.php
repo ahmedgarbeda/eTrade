@@ -21,4 +21,6 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth:admin');
 
+Route::get('/product/create' , 'UserProductController@create');
+Route::post('/product' , 'UserProductController@store')->name('product.user');
 

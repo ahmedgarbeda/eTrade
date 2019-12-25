@@ -64,7 +64,7 @@ class ProductModuleController extends Controller
         $product->price = $request->input('price');
         $product->admin_id = $request->input('admin_id');
         $currentCategory = $request->input('category_id') ;
-        $product->is_active = Product::has('admin') ? 1 : 0 ;
+        $product->is_active = 1  ;
         $category = Category::find($currentCategory);
         $category->products()->save($product);
 

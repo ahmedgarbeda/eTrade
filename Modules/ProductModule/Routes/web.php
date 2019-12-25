@@ -35,3 +35,5 @@ Route::prefix('productmodule')->group(function() {
 Route::prefix('productmodule')->group(function() {
     Route::get('/productApprovment/{id}' , [ 'as' => 'approve.product' , 'uses' => 'ProductModuleController@approvment'] );
 });
+
+
