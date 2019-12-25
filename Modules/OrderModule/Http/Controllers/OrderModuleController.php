@@ -135,14 +135,15 @@ class OrderModuleController extends Controller
         $order->order_status_id = 0;
         $order->user_id = $user->id;
         $order->save();
-        $order_items = Cart::where('user_id',$user->id)->get();
+        //$order_items = Cart::where('user_id',$user->id)->get();
+        $order_items = $request->order_items;
         foreach($order_items as $item){
             
             $order_item = new OrderItem();
             $order_item->order_id = $order->id;
-            $order_item->product_id = $item->product_id;
-            $order_item->quantity = $item->quantity;
-            $order_item->price = $item->price;
+            $order_item->product_id = $item["product_id"];
+            $order_item->quantity = $item["quantity"];
+            $order_item->price = $item["price"];
             $order_item->save();
             $item->delete();
         }

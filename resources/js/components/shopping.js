@@ -9,12 +9,15 @@ class Shopping extends Component {
             payments: [],
             shipping: [],
             governrates: [],
-            payment_method: '',
-            shipping_method: '',
+            payment_method_id: '',
+            shipping_method_id: '',
             governrate_id: '',
             address: '',
+            order_items: [],
             totalPrice: 0
         }
+        this.changeHandler = this.changeHandler.bind(this);
+        this.sendData = this.sendData.bind(this);
      }
 
      changeHandler(event) {
@@ -27,10 +30,10 @@ class Shopping extends Component {
 
     getPayment() {
         return (
-            fetch("api/payment_method")
+            fetch("api/payment_methods")
             .then(req => req.json())
             .then(res => {
-                const payments = res.data.map(payment=> {
+                const payments = res.map(payment=> {
                     return payment
                 });
                 this.setState({
@@ -43,10 +46,10 @@ class Shopping extends Component {
 
     getshipping() {
         return (
-            fetch("api/shipping_method/goverrates_id")
+            fetch("api/shipping_methods/2")
             .then(req => req.json())
             .then(res => {
-                const shipping = res.data.map(ship=> {
+                const shipping = res.map(ship=> {
                     return ship
                 });
                 this.setState({
@@ -76,10 +79,11 @@ class Shopping extends Component {
         event.preventDefault();
 
         let tmpData = {
-            payment_method: this.state.payment_method,
-            shipping_method: this.state.shipping_method,
+            payment_method_id: this.state.payment_method_id,
+            shipping_method_id: this.state.shipping_method_id,
             governrate_id: this.state.governrate_id,
             address: this.state.address,
+            order_items: this.props.order_items,
             totalPrice: this.props.totalPrice
         }
         this.props.sendShopping(tmpData);
@@ -102,10 +106,10 @@ class Shopping extends Component {
                             <select 
                             required id="payment" 
                             className="form-control"
-                            name="payment_method"
+                            name="payment_method_id"
                             onChange={this.changeHandler}
-                            value={this.state.payment_id}>
-                                <option value="default">select government</option>
+                            value={this.state.payment_method_id}>
+                                <option value="default">select payment</option>
                                 {
                                     this.state.payments.map(payment=> (
                                         <option key={payment.id} value={payment.id}>{payment.name}</option>
@@ -116,12 +120,12 @@ class Shopping extends Component {
                             <select 
                             required id="shipping" 
                             className="form-control"
-                            name="shipping_method"
+                            name="shipping_method_id"
                             onChange={this.changeHandler}
-                            value={this.state.shipping_id}>
-                                <option value="default">select government</option>
+                            value={this.state.shipping_method_id}>
+                                <option value="default">select shipping</option>
                                 {
-                                    this.state.shippings.map(shipping=> (
+                                    this.state.shipping.map(shipping=> (
                                         <option key={shipping.id} value={shipping.id}>{shipping.name}</option>
                                     ))
                                 }

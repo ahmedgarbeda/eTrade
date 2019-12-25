@@ -67321,7 +67321,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74375,6 +74375,7 @@ function (_Component) {
       categories: [],
       productList: [],
       cartList: [],
+      orderCartList: [],
       updateQuantity: 0,
       qty: 0,
       cartCount: 0,
@@ -74420,6 +74421,13 @@ function (_Component) {
       });
     }
   }, {
+    key: "updateQuantity",
+    value: function updateQuantity(quantityState) {
+      this.setState({
+        updateQuantity: Math.abs(quantityState + 2)
+      });
+    }
+  }, {
     key: "addToCart",
     value: function addToCart(product) {
       var tmpProduct = this.state.cartList;
@@ -74429,8 +74437,10 @@ function (_Component) {
       if (tmpProduct.includes(product)) {
         return;
       } else {
+        product.quantity = this.state.qty;
         tmpProduct.push(product);
         this.setState({
+          qty: this.state.qty + this.state.updateQuantity,
           cartList: tmpProduct,
           cartCount: tmpCount + 1,
           addToCartAnimate: {
@@ -74459,13 +74469,6 @@ function (_Component) {
       });
     }
   }, {
-    key: "updateQuantity",
-    value: function updateQuantity(quantityState) {
-      this.setState({
-        updateQuantity: Math.abs(quantityState + 2)
-      });
-    }
-  }, {
     key: "targetProduct",
     value: function targetProduct(product) {
       console.log(product);
@@ -74476,20 +74479,49 @@ function (_Component) {
   }, {
     key: "shoppingOrder",
     value: function shoppingOrder(data) {
-      console.log(data);
+      var res, dataPayload;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function shoppingOrder$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/ckeckout", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                  'Content-Type': 'application/json'
+                }
+              }));
+
+            case 2:
+              res = _context.sent;
+              _context.next = 5;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
+
+            case 5:
+              dataPayload = _context.sent;
+              console.log(dataPayload);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      });
     }
   }, {
     key: "register",
     value: function register(data) {
       var res, dataPayload;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function register$(_context) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function register$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               this.setState({
                 waitingTime: !this.state.waitingTime
               });
-              _context.next = 3;
+              _context2.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/register", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -74500,12 +74532,12 @@ function (_Component) {
               }));
 
             case 3:
-              res = _context.sent;
-              _context.next = 6;
+              res = _context2.sent;
+              _context2.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
 
             case 6:
-              dataPayload = _context.sent;
+              dataPayload = _context2.sent;
 
               try {
                 this.setState({
@@ -74521,7 +74553,7 @@ function (_Component) {
 
             case 8:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
       }, null, this);
@@ -74530,16 +74562,16 @@ function (_Component) {
     key: "login",
     value: function login(data) {
       var res, dataPayload_token, key, resUser, user, cookies;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
               this.setState({
                 waitingTime: !this.state.waitingTime,
                 errorState: false,
                 errorMessage: ''
               });
-              _context2.next = 3;
+              _context3.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/login", {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -74550,18 +74582,18 @@ function (_Component) {
               }));
 
             case 3:
-              res = _context2.sent;
-              _context2.next = 6;
+              res = _context3.sent;
+              _context3.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
 
             case 6:
-              dataPayload_token = _context2.sent;
-              _context2.prev = 7;
+              dataPayload_token = _context3.sent;
+              _context3.prev = 7;
               sessionStorage.setItem("access_token", dataPayload_token.token);
               key = sessionStorage.getItem('access_token');
 
               if (!dataPayload_token.error) {
-                _context2.next = 14;
+                _context3.next = 14;
                 break;
               }
 
@@ -74570,7 +74602,7 @@ function (_Component) {
                 errorState: !this.state.errorState,
                 errorMessage: 'invalid email or password'
               });
-              _context2.next = 28;
+              _context3.next = 28;
               break;
 
             case 14:
@@ -74578,7 +74610,7 @@ function (_Component) {
                 userToken: dataPayload_token.token,
                 isLogging: !this.state.isLogging
               });
-              _context2.next = 17;
+              _context3.next = 17;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/user", {
                 method: 'GET',
                 headers: {
@@ -74587,18 +74619,18 @@ function (_Component) {
               }));
 
             case 17:
-              resUser = _context2.sent;
+              resUser = _context3.sent;
 
-              if (!(resUser.status == 200)) {
-                _context2.next = 27;
+              if (!(resUser.status === 200)) {
+                _context3.next = 27;
                 break;
               }
 
-              _context2.next = 21;
+              _context3.next = 21;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(resUser.json());
 
             case 21:
-              user = _context2.sent;
+              user = _context3.sent;
               this.setState({
                 loggingUser: user.user.username
               });
@@ -74609,19 +74641,19 @@ function (_Component) {
                 id: user.user.id,
                 username: user.user.username
               });
-              _context2.next = 28;
+              _context3.next = 28;
               break;
 
             case 27:
               console.log("user not found");
 
             case 28:
-              _context2.next = 33;
+              _context3.next = 33;
               break;
 
             case 30:
-              _context2.prev = 30;
-              _context2.t0 = _context2["catch"](7);
+              _context3.prev = 30;
+              _context3.t0 = _context3["catch"](7);
 
               (function (err) {
                 return console.error("Error:", err);
@@ -74629,7 +74661,7 @@ function (_Component) {
 
             case 33:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
       }, null, this, [[7, 30]]);
@@ -74683,23 +74715,23 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var key;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function componentDidMount$(_context3) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function componentDidMount$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               // sessionStorage.clear();
               key = sessionStorage.getItem('access_token');
               sessionStorage.setItem("access_token", this.state.userToken);
-              _context3.next = 4;
+              _context4.next = 4;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getCategories());
 
             case 4:
-              _context3.next = 6;
+              _context4.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(this.getProducts());
 
             case 6:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       }, null, this);
@@ -74780,7 +74812,8 @@ function (_Component) {
         path: "/payments"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopping__WEBPACK_IMPORTED_MODULE_15__["default"], {
         totalPrice: this.state.subTotal,
-        sendShopping: this.shoppingOrder
+        sendShopping: this.shoppingOrder,
+        order_items: this.state.cartList
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
         path: "/about-us"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_aboutus_js__WEBPACK_IMPORTED_MODULE_19__["default"], null)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -76540,9 +76573,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -76566,12 +76599,15 @@ function (_Component) {
       payments: [],
       shipping: [],
       governrates: [],
-      payment_method: '',
-      shipping_method: '',
+      payment_method_id: '',
+      shipping_method_id: '',
       governrate_id: '',
       address: '',
+      order_items: [],
       totalPrice: 0
     };
+    _this.changeHandler = _this.changeHandler.bind(_assertThisInitialized(_this));
+    _this.sendData = _this.sendData.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -76586,10 +76622,10 @@ function (_Component) {
     value: function getPayment() {
       var _this2 = this;
 
-      return fetch("api/payment_method").then(function (req) {
+      return fetch("api/payment_methods").then(function (req) {
         return req.json();
       }).then(function (res) {
-        var payments = res.data.map(function (payment) {
+        var payments = res.map(function (payment) {
           return payment;
         });
 
@@ -76605,10 +76641,10 @@ function (_Component) {
     value: function getshipping() {
       var _this3 = this;
 
-      return fetch("api/shipping_method/goverrates_id").then(function (req) {
+      return fetch("api/shipping_methods/2").then(function (req) {
         return req.json();
       }).then(function (res) {
-        var shipping = res.data.map(function (ship) {
+        var shipping = res.map(function (ship) {
           return ship;
         });
 
@@ -76641,10 +76677,11 @@ function (_Component) {
     value: function sendData(event) {
       event.preventDefault();
       var tmpData = {
-        payment_method: this.state.payment_method,
-        shipping_method: this.state.shipping_method,
+        payment_method_id: this.state.payment_method_id,
+        shipping_method_id: this.state.shipping_method_id,
         governrate_id: this.state.governrate_id,
         address: this.state.address,
+        order_items: this.props.order_items,
         totalPrice: this.props.totalPrice
       };
       this.props.sendShopping(tmpData);
@@ -76692,12 +76729,12 @@ function (_Component) {
         required: true,
         id: "payment",
         className: "form-control",
-        name: "payment_method",
+        name: "payment_method_id",
         onChange: this.changeHandler,
-        value: this.state.payment_id
+        value: this.state.payment_method_id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: "default"
-      }, "select government"), this.state.payments.map(function (payment) {
+      }, "select payment"), this.state.payments.map(function (payment) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
           key: payment.id,
           value: payment.id
@@ -76709,12 +76746,12 @@ function (_Component) {
         required: true,
         id: "shipping",
         className: "form-control",
-        name: "shipping_method",
+        name: "shipping_method_id",
         onChange: this.changeHandler,
-        value: this.state.shipping_id
+        value: this.state.shipping_method_id
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: "default"
-      }, "select government"), this.state.shippings.map(function (shipping) {
+      }, "select shipping"), this.state.shipping.map(function (shipping) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
           key: shipping.id,
           value: shipping.id

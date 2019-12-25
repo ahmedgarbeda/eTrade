@@ -78,6 +78,7 @@ class App extends Component {
             categories: [],
             productList: [],
             cartList: [],
+            orderCartList: [],
             updateQuantity: 0,
             qty: 0,
             cartCount: 0,
@@ -118,16 +119,24 @@ class App extends Component {
         this.setState({ subTotal: this.state.subTotal + Number(price) });
     }
 
+    updateQuantity(quantityState) {
+        this.setState({ 
+            updateQuantity: Math.abs(quantityState+2)
+        });
+    }
+
     addToCart(product) {
         let tmpProduct = this.state.cartList;
         let tmpCount = this.state.cartCount;
         let tmpBtnId = this.state.addToCartAnimate.btnId;
 
         if(tmpProduct.includes(product)) {
-            return 
+            return
         } else {
+            product.quantity = this.state.qty;
             tmpProduct.push(product);
             this.setState({
+                qty: this.state.qty + this.state.updateQuantity,
                 cartList: tmpProduct,
                 cartCount: tmpCount + 1,
                 addToCartAnimate: {animateState: true, btnId: product.id}
@@ -147,11 +156,6 @@ class App extends Component {
             addToCartAnimate: {animateState: false, btnId: product.id}
         }))
     }
-    updateQuantity(quantityState) {
-        this.setState({ 
-            updateQuantity: Math.abs(quantityState+2)
-        });
-    }
 
     targetProduct(product) {
         console.log(product)
@@ -160,8 +164,17 @@ class App extends Component {
         });
     }
 
-    shoppingOrder(data) {
-        console.log(data);
+    async shoppingOrder(data) {
+            const res = await fetch("/api/ckeckout", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Content-Type': 'application/json'
+                }
+            });
+            const dataPayload = await res.json();
+            console.log(dataPayload);
     }
 
     async register(data) {
@@ -224,7 +237,7 @@ class App extends Component {
                                 'Authorization': `Bearer ${dataPayload_token.token}`
                             }
                         });
-                    if(resUser.status == 200) {
+                    if(resUser.status === 200) {
                         const user = await resUser.json();
                         this.setState({
                             loggingUser: user.user.username
@@ -367,6 +380,7 @@ class App extends Component {
                                 <Shopping 
                                 totalPrice={this.state.subTotal} 
                                 sendShopping={this.shoppingOrder}
+                                order_items={this.state.cartList}
                                 />
                             </Route>
                             <Route path="/about-us">
