@@ -31,7 +31,7 @@ class CartList extends Component {
         });
         this.props.handleTotal(-this.props.price);
 
-        this.props.updateQuantity(this.state.quantity)
+        this.props.updateQuantity(-this.state.quantity)
     }
 
     render() {
