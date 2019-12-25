@@ -18,3 +18,5 @@ Route::middleware('auth:admin')->prefix('dashboard/users')->group(function() {
     Route::get('/{id}/approve','UserModuleController@approve');
     Route::delete('/{id}','UserModuleController@destroy');
 });
+
+

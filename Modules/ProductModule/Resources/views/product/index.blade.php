@@ -63,7 +63,7 @@
                     <td>{{$product->description}}</td>
                     <td>{{$product->price}}</td>
                     <td>{{$product->category->name}}</td>
-                    <td>{{$product->admin->name}}</td>
+                    <td>{{ isset($product->admin->name)  ? $product->admin->name :  "form user" }}</td>
                     <td>{{$product->created_at}}</td>
                     <td>{{$product->updated_at}}</td>
                     <td> {!! link_to_route('product.edit', $title = "Update",

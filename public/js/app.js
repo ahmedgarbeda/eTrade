@@ -74454,6 +74454,15 @@ function (_Component) {
       });
     }
   }, {
+    key: "updateQuantity",
+    value: function updateQuantity(state) {
+      if (state === 0) {
+        console.log(state + 1);
+      } else if (state > 0) {
+        console.log(state - 1);
+      }
+    }
+  }, {
     key: "targetProduct",
     value: function targetProduct(product) {
       console.log(product);
@@ -74512,7 +74521,7 @@ function (_Component) {
   }, {
     key: "login",
     value: function login(data) {
-      var res, dataPayload_token, key, resUser, user;
+      var res, dataPayload_token, key, resUser, user, cookies;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function login$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -74553,7 +74562,7 @@ function (_Component) {
                 errorState: !this.state.errorState,
                 errorMessage: 'invalid email or password'
               });
-              _context2.next = 26;
+              _context2.next = 28;
               break;
 
             case 14:
@@ -74573,7 +74582,7 @@ function (_Component) {
               resUser = _context2.sent;
 
               if (!(resUser.status == 200)) {
-                _context2.next = 25;
+                _context2.next = 27;
                 break;
               }
 
@@ -74585,30 +74594,37 @@ function (_Component) {
               this.setState({
                 loggingUser: user.user.username
               });
-              _context2.next = 26;
+              cookies = document.cookie; //cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+              //document.cookie = cookies
+
+              document.cookie = JSON.stringify({
+                id: user.user.id,
+                username: user.user.username
+              });
+              _context2.next = 28;
               break;
 
-            case 25:
+            case 27:
               console.log("user not found");
 
-            case 26:
-              _context2.next = 31;
+            case 28:
+              _context2.next = 33;
               break;
 
-            case 28:
-              _context2.prev = 28;
+            case 30:
+              _context2.prev = 30;
               _context2.t0 = _context2["catch"](7);
 
               (function (err) {
                 return console.error("Error:", err);
               });
 
-            case 31:
+            case 33:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[7, 28]]);
+      }, null, this, [[7, 30]]);
     }
   }, {
     key: "logOut",
@@ -74692,6 +74708,7 @@ function (_Component) {
           name: product.name,
           price: product.price,
           img: product.photo.path,
+          updateQuantity: _this4.updateQuantity,
           handleTotal: _this4.caluculateSubTotal,
           deleteFromCart: _this4.deleteFromCart
         });
@@ -74910,7 +74927,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartList).call(this));
     _this.state = {
-      quantity: 0
+      quantity: 0,
+      orderItem: []
     };
     _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_this));
     _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_this));
@@ -74925,6 +74943,7 @@ function (_Component) {
         quantity: tempquantity + 1
       });
       this.props.handleTotal(this.props.price);
+      this.props.updateQuantity(this.state.quantity);
     }
   }, {
     key: "minusOne",
@@ -74934,6 +74953,7 @@ function (_Component) {
         quantity: tempquantity - 1
       });
       this.props.handleTotal(-this.props.price);
+      this.props.updateQuantity(this.state.quantity);
     }
   }, {
     key: "render",
@@ -74944,7 +74964,18 @@ function (_Component) {
           id = _this$props.id,
           name = _this$props.name,
           price = _this$props.price,
-          img = _this$props.img;
+          img = _this$props.img; // let tmpOrder = {};
+      // tmpOrder['id'] = id;
+      // tmpOrder['quantity'] = this.state.quantity,
+      // tmpOrder['price'] = price;
+      // let tmpItem = this.state.orderItem;
+      // if(tmpItem.includes(tmpOrder)) {
+      //     return
+      // }else {
+      //     tmpItem.push(tmpOrder);
+      // }
+      // console.log(this.state.orderItem);
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
@@ -76672,6 +76703,19 @@ function (_Component) {
           });
           break;
 
+        case governrate_id === "default" || governrate_id === "":
+          this.setState({
+            validName: true,
+            validEmail: true,
+            validUsername: true,
+            validPassword: true,
+            validPassword_confirmation: true,
+            validpPhone: true,
+            validAddress: true,
+            validGovernrate_id: false
+          });
+          break;
+
         case phone.length < 11:
           this.setState({
             validName: true,
@@ -76891,7 +76935,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",
         htmlFor: "governrate"
-      }, "Governrate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      }, "Government"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         required: true,
         id: "governrate",
         className: "form-control",
@@ -76909,7 +76953,7 @@ function (_Component) {
         className: "text-danger " + (!this.state.validGovernrate_id ? 'd-inline-block' : 'd-none')
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         "class": "fas fa-exclamation-triangle pr-3"
-      }), "required")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "government must be selected")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "text-primary",

@@ -143,6 +143,13 @@ class App extends Component {
             addToCartAnimate: {animateState: false, btnId: product.id}
         }))
     }
+    updateQuantity(state) {
+        if(state === 0) {
+            console.log(state+1);
+        }else if(state > 0){
+            console.log(state-1);
+        }
+    }
 
     targetProduct(product) {
         console.log(product)
@@ -215,7 +222,12 @@ class App extends Component {
                         const user = await resUser.json();
                         this.setState({
                             loggingUser: user.user.username
-                        })
+                        });
+                        let cookies = document.cookie;
+                        //cookies = `id: ${user.user.id}, username: ${user.user.username}`;
+
+                        //document.cookie = cookies
+                        document.cookie = JSON.stringify({id: user.user.id, username: user.user.username})
                     }else {
                         console.log("user not found");
                     }
@@ -284,6 +296,7 @@ class App extends Component {
                 name={product.name}
                 price={product.price}
                 img={product.photo.path}
+                updateQuantity={this.updateQuantity}
                 handleTotal={this.caluculateSubTotal}
                 deleteFromCart={this.deleteFromCart}
                 />
