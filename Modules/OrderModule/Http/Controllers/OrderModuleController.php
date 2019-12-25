@@ -5,6 +5,10 @@ namespace Modules\OrderModule\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use JWTAuth;
+use Modules\OrderModule\Entities\Order;
+use Modules\OrderModule\Entities\OrderItem;
+use Modules\OrderModule\Entities\Cart;
 
 class OrderModuleController extends Controller
 {
@@ -75,5 +79,74 @@ class OrderModuleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addToCart(Request $request)
+    {
+        $request->validate([
+            'product_id'=>'required',
+            'quantity'=>'required',
+            'price'=>'required'
+        ]);
+        $user = JWTAuth::toUser(JWTAuth::getToken());
+        $cart = Cart::where(['product_id'=>$request->product_id,"user_id"=>$user->id])->first();
+        if(!$cart){
+            $cart = new Cart();
+            $cart->user_id = $user->id;
+            $cart->product_id = $request->product_id;
+            $cart->quantity = $request->quantity;
+            $cart->price = $request->price;
+            $cart->save();
+        }else{
+            $cart->user_id = $user->id;
+            $cart->product_id = $request->product_id;
+            $cart->quantity = $request->quantity;
+            $cart->price = $request->price;
+            $cart->update();
+        }
+        
+        
+        if($cart){
+            return response()->json('added to cart success',200);
+        }else{
+            return response()->json('added to cart faild',400);
+        }
+
+
+    }
+
+    public function checkout(Request $request)
+    {
+        $user = JWTAuth::toUser(JWTAuth::getToken());
+        $request->validate([
+            'shipping_method_id'=>'required',
+            'payment_method_id'=>'required',
+            'governrate_id'=>'required',
+            'address'=>'required|string',
+            'total_price'=>'required',
+            
+        ]);
+        $order = new Order();
+        $order->shipping_method_id = $request->shipping_method_id;
+        $order->payment_method_id = $request->payment_method_id;
+        $order->governrate_id = $request->governrate_id;
+        $order->address = $request->address;
+        $order->total_price = $request->total_price;
+        $order->order_status_id = 0;
+        $order->user_id = $user->id;
+        $order->save();
+        $order_items = Cart::where('user_id',$user->id)->get();
+        foreach($order_items as $item){
+            
+            $order_item = new OrderItem();
+            $order_item->order_id = $order->id;
+            $order_item->product_id = $item->product_id;
+            $order_item->quantity = $item->quantity;
+            $order_item->price = $item->price;
+            $order_item->save();
+            $item->delete();
+        }
+
+        return response()->json('order added successfully',200);
     }
 }
