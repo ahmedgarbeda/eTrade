@@ -79,9 +79,17 @@ class ShippingMethodsController extends Controller
         //
     }
 
-    public function getShippingMethods()
+    public function getShippingMethods($id)
     {
-        $methods = ShippingMethod::with('shipping_cost')->get();
-        return $methods;
+        $methods = ShippingMethod::all();
+        $available=[];
+        foreach($methods as $method){
+            $cost = ShippingCost::where(['shipping_method_id'=>$method->id , 'governrate_id'=>$id])->first();
+            if($cost){
+                $method->cost=$cost->cost;
+                $available[]=$method;
+            }
+        }
+        return $available;
     }
 }
