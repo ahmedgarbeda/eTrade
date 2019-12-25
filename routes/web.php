@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,3 +27,18 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth:admi
 Route::get('/product/create' , 'UserProductController@create');
 Route::post('/product' , 'UserProductController@store')->name('product.user');
 
+
+
+Route::get('/email' , function (){
+
+
+    $data = [
+        'title' => 'this is email from etrade title',
+        'body' => 'this is email from etrade body'
+    ];
+
+    Mail::send('emails.test' , $data , function ($message){
+        $message->to('20130975@std.sci.cu.edu.eg')->subject('message from etrade');
+    });
+
+    });
