@@ -11,6 +11,8 @@
 |
 */
 
-Route::prefix('ordermodule')->group(function() {
+Route::prefix('/dashboard/order')->group(function() {
     Route::get('/', 'OrderModuleController@index');
+    Route::get('/{order_id}/status/{status_id}','OrderModuleController@updateStatus');
+    Route::delete('/{id}','OrderModuleController@destroy');
 });
