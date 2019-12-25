@@ -144,9 +144,9 @@ class App extends Component {
         }))
     }
     updateQuantity(state) {
-        if(state == 0) {
+        if(state === 0) {
             console.log(state+1);
-        }else {
+        }else if(state > 0){
             console.log(state-1);
         }
     }
