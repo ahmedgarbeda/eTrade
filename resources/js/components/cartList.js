@@ -9,6 +9,7 @@ class CartList extends Component {
         super();
         this.state= {
             quantity: 0,
+            orderItem: []
         }
         this.plusOne = this.plusOne.bind(this);
         this.minusOne = this.minusOne.bind(this);
@@ -20,6 +21,8 @@ class CartList extends Component {
             quantity: tempquantity + 1
         });
         this.props.handleTotal(this.props.price);
+
+        this.props.updateQuantity(this.state.quantity)
     }
     minusOne() {
         const tempquantity = this.state.quantity;
@@ -27,12 +30,26 @@ class CartList extends Component {
             quantity: tempquantity - 1
         });
         this.props.handleTotal(-this.props.price);
-    }
 
+        this.props.updateQuantity(this.state.quantity)
+    }
 
     render() {
 
         const { id, name, price, img } = this.props;
+
+        // let tmpOrder = {};
+        // tmpOrder['id'] = id;
+        // tmpOrder['quantity'] = this.state.quantity,
+        // tmpOrder['price'] = price;
+
+        // let tmpItem = this.state.orderItem;
+        // if(tmpItem.includes(tmpOrder)) {
+        //     return
+        // }else {
+        //     tmpItem.push(tmpOrder);
+        // }
+        // console.log(this.state.orderItem);
 
         return (
             <tr key={id}>

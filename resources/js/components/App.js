@@ -143,6 +143,13 @@ class App extends Component {
             addToCartAnimate: {animateState: false, btnId: product.id}
         }))
     }
+    updateQuantity(state) {
+        if(state == 0) {
+            console.log(state+1);
+        }else {
+            console.log(state-1);
+        }
+    }
 
     targetProduct(product) {
         console.log(product)
@@ -284,6 +291,7 @@ class App extends Component {
                 name={product.name}
                 price={product.price}
                 img={product.photo.path}
+                updateQuantity={this.updateQuantity}
                 handleTotal={this.caluculateSubTotal}
                 deleteFromCart={this.deleteFromCart}
                 />

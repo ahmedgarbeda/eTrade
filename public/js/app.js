@@ -74454,6 +74454,15 @@ function (_Component) {
       });
     }
   }, {
+    key: "updateQuantity",
+    value: function updateQuantity(state) {
+      if (state == 0) {
+        console.log(state + 1);
+      } else {
+        console.log(state - 1);
+      }
+    }
+  }, {
     key: "targetProduct",
     value: function targetProduct(product) {
       console.log(product);
@@ -74692,6 +74701,7 @@ function (_Component) {
           name: product.name,
           price: product.price,
           img: product.photo.path,
+          updateQuantity: _this4.updateQuantity,
           handleTotal: _this4.caluculateSubTotal,
           deleteFromCart: _this4.deleteFromCart
         });
@@ -74910,7 +74920,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CartList).call(this));
     _this.state = {
-      quantity: 0
+      quantity: 0,
+      orderItem: []
     };
     _this.plusOne = _this.plusOne.bind(_assertThisInitialized(_this));
     _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_this));
@@ -74925,6 +74936,7 @@ function (_Component) {
         quantity: tempquantity + 1
       });
       this.props.handleTotal(this.props.price);
+      this.props.updateQuantity(this.state.quantity);
     }
   }, {
     key: "minusOne",
@@ -74934,6 +74946,7 @@ function (_Component) {
         quantity: tempquantity - 1
       });
       this.props.handleTotal(-this.props.price);
+      this.props.updateQuantity(this.state.quantity);
     }
   }, {
     key: "render",
@@ -74944,7 +74957,18 @@ function (_Component) {
           id = _this$props.id,
           name = _this$props.name,
           price = _this$props.price,
-          img = _this$props.img;
+          img = _this$props.img; // let tmpOrder = {};
+      // tmpOrder['id'] = id;
+      // tmpOrder['quantity'] = this.state.quantity,
+      // tmpOrder['price'] = price;
+      // let tmpItem = this.state.orderItem;
+      // if(tmpItem.includes(tmpOrder)) {
+      //     return
+      // }else {
+      //     tmpItem.push(tmpOrder);
+      // }
+      // console.log(this.state.orderItem);
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
         key: id
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
