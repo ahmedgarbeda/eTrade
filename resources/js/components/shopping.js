@@ -100,7 +100,7 @@ class Shopping extends Component {
         return ( 
             <div className="container-fluid my-5 bg-white text-dark py-4 px-5 shadow card-margin">
                 <div className="row justify-content-center py-5">
-                    <div className="col-md-8 text-center py-3">
+                    <div className="col-md-8 text-left py-3">
                         <form onSubmit={this.sendData}>
                             <label className="text-primary" htmlFor="payment">Payment Method</label>
                             <select 

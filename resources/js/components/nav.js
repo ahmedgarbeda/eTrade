@@ -48,6 +48,11 @@ class Navbar extends Component {
                                 <div className="dropdown-menu pointer">
                                     <span className="dropdown-item h4 m-0" onClick={this.props.logOut}>log out</span>
                                 </div>
+                                <a href="/product/create">
+                                    <button type="button" class="btn btn-primary">
+                                    Add Product <span class="badge badge-light"><i class="fas fa-plus"></i></span>
+                                    </button>
+                                </a>
                             </div> :
                             <div className="">
                                 <Link to="/login">

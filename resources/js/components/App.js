@@ -165,12 +165,14 @@ class App extends Component {
     }
 
     async shoppingOrder(data) {
-            const res = await fetch("/api/ckeckout", {
+            let token = sessionStorage.getItem('access_token');
+            const res = await fetch("/api/checkout", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             });
             const dataPayload = await res.json();

@@ -67321,7 +67321,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, __RouterContext, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74479,31 +74479,33 @@ function (_Component) {
   }, {
     key: "shoppingOrder",
     value: function shoppingOrder(data) {
-      var res, dataPayload;
+      var token, res, dataPayload;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function shoppingOrder$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/ckeckout", {
+              token = sessionStorage.getItem('access_token');
+              _context.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(fetch("/api/checkout", {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Authorization': "Bearer ".concat(token)
                 }
               }));
 
-            case 2:
+            case 3:
               res = _context.sent;
-              _context.next = 5;
+              _context.next = 6;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(res.json());
 
-            case 5:
+            case 6:
               dataPayload = _context.sent;
               console.log(dataPayload);
 
-            case 7:
+            case 8:
             case "end":
               return _context.stop();
           }
@@ -74602,7 +74604,7 @@ function (_Component) {
                 errorState: !this.state.errorState,
                 errorMessage: 'invalid email or password'
               });
-              _context3.next = 28;
+              _context3.next = 29;
               break;
 
             case 14:
@@ -74622,7 +74624,7 @@ function (_Component) {
               resUser = _context3.sent;
 
               if (!(resUser.status === 200)) {
-                _context3.next = 27;
+                _context3.next = 28;
                 break;
               }
 
@@ -74631,6 +74633,7 @@ function (_Component) {
 
             case 21:
               user = _context3.sent;
+              console.log(resUser);
               this.setState({
                 loggingUser: user.user.username
               });
@@ -74641,30 +74644,30 @@ function (_Component) {
                 id: user.user.id,
                 username: user.user.username
               });
-              _context3.next = 28;
+              _context3.next = 29;
               break;
-
-            case 27:
-              console.log("user not found");
 
             case 28:
-              _context3.next = 33;
+              console.log("user not found");
+
+            case 29:
+              _context3.next = 34;
               break;
 
-            case 30:
-              _context3.prev = 30;
+            case 31:
+              _context3.prev = 31;
               _context3.t0 = _context3["catch"](7);
 
               (function (err) {
                 return console.error("Error:", err);
               });
 
-            case 33:
+            case 34:
             case "end":
               return _context3.stop();
           }
         }
-      }, null, this, [[7, 30]]);
+      }, null, this, [[7, 31]]);
     }
   }, {
     key: "logOut",
@@ -75905,7 +75908,16 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "dropdown-item h4 m-0",
         onClick: this.props.logOut
-      }, "log out"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "log out")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/product/create"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        "class": "btn btn-primary"
+      }, "Add Product ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "class": "badge badge-light"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-plus"
+      }))))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: ""
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/login"
@@ -76719,7 +76731,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "row justify-content-center py-5"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-8 text-center py-3"
+        className: "col-md-8 text-left py-3"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
         onSubmit: this.sendData
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
